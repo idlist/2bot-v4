@@ -1,2 +1,3 @@
 # 2bot-v4
-A bot using Koishi v4
+
+玩具，大概等 v4 稳定之后才会正式使用
