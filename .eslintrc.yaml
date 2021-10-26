@@ -1,0 +1,22 @@
+env:
+  commonjs: true
+  es6: true
+  node: true
+
+extends: eslint:recommended
+
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+
+parserOptions:
+  ecmaVersion: 2021
+
+rules:
+  no-unused-vars: [warn]
+  no-empty: [warn]
+
+  semi: [warn, never]
+  quotes: [warn, single]
+  comma-dangle: [warn, never]
+  indent: [warn, 2, { SwitchCase: 1 }]

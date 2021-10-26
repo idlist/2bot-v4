@@ -16,14 +16,15 @@
   "homepage": "https://github.com/idlist/2bot-v4#readme",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "cli": "npx koishi start"
   },
-  "dependencies": {
-    "@koishijs/plugin-common": "^5.0.0-alpha.8",
-    "@koishijs/plugin-mysql": "^4.0.0-alpha.0",
-    "@koishijs/plugin-onebot": "^4.0.0-alpha.7",
-    "@koishijs/plugin-status": "^5.0.0-alpha.6",
-    "koishi": "^4.0.0-alpha.8",
-    "proxy-agent": "^5.0.0"
+  "devDependencies": {
+    "@koishijs/cli": "^4.0.0-alpha.0",
+    "@koishijs/plugin-adapter-onebot": "^4.0.0-alpha.9",
+    "@koishijs/plugin-database-mysql": "^4.0.0-alpha.8",
+    "@koishijs/sql-utils": "^1.0.0-alpha.2",
+    "eslint": "^8.1.0",
+    "koishi": "^4.0.0-alpha.11"
   }
 }

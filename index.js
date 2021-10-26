@@ -17,15 +17,20 @@ Logger.levels = {
   command: 3
 }
 
-const onebot = require('@koishijs/plugin-onebot')
-const mysql = require('@koishijs/plugin-mysql')
+/*
 const { echo, contextify } = require('@koishijs/plugin-common')
 const status = require('@koishijs/plugin-status')
+*/
+
+const onebot = require('@koishijs/plugin-adapter-onebot')
+const mysql = require('@koishijs/plugin-database-mysql')
 
 app.plugin(onebot, secret.onebot)
 app.plugin(mysql, secret.mysql)
+/*
 app.plugin(echo)
 app.plugin(contextify)
 app.plugin(status)
+*/
 
 app.start()
