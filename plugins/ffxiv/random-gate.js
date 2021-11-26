@@ -6,11 +6,11 @@ const imageResources = new Map()
 
 Promise.all([
   (async () => {
-    const image = await readFile(resolve(__dirname, './assets/choose-left.png'))
+    const image = await readFile(resolve(__dirname, 'assets/choose-left.png'))
     imageResources.set('left', image.toString('base64'))
   })(),
   (async () => {
-    const image = await readFile(resolve(__dirname, './assets/choose-right.png'))
+    const image = await readFile(resolve(__dirname, 'assets/choose-right.png'))
     imageResources.set('right', image.toString('base64'))
   })()
 ])

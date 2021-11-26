@@ -1,3 +1,8 @@
+const { registerFont } = require('canvas')
+
+registerFont('./fonts/msyh.ttf', { family: 'ffxiv-text' })
+registerFont('./fonts/bahnschrift.ttf', { family: 'ffxiv-number' })
+
 module.exports.name = 'ffxiv'
 
 /**
@@ -12,4 +17,6 @@ module.exports.apply = ctx => {
   ctx.plugin(require('./simulate-melding'))
   ctx.plugin(require('./search-wiki'))
   ctx.plugin(require('./search-item'))
+  ctx.plugin(require('./get-logs'))
+  ctx.plugin(require('./misc'))
 }

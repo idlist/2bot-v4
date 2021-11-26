@@ -7,7 +7,7 @@ const imageResources = new Map()
 
 Promise.all(range(6).map(async (i) => {
   const x = i + 1
-  const image = await readFile(resolve(__dirname, `./assets/cards/${x}.png`))
+  const image = await readFile(resolve(__dirname, `assets/cards/${x}.png`))
   imageResources.set(x, image.toString('base64'))
 }))
 
