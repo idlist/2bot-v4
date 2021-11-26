@@ -1,6 +1,8 @@
-const { createPool } = require('mysql')
+import { createPool } from 'mysql'
 
-const { db } = require('../secret')
+import secret from '../secret.js'
+
+const db = secret.mysql
 
 const pool = createPool({
   host: 'localhost',

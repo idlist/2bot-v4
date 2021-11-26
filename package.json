@@ -21,7 +21,8 @@
     "reindex": "node scripts/reindex-teach.js"
   },
   "dependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "js-yaml": "^4.0.0"
   },
   "devDependencies": {
     "@koishijs/cli": "^4.0.0-beta.0",

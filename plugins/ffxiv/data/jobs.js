@@ -66,5 +66,5 @@ module.exports = [
   {
     keywords: ['绝枪战士', 'gnb', '绝枪', '枪刃'],
     name: 'Gunbreaker'
-  },
+  }
 ]

@@ -11,10 +11,12 @@ globals:
 
 parserOptions:
   ecmaVersion: 2021
+  sourceType: module
 
 rules:
   no-unused-vars: [warn]
   no-empty: [warn]
+  prefer-const: [warn]
 
   semi: [warn, never]
   quotes: [warn, single]

@@ -27,7 +27,7 @@ module.exports = [
   {
     keywords: ['宇宙和音', '宇宙'],
     name: '宇宙和音',
-    server: 'YuZhouHeYin',
+    server: 'YuZhouHeYin'
   },
   {
     keywords: ['沃仙曦染', '沃仙', '我先洗染'],
@@ -82,7 +82,7 @@ module.exports = [
   {
     keywords: ['紫水栈桥', '紫水', '紫水剑桥'],
     name: '紫水栈桥',
-    server: 'ZiShuiZhanQiao',
+    server: 'ZiShuiZhanQiao'
   },
   {
     keywords: ['延夏'],

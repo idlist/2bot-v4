@@ -35,9 +35,9 @@ module.exports = defineConfig({
     'database-mysql': secret.mysql,
 
     // local plugins
-
+    './plugins/ffxiv': {},
 
     // customize plugin behaviours
-    './plugin-tweaks': {}
+    './koishi.tweaks': {}
   }
 })

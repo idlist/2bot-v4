@@ -7,18 +7,19 @@ const mockHeader = {
 }
 
 /**
- * @param {import('koishi').Context} ctx
+ * @param {import('koishi').Context} context
  */
-module.exports.apply = ctx => {
-  const logger = ctx.logger('ff-fashion')
+module.exports.apply = context => {
+  const logger = context.logger('ff.fashion')
 
-  ctx.command('ff.fashion', '时尚品鉴', { minInterval: 60 * 1000 })
+  context
+    .command('ff.fashion', '时尚品鉴', { minInterval: 60 * 1000 })
     .alias('ff.nuan')
-    .usage('抄一道 游玩C哩酱（UID: 15503317） 的最新视频简介给你看。')
+    .usage('抄一道 游玩C哩酱 (UID: 15503317) 的最新视频简介给你看。')
     .action(async () => {
       try {
         /**
-         * @type {import('./fashion-report').ListPayload}
+         * @type {import('./fashion').BVideoListPayload}
          */
         const { data: listData } = await axios.get(bSpaceAPI, {
           params: { mid: 15503317 },
@@ -36,7 +37,7 @@ module.exports.apply = ctx => {
         if (!latestReport) return '没有偷到暖暖攻略……'
 
         /**
-         * @type {import('./fashion-report').ReportPayload}
+         * @type {import('./fashion').BVideoPayload}
          */
         const { data: reportData } = await axios.get(bVideoAPI, {
           params: { aid: latestReport.aid },
@@ -65,7 +66,7 @@ module.exports.apply = ctx => {
         return report
       } catch (err) {
         logger.warn(err)
-        return '发生了网络错误。'
+        return '出现了网络错误。'
       }
     })
 }

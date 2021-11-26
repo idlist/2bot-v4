@@ -1,4 +1,4 @@
-export interface ListPayload {
+export interface BVideoListPayload {
   data: {
     data: {
       list: {
@@ -11,7 +11,7 @@ export interface ListPayload {
   }
 }
 
-export interface ReportPayload {
+export interface BVideoPayload {
   data: {
     data: {
       aid: number

@@ -1,0 +1,138 @@
+# Extremes
+
+- keywords:
+    - diamond
+    - 钻石神兵
+    - 钻石
+  name: 钻石神兵
+  zoneId: 37
+  id: 1057
+  teamsize: 8
+  diff: 100
+  server: { global: 7, cn: 9 }
+
+# Unreals
+
+- keywords:
+    - leviathanu
+    - leviu
+    - 幻利维亚桑
+    - 幻水
+    - 利维亚桑幻巧
+    - 水幻巧
+  name: 利维亚桑幻巧战
+  zoneId: 36
+  id: 3003
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+# Normal Raids
+- keywords:
+    - e9
+  name: 暗黑之云 (E9)
+  zoneId: 38
+  id: 73
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - e10
+  name: 影之王 (E10)
+  zoneId: 38
+  id: 74
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - e11
+  name: 绝命战士 (E11)
+  zoneId: 38
+  id: 75
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - e12
+  name: 伊甸之约 (E12)
+  zoneId: 38
+  id: 76
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+# Savage Raids
+
+- keywords:
+    - e9s
+    - 暗黑之云
+    - 云妈
+  name: 暗黑之云 (E9S)
+  zoneId: 38
+  id: 73
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - e10s
+    - 影之王
+    - 大狗狗
+    - 臭狗
+  name: 影之王 (E10S)
+  zoneId: 38
+  id: 74
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - e11s
+    - fatebreaker
+    - 绝命战士
+  name: 绝命战士(E11S)
+  zoneId: 38
+  id: 75
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - e12s
+    - e12s1
+    - promise
+    - 伊甸之约
+  name: 伊甸之约(E12S P1)
+  zoneId: 38
+  id: 76
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - e12s2
+    - oracle
+    - 暗之巫女
+  name: 暗之巫女(E12S P2)
+  zoneId: 38
+  id: 77
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+# Ultimates
+
+- keywords:
+    - 绝亚
+    - 绝a
+    - 绝亚历山大
+    - ua
+  name: "亚历山大绝境战"
+  zoneId: 32
+  id: 1050
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }

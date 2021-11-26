@@ -1,10 +1,12 @@
 module.exports.name = 'ffxiv'
 
 /**
- * @param {import('koishi').Context} ctx
+ * @param {import('koishi').Context} context
  */
-module.exports.apply = ctx => {
-  ctx.command('ff', 'FFXIV 功能')
+module.exports.apply = context => {
+  context.command('ff', 'FFXIV 功能')
 
-  ctx.plugin('./fashion-report')
+  context.plugin(require('./random-gate'))
+  context.plugin(require('./draw-ast-card'))
+  context.plugin(require('./fashion-report'))
 }
