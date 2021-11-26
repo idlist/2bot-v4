@@ -4,8 +4,7 @@ const secret = require('./secret')
 
 module.exports = defineConfig({
   // basic settings
-  prefix: '-',
-  nickname: ['2bot', '阿尔博特', '阿尔伯特'],
+  prefix: '.',
   minSimilarity: 0,
 
   autoAssign: true,
@@ -32,12 +31,8 @@ module.exports = defineConfig({
   plugins: {
     // official plugins
     'adapter-onebot': secret.onebot,
-    'database-mysql': secret.mysql,
+    'database-mysql': secret.mysql
 
-    // local plugins
-
-
-    // customize plugin behaviours
-    './plugin-tweaks': {}
+    // test plugins
   }
 })
