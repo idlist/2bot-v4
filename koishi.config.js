@@ -1,9 +1,9 @@
 const { defineConfig } = require('@koishijs/cli')
 
-const secret = require('./secret')
+const secret = require('./koishi.secret')
 
 module.exports = defineConfig({
-  // basic settings
+  // Basic settings
   prefix: '-',
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
   minSimilarity: 0,
@@ -19,7 +19,7 @@ module.exports = defineConfig({
     shortcut: false
   },
 
-  // logger settings
+  // Logger settings
   logger: {
     levels: {
       command: 3
@@ -28,16 +28,16 @@ module.exports = defineConfig({
     showDiff: false
   },
 
-  // plugins
+  // Plugins
   plugins: {
     // official plugins
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
 
-    // local plugins
-    './plugins/ffxiv': {},
+    // Local plugins
+    'ffxiv': {},
 
-    // customize plugin behaviours
+    // Customize plugin behaviours
     './koishi.tweaks': {}
   }
 })

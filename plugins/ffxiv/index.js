@@ -1,12 +1,15 @@
 module.exports.name = 'ffxiv'
 
 /**
- * @param {import('koishi').Context} context
+ * @param {import('koishi').Context} ctx
  */
-module.exports.apply = context => {
-  context.command('ff', 'FFXIV 功能')
+module.exports.apply = ctx => {
+  ctx.command('ff', 'FFXIV 功能')
 
-  context.plugin(require('./random-gate'))
-  context.plugin(require('./draw-ast-card'))
-  context.plugin(require('./fashion-report'))
+  ctx.plugin(require('./random-gate'))
+  ctx.plugin(require('./random-card'))
+  ctx.plugin(require('./fashion-report'))
+  ctx.plugin(require('./simulate-melding'))
+  ctx.plugin(require('./search-wiki'))
+  ctx.plugin(require('./search-item'))
 }

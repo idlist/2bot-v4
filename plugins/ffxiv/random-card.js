@@ -1,7 +1,6 @@
 const { readFile } = require('fs/promises')
 const { resolve } = require('path')
 const { s, Random } = require('koishi')
-
 const { range } = require('./utils')
 
 const imageResources = new Map()
@@ -13,12 +12,12 @@ Promise.all(range(6).map(async (i) => {
 }))
 
 /**
- * @param {import('koishi').Context} context
+ * @param {import('koishi').Context} ctx
  */
-module.exports = context => {
-  const logger = context.logger('ff.draw')
+module.exports = ctx => {
+  const logger = ctx.logger('ff.draw')
 
-  context
+  ctx
     .command('ff.draw', '抽一张占星卡')
     .shortcut('抽卡', { prefix: true })
     .action(() => {

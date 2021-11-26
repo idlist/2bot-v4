@@ -1,0 +1,14 @@
+{
+  "name": "koishi-plugin-ffxiv",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "author": "i'DLisT <me@idl.ist> (https://idl.ist)",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10",
+    "js-yaml": "^4.0.0",
+    "node-canvas": "^2.0.0"
+  }
+}

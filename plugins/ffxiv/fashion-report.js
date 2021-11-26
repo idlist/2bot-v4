@@ -7,12 +7,12 @@ const mockHeader = {
 }
 
 /**
- * @param {import('koishi').Context} context
+ * @param {import('koishi').Context} ctx
  */
-module.exports.apply = context => {
-  const logger = context.logger('ff.fashion')
+module.exports.apply = ctx => {
+  const logger = ctx.logger('ff.fashion')
 
-  context
+  ctx
     .command('ff.fashion', '时尚品鉴', { minInterval: 60 * 1000 })
     .alias('ff.nuan')
     .usage('抄一道 游玩C哩酱 (UID: 15503317) 的最新视频简介给你看。')
@@ -64,8 +64,8 @@ module.exports.apply = context => {
           report.join('\n').replace(/\*/g, '').replace(/—/g, '')
 
         return report
-      } catch (err) {
-        logger.warn(err)
+      } catch (error) {
+        logger.warn(error)
         return '出现了网络错误。'
       }
     })

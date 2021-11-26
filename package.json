@@ -21,8 +21,7 @@
     "reindex": "node scripts/reindex-teach.js"
   },
   "dependencies": {
-    "axios": "^0.24.0",
-    "js-yaml": "^4.0.0"
+    "axios": "^0.24.0"
   },
   "devDependencies": {
     "@koishijs/cli": "^4.0.0-beta.0",
@@ -31,5 +30,8 @@
     "@koishijs/sql-utils": "^1.0.0-beta.0",
     "eslint": "^8.0.0",
     "koishi": "^4.0.0-beta.0"
-  }
+  },
+  "workspaces": [
+    "plugins/*"
+  ]
 }

@@ -3,7 +3,7 @@ const { defineConfig } = require('@koishijs/cli')
 const secret = require('./secret')
 
 module.exports = defineConfig({
-  // basic settings
+  // Basic settings
   prefix: '.',
   minSimilarity: 0,
 
@@ -18,7 +18,7 @@ module.exports = defineConfig({
     shortcut: false
   },
 
-  // logger settings
+  // Logger settings
   logger: {
     levels: {
       command: 3
@@ -27,12 +27,12 @@ module.exports = defineConfig({
     showDiff: false
   },
 
-  // plugins
+  // Plugins
   plugins: {
-    // official plugins
+    // Official plugins
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql
 
-    // test plugins
+    // Test plugins
   }
 })

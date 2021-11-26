@@ -1,3 +1,3 @@
-node_modules/
+node_modules
 
-secret.js
+koishi.secret.js
