@@ -1,199 +1,63 @@
-const { readFile } = require('fs/promises')
-const { resolve } = require('path')
-const yaml = require('js-yaml')
-const axios = require('axios').default
+const { isDeepStrictEqual } = require('util')
+const { s } = require('koishi')
 const Server = require('./market.server')
-const { ErrorContent } = require('./market.api')
-const getMarketImage = require('./get-market-image')
+const API = require('./market.api')
+const getMarketImage = require('./market.image')
 
 /**
- * Object deep-equal comparison
+ * @param {string} keyword
+ * @param {'shorten' | 'lengthen'} direction
+ * @returns {string}
  */
-const isEqual = (a, b) => {
-  const isPrimitive = obj => obj !== Object(obj)
+const findSubsTable = (keyword, direction) => {
+  if (!(typeof keyword == 'string')) return '参数数量似乎不够。'
 
-  if (a === b) return true
-  if (isPrimitive(a) && isPrimitive(b)) return a === b
-  if (Object.keys(a).length !== Object.keys(b).length) return false
+  /**
+   * @type {import('./market'.MarketShortcodeData[])}
+   */
+  let result = API.searchShortcodes(keyword, direction)
 
-  for (const key in a) {
-    if (!isEqual(a[key], b[key])) return false
-  }
+  if (result.length > 10) result = result.slice(0, 10)
 
-  return true
-}
+  const typeText = direction ? '缩写规则' : '全称'
+  const showResult = () => direction == 'shorten'
+    ? result.map(item => `${item.full} - ${item.code}`).join('\n')
+    : result.map(item => `${item.code} - ${item.full}`).join('\n')
 
-/**
- * @type {import('./market').MarketShortcodeData[]}
- */
-let Shortcodes
-(async () => {
-  Shortcodes = yaml.load(await readFile(resolve(__dirname, 'data/market-abbr.yaml'), 'utf-8'))
-  Shortcodes = Shortcodes.sort((a, b) => a.code.localeCompare(b.code))
-})()
-
-const Method = {
-  Shorten: 0,
-  Find: 1
-}
-
-const resolveItemName = name => {
-  Shortcodes.forEach(item => {
-    const subsRegExp = new RegExp(item.abbr, 'g')
-    name = name.replace(subsRegExp, item.full)
-  })
-  return name
-}
-
-const findSubsTable = (session, str, method) => {
-  if (!(typeof str == 'string')) {
-    session.send('参数数量似乎不够。')
-    return
-  }
-
-  let result = [], len
-  Shortcodes.forEach(item => {
-    if (method == Method.Find && item.abbr.match(str)) {
-      result.push(item)
-    }
-    if (method == Method.Shorten && item.full.match(str)) {
-      result.push(item)
-    }
-  })
-
-  len = result.length
-  if (len > 10) result = result.slice(0, 10)
-
-  const typeText = method ? '缩写规则' : '全称'
-  const showResult = () => method == Method.Find
-    ? result.map(item => `${item.abbr} - ${item.full}`).join('\n')
-    : result.map(item => `${item.full} - ${item.abbr}`).join('\n')
-
-  if (!len) {
-    session.send(`没有找到包含 ${str} 的${typeText}。`)
-  } else if (len <= 10) {
-    session.send(`共找到包含 ${str} 的 ${len} 条${typeText}：\n${showResult()}`)
+  if (!result.length) {
+    return `没有找到包含 ${keyword} 的${typeText}。`
+  } else if (result.length <= 10) {
+    return `共找到包含 ${keyword} 的 ${result.length} 条${typeText}：\n${showResult()}`
   } else {
-    session.send(`共找到包含 ${str} 的 ${len} 条${typeText}，仅显示前10条：\n${showResult()}`)
+    return `共找到包含 ${keyword} 的 ${result.length} 条${typeText}，仅显示前10条：\n${showResult()}`
   }
 }
 
-const getItemId = async (options, name) => {
-  let apiUrl
+/**
+ * @param {string} server
+ * @param {string[]} item
+ * @param {string} lang
+ * @returns {Promise<string | import('canvas').Canvas>}
+ */
+const getMarketData = async (server, item, lang) => {
+  const parsedServer = Server.parse(server)
+  const resolve = await API.getItemData(parsedServer, item, lang)
 
-  let lang
-  switch (options.language) {
-    case '英':
-    case 'en':
-      lang = 'en'
-      break
-    case '日':
-    case 'ja':
-    case 'jp':
-      lang = 'ja'
-      break
-    default:
-      lang = 'cn'
-      break
-  }
-  if (lang == 'cn') apiUrl = 'https://cafemaker.wakingsands.com'
-  else apiUrl = 'https://xivapi.com'
+  if (resolve.status == 'error') return resolve.message
+  const { name, hq, nq, payload } = resolve
 
-  try {
-    let res = await axios.get(encodeURI(`${apiUrl}/search`
-      + `?indexes=Item&language=${lang}&string=${name}`))
-    let results = res.data.Results
+  const listing = payload.listings
+  const lastUpdate = payload.lastUploadTime
+  const average = payload.currentAveragePrice.toFixed(2)
 
-    if (results.length) {
-      return {
-        name: results[0].Name,
-        id: results[0].ID
-      }
-    } else return
-  } catch (err) {
-    if (err) console.log(err)
-  }
-}
-
-const getItemData = async (options, server, item) => {
-  if (typeof item != 'string') item = item.join(' ')
-
-  let hq = false
-  if (item.toLowerCase().match('hq') != null) {
-    hq = true
-    item = item.replace(/[hH][qQ]/g, '')
-  }
-
-  let nq = false
-  if (item.toLowerCase().match('nq') != null) {
-    nq = true
-    item = item.replace(/[nN][qQ]/g, '')
-  }
-
-  item = resolveItemName(item)
-  let targetItem = await getItemId(options, item)
-
-  const info = {
-    name: targetItem ? targetItem.name : item,
-    server: server,
-    hq: hq,
-    nq: nq
-  }
-
-  if (!targetItem) return { ...info, errCode: 3 }
-
-  try {
-    let apiUrl = 'https://universalis.app/api'
-    apiUrl = encodeURI(`${apiUrl}/${server}/${targetItem.id}`)
-    let res = await axios.get(apiUrl)
-
-    if (res.status != 200) return { ...info, errCode: 2 }
-    if (!res.data.listings.length) return { ...info, errCode: 5 }
-
-    return { ...info, data: res.data }
-  } catch (err) {
-    let errCode
-    if (err.response) {
-      if (err.response.status == 404) {
-        errCode = 4
-      } else if (err.respose.status == 403) {
-        errCode = 2
-      } else {
-        errCode = 1
-        console.log(err)
-      }
-
-      return { ...info, errCode: errCode }
-    } else {
-      console.log(err)
-    }
-  }
-
-}
-
-const getMarketData = async (session, options, server, item) => {
-  if (!server || !item.length) {
-    session.send('参数数量似乎不够。')
-    return
-  }
-
-  server = Server.resolve(server)
-  let res = await getItemData(options, server, item)
-
-  if ('errCode' in res) {
-    session.send(ErrorContent[res.errCode])
-    return
-  }
-  let { name, hq, nq, data } = res
-
-  let listing = data.listings
-  let lastUpdate = data.lastUploadTime
-  let average = data.averagePrice.toFixed(2)
-
+  /**
+   * @param {import('./market').MarketPayloadListing} item
+   * @returns {import('./market').MarketListing}
+   */
   const extractItem = item => {
     return {
       seller: item.retainerName,
-      server: 'worldName' in item ? Server.localize(item.worldName) : server,
+      server: item.worldName ? Server.localize(item.worldName) : parsedServer,
       hq: item.hq,
       unit: item.pricePerUnit,
       qty: item.quantity,
@@ -201,67 +65,95 @@ const getMarketData = async (session, options, server, item) => {
     }
   }
 
-  let extractedList = []
+  /**
+   * @type {import('./market').MarketListingCounted[]}
+   */
+  const extractedList = []
+
   let listCount = 0
   let lastItem, itemRepeat
-  for (let item of listing) {
+
+  for (const item of listing) {
     if (hq && !item.hq) continue
     if (nq && item.hq) continue
 
-    let extractedItem = extractItem(item)
+    const extractedItem = extractItem(item)
 
     if (!lastItem) {
       lastItem = extractedItem
       itemRepeat = 1
-    } else if (isEqual(extractedItem, lastItem)) {
+    } else if (isDeepStrictEqual(extractedItem, lastItem)) {
       itemRepeat++
     } else {
-      lastItem.repeat = itemRepeat
+      const countedItem = {
+        ...lastItem,
+        repeat: itemRepeat
+      }
       itemRepeat = 1
-      extractedList.push(lastItem)
+      extractedList.push(countedItem)
       lastItem = extractedItem
       listCount++
       if (listCount >= 10) break
     }
   }
 
-  let highestItem = extractItem(listing[listing.length - 1])
-  highestItem.repeat = 1
-
+  /**
+   * @type {import('./market').MarketImageData}
+   */
   const marketData = {
     item: name,
     hq: hq,
     nq: nq,
-    server: server,
+    server: parsedServer,
     average: average,
     lastUpdate: lastUpdate,
-    list: extractedList,
-    highest: highestItem
+    list: extractedList
   }
-  getMarketImage(session, marketData)
+
+  return getMarketImage(marketData)
 }
 
 module.exports = ctx => {
-  ctx.command('ff/ff-market <server> [...item]', '查询市场')
-    .alias('ff-m')
+  const logger = ctx.logger('ff.market')
+
+  ctx
+    .command('ff.market <server> [...item]', '查询市场')
+    .alias('ff.m')
     .usage('部分缩写将被正则替换为全称，替换规则可用选项查询。')
-    .option('find', '-f <abbr> 查询缩写的全称')
+    .option('lengthen', '-f <code> 查询缩写的全称')
     .option('shorten', '-s <full> 查询全称的缩写')
     .option('language', '-l <lcode> 注明物品名语言（en：英语，ja：日语）')
     .shortcut('查市场', { fuzzy: true, prefix: true })
     .shortcut(/^查(.+)区市场\s+(.+)$/, { args: ['$1', '$2'], prefix: true })
-    .shortcut(/^用(.+)(语|文)查市场\s+(.+)\s+(.+)/, { args: ['$3', '$4'], options: { language: '$1' }, prefix: true })
-    .check(({ options }) => (options.find && options.shorten) ? '不可以同时查询缩写与全称。' : undefined)
-    .action(({ session, options }) => {
-      if (!options.find) return
+    .shortcut(/^用(.+)(语|文)查市场\s+(.+)\s+(.+)/, {
+      args: ['$3', '$4'], options: { language: '$1' }, prefix: true
     })
-    .action(({ session, options }, server, ...item) => {
-      if (options.find) {
-        findSubsTable(session, options.find, Method.Find)
-      } else if (options.shorten) {
-        findSubsTable(session, options.shorten, Method.Shorten)
-      } else {
-        getMarketData(session, options, server, item)
+    .before(({ session, options }, server) => {
+      if (!server && (!options.shorten && !options.lengthen)) {
+        return session.execute('help ff.market')
       }
+    })
+    .before(({ options }) => {
+      if (options.find && options.shorten) return '不可以同时查询缩写与全称。'
+    })
+    .action(async ({ options }, server, ...item) => {
+      const result = await getMarketData(server, item, options.language)
+      if (typeof result == 'string') return result
+
+      try {
+        const imageData = result.toBuffer().toString('base64')
+        return s('image', { url: `base64://${imageData}` })
+      } catch (error) {
+        logger.error(error)
+        return '图片发送出错。'
+      }
+    })
+    .action(({ options }) => {
+      if (!options.lengthen) return
+      return findSubsTable(options.lengthen, 'lengthen')
+    })
+    .action(({ options }) => {
+      if (!options.shorten) return
+      return findSubsTable(options.shorten, 'shorten')
     })
 }

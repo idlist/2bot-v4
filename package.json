@@ -23,7 +23,8 @@
     "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },
   "dependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "luxon": "^2.0.0"
   },
   "devDependencies": {
     "@koishijs/cli": "^4.0.0-beta.0",

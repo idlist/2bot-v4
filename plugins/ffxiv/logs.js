@@ -147,7 +147,7 @@ module.exports = ctx => {
         return s('image', { url: `base64://${imageData}` })
       } catch (error) {
         logger.error(error)
-        return '图片生成出错，请联系开发者 debug。'
+        return '图片发送出错。'
       }
     })
 }

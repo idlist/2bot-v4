@@ -10,8 +10,8 @@ const canvasResources = new Map()
 
 Promise.all([
   (async () => {
-    const image = await loadImage(resolve(__dirname, 'assets/2bot_look-phone.png'))
-    canvasResources.set('look-phone', image)
+    const lookPhone = await loadImage(resolve(__dirname, 'assets/2bot_look-phone.png'))
+    canvasResources.set('look-phone', lookPhone)
   })(),
   (async () => {
     const jobIconPaths = await readdir(resolve(__dirname, 'assets/jobs'))
@@ -109,6 +109,7 @@ module.exports = logsData => {
 
   /*
   const { createWriteStream } = require('fs')
+  const targetPath = './test/test.png'
 
   const stream = outputCanvas.createPNGStream()
   const out = fs.createWriteStream('./test/test.png')
