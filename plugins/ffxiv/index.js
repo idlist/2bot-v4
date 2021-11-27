@@ -17,6 +17,6 @@ module.exports.apply = ctx => {
   ctx.plugin(require('./simulate-melding'))
   ctx.plugin(require('./search-wiki'))
   ctx.plugin(require('./search-item'))
-  ctx.plugin(require('./get-logs'))
+  ctx.plugin(require('./logs'))
   ctx.plugin(require('./misc'))
 }

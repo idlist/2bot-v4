@@ -24,7 +24,7 @@ Promise.all([
 ])
 
 /**
- * @param {import('./get-logs').LogsData} logsData
+ * @param {import('./logs').LogsData} logsData
  * @returns {import('canvas').Canvas}
  */
 module.exports = logsData => {

@@ -16,9 +16,11 @@
   "homepage": "https://github.com/idlist/2bot-v4#readme",
   "main": "index.js",
   "scripts": {
+    "update": "git pull && git submodule update --init",
     "start": "npx koishi start",
     "test": "npx koishi start koishi.config.test.js",
-    "reindex": "node scripts/reindex-teach.js"
+    "reindex": "node scripts/reindex-teach.js",
+    "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },
   "dependencies": {
     "axios": "^0.24.0"

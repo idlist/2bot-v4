@@ -3,12 +3,12 @@ const { resolve } = require('path')
 const axios = require('axios').default
 const yaml = require('js-yaml')
 const { s } = require('koishi')
-const getLogsImage = require('./get-logs.image')
+const generateLogsImage = require('./logs.image')
 
 const Jobs = require('./data/jobs')
 
 /**
- * @type {import('./data/bosses').BossData[]}
+ * @type {import('./logs').BossData[]}
  */
 let Bosses
 (async () => {
@@ -20,7 +20,7 @@ Object.freeze(SERVER)
 
 /**
  * @param {string} str
- * @return {import('./get-logs').BossData}
+ * @return {import('./logs').BossData}
  */
 const resolveBoss = str => {
   for (const boss of Bosses) {
@@ -127,7 +127,7 @@ module.exports = ctx => {
       }
 
       /**
-       * @type {import('./get-logs').LogsData}
+       * @type {import('./logs').LogsData}
        */
       const logsData = {
         boss: boss.name,
@@ -140,7 +140,7 @@ module.exports = ctx => {
         data: seriesData.map(str => parseFloat(str).toFixed(2))
       }
 
-      const canvas = getLogsImage(logsData)
+      const canvas = generateLogsImage(logsData)
 
       try {
         const imageData = canvas.toBuffer().toString('base64')

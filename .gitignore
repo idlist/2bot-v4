@@ -2,3 +2,4 @@ node_modules
 test
 
 koishi.secret.js
+koishi.secret.prod.js

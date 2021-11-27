@@ -1,6 +1,6 @@
 const { defineConfig } = require('@koishijs/cli')
 
-const secret = require('./secret')
+const secret = require('./koishi.secret')
 
 module.exports = defineConfig({
   // Basic settings
@@ -31,8 +31,9 @@ module.exports = defineConfig({
   plugins: {
     // Official plugins
     'adapter-onebot': secret.onebot,
-    'database-mysql': secret.mysql
+    'database-mysql': secret.mysql,
 
     // Test plugins
+    'ffxiv': {}
   }
 })

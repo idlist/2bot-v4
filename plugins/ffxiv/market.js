@@ -1,16 +1,35 @@
 const { readFile } = require('fs/promises')
-
+const { resolve } = require('path')
 const yaml = require('js-yaml')
 const axios = require('axios').default
-const { isEqual } = require('lodash')
-
-const { ErrorContent, resolveServer, localizeServer } = require('./get-market-utils')
+const Server = require('./market.server')
+const { ErrorContent } = require('./market.api')
 const getMarketImage = require('./get-market-image')
 
-let Abbr
+/**
+ * Object deep-equal comparison
+ */
+const isEqual = (a, b) => {
+  const isPrimitive = obj => obj !== Object(obj)
+
+  if (a === b) return true
+  if (isPrimitive(a) && isPrimitive(b)) return a === b
+  if (Object.keys(a).length !== Object.keys(b).length) return false
+
+  for (const key in a) {
+    if (!isEqual(a[key], b[key])) return false
+  }
+
+  return true
+}
+
+/**
+ * @type {import('./market').MarketShortcodeData[]}
+ */
+let Shortcodes
 (async () => {
-  Abbr = await readFile(`${__dirname}/data/market-abbr.yaml`, 'utf-8')
-  Abbr = yaml.load(Abbr).sort((a, b) => a.abbr.localeCompare(b.abbr))
+  Shortcodes = yaml.load(await readFile(resolve(__dirname, 'data/market-abbr.yaml'), 'utf-8'))
+  Shortcodes = Shortcodes.sort((a, b) => a.code.localeCompare(b.code))
 })()
 
 const Method = {
@@ -19,7 +38,7 @@ const Method = {
 }
 
 const resolveItemName = name => {
-  Abbr.forEach(item => {
+  Shortcodes.forEach(item => {
     const subsRegExp = new RegExp(item.abbr, 'g')
     name = name.replace(subsRegExp, item.full)
   })
@@ -33,7 +52,7 @@ const findSubsTable = (session, str, method) => {
   }
 
   let result = [], len
-  Abbr.forEach(item => {
+  Shortcodes.forEach(item => {
     if (method == Method.Find && item.abbr.match(str)) {
       result.push(item)
     }
@@ -158,7 +177,7 @@ const getMarketData = async (session, options, server, item) => {
     return
   }
 
-  server = resolveServer(server)
+  server = Server.resolve(server)
   let res = await getItemData(options, server, item)
 
   if ('errCode' in res) {
@@ -174,7 +193,7 @@ const getMarketData = async (session, options, server, item) => {
   const extractItem = item => {
     return {
       seller: item.retainerName,
-      server: 'worldName' in item ? localizeServer(item.worldName) : server,
+      server: 'worldName' in item ? Server.localize(item.worldName) : server,
       hq: item.hq,
       unit: item.pricePerUnit,
       qty: item.quantity,
@@ -222,20 +241,27 @@ const getMarketData = async (session, options, server, item) => {
   getMarketImage(session, marketData)
 }
 
-module.exports = (session, options, server, item) => {
-  if (options.find) {
-    findSubsTable(session, options.find, Method.Find)
-  } else if (options.shorten) {
-    findSubsTable(session, options.shorten, Method.Shorten)
-  } else {
-    getMarketData(session, options, server, item)
-  }
+module.exports = ctx => {
+  ctx.command('ff/ff-market <server> [...item]', '查询市场')
+    .alias('ff-m')
+    .usage('部分缩写将被正则替换为全称，替换规则可用选项查询。')
+    .option('find', '-f <abbr> 查询缩写的全称')
+    .option('shorten', '-s <full> 查询全称的缩写')
+    .option('language', '-l <lcode> 注明物品名语言（en：英语，ja：日语）')
+    .shortcut('查市场', { fuzzy: true, prefix: true })
+    .shortcut(/^查(.+)区市场\s+(.+)$/, { args: ['$1', '$2'], prefix: true })
+    .shortcut(/^用(.+)(语|文)查市场\s+(.+)\s+(.+)/, { args: ['$3', '$4'], options: { language: '$1' }, prefix: true })
+    .check(({ options }) => (options.find && options.shorten) ? '不可以同时查询缩写与全称。' : undefined)
+    .action(({ session, options }) => {
+      if (!options.find) return
+    })
+    .action(({ session, options }, server, ...item) => {
+      if (options.find) {
+        findSubsTable(session, options.find, Method.Find)
+      } else if (options.shorten) {
+        findSubsTable(session, options.shorten, Method.Shorten)
+      } else {
+        getMarketData(session, options, server, item)
+      }
+    })
 }
-
-module.exports.check = options => {
-  if (options.find && options.shorten) {
-    return '不可以同时查询缩写与全称。'
-  } else return
-}
-
-module.exports.getItemData = getItemData
