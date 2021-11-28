@@ -1,3 +1,4 @@
+const { s, sleep } = require('koishi')
 const Server = require('./market.server')
 const API = require('./market.api')
 const ListAPI = require('./market-list.api')
@@ -30,6 +31,10 @@ const findMarketList = name => {
   }
 }
 
+/**
+ * @param {string} name
+ * @returns {string}
+ */
 const showListDetail = name => {
   if (!name) return '未提供清单名。'
   const list = ListAPI.showMarketList(name)
@@ -37,63 +42,70 @@ const showListDetail = name => {
   return `清单 ${name} 包括：\n${list.items.join('\n')}`
 }
 
-const getMarketListData = async (server, name) => {
-  server = Server.parse(server)
-  let list = ListAPI.showMarketList(name)
+/**
+ * @param {string} rawServer
+ * @param {string} name
+ * @returns {Promise<string | import('canvas').Canvas>}
+ */
+const getMarketListData = async (rawServer, name) => {
+  const server = Server.parse(rawServer)
+  const list = ListAPI.showMarketList(name)
   if (!list) return '未找到清单。'
-  else list = [...list.items]
 
-  const options = { ...list.options }
-  let res = await Promise.all(list.map((item, i) => {
-    return new Promise((resolve, reject) => {
-      try {
-        setTimeout(() => {
-          resolve(getItemData(options, server, item))
-        }, i * 200)
-      } catch (err) {
-        reject(err)
-      }
-    })
-  }))
+  const { items, options } = list
 
-  res = res.map(item => {
+  /**
+   * @type {import('./market').MarketResolve[]}
+   */
+  const itemResolve = []
+
+  for (const item of items) {
+    itemResolve.push(await API.getMarketItemData(server, item, options?.language))
+    await sleep(200)
+  }
+
+  /**
+   * @type {import('./market').MarketListItemParsed[]}
+   */
+  const parsedList = itemResolve.map(item => {
+    /**
+     * @type {Partial<import('./market').MarketPayloadListing>}
+     */
     let lowest = {}
-    if (!('errCode' in item)) lowest = item.data.listings[0]
+    if (item.status == 'success') lowest = item.payload.listings[0]
+
     return {
-      seller: lowest.retainerName,
-      server: 'worldName' in lowest ? localizeServer(lowest.worldName) : server,
-      item: item.name,
-      itemhq: item.hq,
-      reshq: lowest.hq,
-      unit: lowest.pricePerUnit,
-      qty: lowest.quantity,
-      total: lowest.total,
-      lastUpdate: 'data' in item ? item.data.lastUploadTime : undefined,
-      errCode: item.errCode
+      status: item.status,
+      message: 'message' in item ? item.message : undefined,
+      seller: lowest?.retainerName,
+      server: 'worldName' in lowest ? Server.localize(lowest.worldName) : server,
+      item: 'name' in item ? item.name : undefined,
+      itemhq: 'hq' in item ? item.hq : undefined,
+      reshq: lowest?.hq,
+      unit: lowest?.pricePerUnit,
+      qty: lowest?.quantity,
+      total: lowest?.total,
+      lastUpdate: 'payload' in item ? item.payload.lastUploadTime : undefined
     }
   })
 
-  if (res.every(item => item.errCode)) {
-    if (res.every(item => item.errCode == 1)) {
-      return ErrorContent[1]
-    } else if (res.every(item => item.errCode == 3)) {
-      return '清单内的所有物品都不可出售。'
-    } else if (res.every(item => item.errCode == 4)) {
-      return ErrorContent[4]
-    } else if (res.every(item => item.errCode == 5)) {
-      return ErrorContent[5]
-    } else {
-      return ErrorContent[0]
-    }
+  if (parsedList.every(item => item.status == 'error')) {
+    return '所有请求均失败，请检查输入或尝试查询单件物品。'
   }
 
-  generateMarketListImage(session, { listname: name, server: server, list: res })
+  return generateMarketListImage({
+    name: name,
+    server: server,
+    list: parsedList
+  })
 }
 
 /**
  * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
+  const logger = ctx.logger('ff.marketlist')
+
   ctx
     .command('ff.marketlist <server> <listname>', '查询市场清单')
     .alias('ff.mlist')
@@ -109,8 +121,17 @@ module.exports = ctx => {
     .before(({ options }) => {
       if (options.list && options.detail) return '不可以同时查询多个项目。'
     })
-    .action(async (_, server, listname) => {
-      return await getMarketListData(server, listname)
+    .action(async (_, server, name) => {
+      const result = await getMarketListData(server, name)
+      if (typeof result == 'string') return result
+
+      try {
+        const imageData = result.toBuffer().toString('base64')
+        return s('image', { url: `base64://${imageData}` })
+      } catch (error) {
+        logger.error(error)
+        return '图片发送出错。'
+      }
     })
     .action(({ options }) => {
       if (!options.detail) return

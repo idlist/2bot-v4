@@ -19,7 +19,6 @@ Promise.all([
  * @returns {import('canvas').Canvas}
  */
 module.exports = async (data) => {
-
   const canvas = createCanvas()
   canvas.width = 1020
   canvas.height = 700

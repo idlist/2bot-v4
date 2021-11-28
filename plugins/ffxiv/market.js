@@ -32,14 +32,14 @@ const findSubsTable = (keyword, direction) => {
 }
 
 /**
- * @param {string} server
+ * @param {string} rawServer
  * @param {string[]} item
  * @param {string} lang
  * @returns {Promise<string | import('canvas').Canvas>}
  */
-const getMarketData = async (server, item, lang) => {
-  server = Server.parse(server)
-  const resolve = await API.getItemData(server, item, lang)
+const getMarketData = async (rawServer, item, lang) => {
+  const server = Server.parse(rawServer)
+  const resolve = await API.getMarketItemData(server, item, lang)
 
   if (resolve.status == 'error') return resolve.message
   const { name, hq, nq, payload } = resolve

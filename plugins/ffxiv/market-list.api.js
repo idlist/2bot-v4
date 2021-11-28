@@ -6,12 +6,11 @@ const yaml = require('js-yaml')
  * @type {import('./market').MarketListItem[]}
  */
 let MarketList
-
 (async () => {
   MarketList = await readFile(resolve(__dirname, 'data/market-list.yaml'), 'utf-8')
   MarketList = yaml.load(MarketList)
   Object.freeze(MarketList)
-})
+})()
 
 class ListAPI {
   /**
@@ -25,7 +24,7 @@ class ListAPI {
   /**
    *
    * @param {string} name
-   * @returns {import('./market').MarketListItem[]}
+   * @returns {import('./market').MarketListItem | undefined}
    */
   static showMarketList(name) {
     return MarketList.find(item => item.name == name)

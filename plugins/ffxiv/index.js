@@ -19,5 +19,6 @@ module.exports.apply = ctx => {
   ctx.plugin(require('./search-item'))
   ctx.plugin(require('./logs'))
   ctx.plugin(require('./market'))
+  ctx.plugin(require('./market-list'))
   ctx.plugin(require('./misc'))
 }

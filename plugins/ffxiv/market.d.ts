@@ -18,7 +18,7 @@ export interface ItemAPIError {
   message: string
 }
 
-export type ItemResolve = Promise<ItemData | ItemAPIError>
+export type ItemResolve = ItemData | ItemAPIError
 
 export interface ItemQuery {
   status: 'success'
@@ -80,7 +80,7 @@ export interface MarketAPIError extends Omit<ItemQuery, 'status'> {
   message: string
 }
 
-export type MarketResolve = Promise<MarketResult | ItemAPIError | MarketAPIError>
+export type MarketResolve = MarketResult | ItemAPIError | MarketAPIError
 
 export interface MarketListing {
   seller: string
@@ -108,4 +108,27 @@ export interface MarketImageData {
 export interface MarketListItem {
   name: string
   items: string[]
+  options?: {
+    language?: string
+  }
+}
+
+export interface MarketListItemParsed {
+  status: 'success' | 'error'
+  message?: string
+  seller?: string
+  server: string
+  item?: string
+  itemhq?: boolean
+  reshq?: boolean
+  unit?: number
+  qty?: number
+  total?: number
+  lastUpdate?: number
+}
+
+export interface MarketListImageData {
+  name: string
+  server: string
+  list: MarketListItemParsed[]
 }

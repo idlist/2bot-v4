@@ -84,7 +84,7 @@ class API {
   /**
    * @param {string} name
    * @param {string} langCode
-   * @returns {import('./market').ItemResolve}
+   * @returns {Promise<import('./market').ItemResolve>}
    */
   static async getItemId(name, langCode) {
     let apiUrl
@@ -127,12 +127,12 @@ class API {
   }
   /**
    * @param {string} server
-   * @param {string[]} item
+   * @param {string | string[]} item
    * @param {string} lang
-   * @returns {import('./market').MarketResolve}
+   * @returns {Promise<import('./market').MarketResolve>}
    */
-  static async getItemData(server, item, lang) {
-    item = item.join(' ')
+  static async getMarketItemData(server, item, lang) {
+    if (typeof item != 'string') item = item.join(' ')
 
     let hq = false
     if (item.toLowerCase().match('hq') != null) {
