@@ -1,4 +1,4 @@
-export interface MarketShortcodeData {
+export interface MarketShortcodeItem {
   code: string
   full: string
 }
@@ -20,7 +20,7 @@ export interface ItemAPIError {
 
 export type ItemResolve = Promise<ItemData | ItemAPIError>
 
-export interface ItemQueryData {
+export interface ItemQuery {
   status: 'success'
   name: string
   server: string
@@ -71,11 +71,11 @@ export interface MarketPayload {
   hqSaleVelocity: number
 }
 
-export interface MarketResult extends ItemQueryData {
+export interface MarketResult extends ItemQuery {
   payload: MarketPayload
 }
 
-export interface MarketAPIError extends Omit<ItemQueryData, 'status'> {
+export interface MarketAPIError extends Omit<ItemQuery, 'status'> {
   status: 'error'
   message: string
 }
@@ -103,4 +103,9 @@ export interface MarketImageData {
   average: number
   lastUpdate: number
   list: MarketListingCounted[]
+}
+
+export interface MarketListItem {
+  name: string
+  items: string[]
 }

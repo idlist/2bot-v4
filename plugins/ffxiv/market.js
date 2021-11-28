@@ -2,7 +2,7 @@ const { isDeepStrictEqual } = require('util')
 const { s } = require('koishi')
 const Server = require('./market.server')
 const API = require('./market.api')
-const getMarketImage = require('./market.image')
+const generateMarketImage = require('./market.image')
 
 /**
  * @param {string} keyword
@@ -13,11 +13,9 @@ const findSubsTable = (keyword, direction) => {
   if (!(typeof keyword == 'string')) return '参数数量似乎不够。'
 
   /**
-   * @type {import('./market'.MarketShortcodeData[])}
+   * @type {import('./market'.MarketShortcodeItem[])}
    */
-  let result = API.searchShortcodes(keyword, direction)
-
-  if (result.length > 10) result = result.slice(0, 10)
+  const result = API.searchShortcodes(keyword, { direction: direction }).slice(0, 10)
 
   const typeText = direction ? '缩写规则' : '全称'
   const showResult = () => direction == 'shorten'
@@ -40,8 +38,8 @@ const findSubsTable = (keyword, direction) => {
  * @returns {Promise<string | import('canvas').Canvas>}
  */
 const getMarketData = async (server, item, lang) => {
-  const parsedServer = Server.parse(server)
-  const resolve = await API.getItemData(parsedServer, item, lang)
+  server = Server.parse(server)
+  const resolve = await API.getItemData(server, item, lang)
 
   if (resolve.status == 'error') return resolve.message
   const { name, hq, nq, payload } = resolve
@@ -57,7 +55,7 @@ const getMarketData = async (server, item, lang) => {
   const extractItem = item => {
     return {
       seller: item.retainerName,
-      server: item.worldName ? Server.localize(item.worldName) : parsedServer,
+      server: item.worldName ? Server.localize(item.worldName) : server,
       hq: item.hq,
       unit: item.pricePerUnit,
       qty: item.quantity,
@@ -97,20 +95,15 @@ const getMarketData = async (server, item, lang) => {
     }
   }
 
-  /**
-   * @type {import('./market').MarketImageData}
-   */
-  const marketData = {
+  return generateMarketImage({
     item: name,
     hq: hq,
     nq: nq,
-    server: parsedServer,
+    server: server,
     average: average,
     lastUpdate: lastUpdate,
     list: extractedList
-  }
-
-  return getMarketImage(marketData)
+  })
 }
 
 module.exports = ctx => {
@@ -128,8 +121,8 @@ module.exports = ctx => {
     .shortcut(/^用(.+)(语|文)查市场\s+(.+)\s+(.+)/, {
       args: ['$3', '$4'], options: { language: '$1' }, prefix: true
     })
-    .before(({ session, options }, server) => {
-      if (!server && (!options.shorten && !options.lengthen)) {
+    .before(({ session, options }, ...args) => {
+      if (args.length < 2 && (!options.shorten && !options.lengthen)) {
         return session.execute('help ff.market')
       }
     })

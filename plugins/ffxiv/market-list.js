@@ -1,52 +1,49 @@
-const { readFile } = require('fs/promises')
+const Server = require('./market.server')
+const API = require('./market.api')
+const ListAPI = require('./market-list.api')
+const generateMarketListImage = require('./market-list.image')
 
-const yaml = require('js-yaml')
+/**
+ * @param {boolean | string} name
+ * @returns
+ */
+const findMarketList = name => {
+  /**
+   * @param {import('./market').MarketListItem[]} list
+   * @returns {string}
+   */
+  const showResult = list => list.slice(0, 10).map(item => item.name).join('\n')
 
-const { ErrorContent, resolveServer, localizeServer } = require('./get-market-utils')
-const { getItemData } = require('./get-market')
-const getMarketListImage = require('./get-market-list-image')
+  if (typeof name == 'boolean') {
+    const list = ListAPI.getMarketList()
+    const length = list.length
 
-let MarketList
-(async () => {
-  MarketList = await readFile(`${__dirname}/data/market-list.yaml`, 'utf-8')
-  MarketList = yaml.load(MarketList)
-})()
-
-let findMarketList = listname => {
-  let showResult = list => list.map(item => item.name).join('\n')
-
-  if (typeof listname == 'boolean') {
-    let len = MarketList.length
-
-    if (len <= 10) return `现有 ${len} 个清单：\n${showResult(MarketList)}`
-    else return `现有 ${len} 个清单，仅显示前10条：\n${showResult(MarketList)}`
+    if (length <= 10) return `现有 ${length} 个清单：\n${showResult(list)}`
+    else return `现有 ${length} 个清单，仅显示前10条：\n${showResult(list)}`
   } else {
-    let list = MarketList.filter(item => item.name.match(listname))
-    let len = list.length
-    if (len > 10) list = list.slice(0, 10)
+    const list = ListAPI.getMarketList(name)
+    const length = list.length
 
-    if (!len) return `没有找到包含 ${listname} 的清单。`
-    else if (len <= 10) return `共找到包含 ${listname} 的 ${len} 个清单：\n${showResult(list)}`
-    else return `共找到包含 ${listname} 的 ${len} 个清单，仅显示前10条：\n${showResult(list)}`
+    if (!length) return `没有找到包含 ${name} 的清单。`
+    else if (length <= 10) return `共找到包含 ${name} 的 ${length} 个清单：\n${showResult(list)}`
+    else return `共找到包含 ${name} 的 ${length} 个清单，仅显示前10条：\n${showResult(list)}`
   }
 }
 
-let showListDetail = listname => {
-  if (!listname) return '未提供清单名。'
-  let list = MarketList.find(item => item.name == listname)
+const showListDetail = name => {
+  if (!name) return '未提供清单名。'
+  const list = ListAPI.showMarketList(name)
 
-  return `清单 ${listname} 包括：\n${list.items.join('\n')}`
+  return `清单 ${name} 包括：\n${list.items.join('\n')}`
 }
 
-let getMarketListData = async (session, server, listname) => {
-  if (!server || !listname) return '参数数量似乎不够。'
-
-  server = resolveServer(server)
-  let list = MarketList.find(item => item.name == listname)
+const getMarketListData = async (server, name) => {
+  server = Server.parse(server)
+  let list = ListAPI.showMarketList(name)
   if (!list) return '未找到清单。'
   else list = [...list.items]
 
-  let options = { ...list.options }
+  const options = { ...list.options }
   let res = await Promise.all(list.map((item, i) => {
     return new Promise((resolve, reject) => {
       try {
@@ -90,15 +87,37 @@ let getMarketListData = async (session, server, listname) => {
     }
   }
 
-  getMarketListImage(session, { listname: listname, server: server, list: res })
+  generateMarketListImage(session, { listname: name, server: server, list: res })
 }
 
-module.exports = async (session, options, server, listname) => {
-  if (options.list) {
-    return findMarketList(options.list)
-  } else if (options.detail) {
-    return showListDetail(options.detail)
-  } else {
-    return await getMarketListData(session, server, listname)
-  }
+/**
+ * @param {import('koishi').Context} ctx
+ */
+module.exports = ctx => {
+  ctx
+    .command('ff.marketlist <server> <listname>', '查询市场清单')
+    .alias('ff.mlist')
+    .usage('使用预设的清单查询市场。')
+    .option('list', '-l [name] 显示或查询可用清单')
+    .option('detail', '-d <listname> 显示清单内容')
+    .shortcut('查清单', { fuzzy: true, prefix: true })
+    .before(({ session, options }, ...args) => {
+      if (args.length < 2 && (!options.list || !options.detail)) {
+        return session.execute('help ff.marketlist')
+      }
+    })
+    .before(({ options }) => {
+      if (options.list && options.detail) return '不可以同时查询多个项目。'
+    })
+    .action(async (_, server, listname) => {
+      return await getMarketListData(server, listname)
+    })
+    .action(({ options }) => {
+      if (!options.detail) return
+      return showListDetail(options.detail)
+    })
+    .action(({ options }) => {
+      if (!options.list) return
+      return findMarketList(options.list)
+    })
 }

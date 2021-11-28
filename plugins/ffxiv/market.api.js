@@ -5,12 +5,13 @@ const yaml = require('js-yaml')
 const axios = require('axios').default
 
 /**
- * @type {import('./market').MarketShortcodeData[]}
+ * @type {import('./market').MarketShortcodeItem[]}
  */
 let Shortcodes
 (async () => {
   Shortcodes = yaml.load(await readFile(resolve(__dirname, 'data/market-shortcodes.yaml'), 'utf-8'))
   Shortcodes = Shortcodes.sort((a, b) => a.code.localeCompare(b.code))
+  Object.freeze(Shortcodes)
 })()
 
 const logger = new Logger('ff.market')
@@ -150,7 +151,7 @@ class API {
     if (targetItem.status == 'error') return targetItem
 
     /**
-     * @type {import('./market').ItemQueryData}
+     * @type {import('./market').ItemQuery}
      */
     const query = {
       status: 'success',
