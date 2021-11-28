@@ -1,6 +1,6 @@
 const { resolve } = require('path')
 const { createCanvas, loadImage } = require('canvas')
-const { DateTime } = require('luxon')
+const { formatTimestamp } = require('./utils')
 
 const canvasResources = new Map()
 Promise.all([
@@ -49,7 +49,7 @@ module.exports = async (data) => {
   offsetX += ctx.measureText(text).width
   ctx.font = '32px ffxiv-number'
   ctx.fillText(data.average, 84 + offsetX, 108)
-  text = DateTime.fromMillis(data.lastUpdate).toFormat('yyyy/LL/dd TT')
+  text = formatTimestamp(data.lastUpdate)
   offsetX = ctx.measureText(text).width
   ctx.fillText(text, canvas.width - 10 - offsetX, 108)
   text = '最后更新时间'

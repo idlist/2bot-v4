@@ -49,6 +49,9 @@ module.exports = ctx => {
     .alias('ff.s')
     .option('share', '-s 使用分享卡片发送结果（大概率发不出来）')
     .shortcut('查维基', { fuzzy: true, prefix: true })
+    .before(({ session }, item)=> {
+      if (!item) return session.execute('help ff.search')
+    })
     .action(async ({ options }, keyword) => {
       try {
         const requestUrl = `${wikiUrl}/api.php`

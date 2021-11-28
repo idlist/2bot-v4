@@ -1,6 +1,6 @@
 const { resolve } = require('path')
 const { createCanvas, loadImage } = require('canvas')
-const { DateTime } = require('luxon')
+const { formatTimestamp } = require('./utils')
 
 const canvasResources = new Map()
 Promise.all([
@@ -91,7 +91,7 @@ module.exports = async (data) => {
       ctx.fillRect(910, setY - 32, canvas.width - 20, 42)
       ctx.fillStyle = '#000'
       ctx.font = '32px ffxiv-number'
-      ctx.fillText(DateTime.fromMillis(item.lastUpdate).toFormat('yyyy/LL/dd TT'), 920, setY)
+      ctx.fillText(formatTimestamp(item.lastUpdate), 920, setY)
     }
   }
 

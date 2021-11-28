@@ -53,7 +53,7 @@ module.exports = ctx => {
 
   const shortcutConfig = { fuzzy: true, prefix: true }
 
-  ctx.command('ff.logs <boss> <job>', '查询logs')
+  ctx.command('ff.logs <boss> <job>', '查询 logs')
     .usage('默认查询国服、rDPS。')
     .option('adps', '-a 查询aDPS')
     .option('global', '-g 查询国际服')
