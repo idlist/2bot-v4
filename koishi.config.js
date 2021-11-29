@@ -36,6 +36,8 @@ module.exports = defineConfig({
 
     // Local plugins
     'ffxiv': {},
+    './plugins/admin': {},
+    './plugins/parrot': {},
 
     // Customize plugin behaviours
     './koishi.tweaks': {}

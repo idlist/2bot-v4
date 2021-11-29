@@ -25,7 +25,7 @@ const getRandomNumbers = async () => {
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = async (ctx) => {
+module.exports = ctx => {
   const logger = ctx.logger('ff.advmeld')
 
   ctx

@@ -1,6 +1,6 @@
-import { createPool } from 'mysql'
+const { createPool } = require('mysql')
 
-import secret from '../secret.js'
+const secret = require('../koishi.secret')
 
 const db = secret.mysql
 
