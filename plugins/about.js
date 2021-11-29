@@ -4,7 +4,8 @@ module.exports.name = 'about'
  * @param {import('koishi').Context} ctx
  */
 module.exports.apply = ctx => {
-  ctx.command('about', '关于 2bot')
+  ctx
+    .command('about', '关于 2bot')
     .action(() => {
       return (
         '2bot 是由日地地 (me@idl.ist) 所搭建的没什么功能的 bot！\n' +

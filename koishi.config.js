@@ -36,6 +36,9 @@ module.exports = defineConfig({
     // official plugins
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
+    'assets-smms': secret.smms,
+    // 'schedule': {},
+    'teach': { prefix: '->' },
 
     // Local plugins
     'ffxiv': {},
