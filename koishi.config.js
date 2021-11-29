@@ -1,6 +1,9 @@
 const { defineConfig } = require('@koishijs/cli')
+const { registerFont } = require('canvas')
 
 const secret = require('./koishi.secret')
+
+registerFont('./fonts/msyh.ttf', { family: 'msyh' })
 
 module.exports = defineConfig({
   // Basic settings
@@ -39,6 +42,7 @@ module.exports = defineConfig({
     './plugins/admin': {},
     './plugins/about': {},
     './plugins/parrot': {},
+    './plugins/fun': {},
 
     // Customize plugin behaviours
     './koishi.tweaks': {}

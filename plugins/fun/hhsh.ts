@@ -8,4 +8,6 @@ interface UserAbbrs {
   inputting: string[]
 }
 
-export type AbbrsPayload = OfficialAbbrs[] | UserAbbrs[]
+export interface AbbrsPayload {
+  data: OfficialAbbrs[] | UserAbbrs[]
+}
