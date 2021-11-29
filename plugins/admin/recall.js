@@ -26,8 +26,9 @@ module.exports = ctx => {
       if (!list) return '没有近期发送的消息。'
       if (!list.length) return '可撤回消息数已达上限。'
 
-      if (list.length >= count) {
-        const targets = list.splice(list.length - count, count)
+      const length = list.length
+      if (length >= count) {
+        const targets = list.splice(length - count, count)
         for (const message of targets) {
           session.bot.deleteMessage(session.cid, message)
           await sleep(100)
@@ -41,7 +42,7 @@ module.exports = ctx => {
         RecentSent[session.cid] = []
         return (
           '可撤回消息数已达上限。' +
-          `最多可撤回 ${list.length} 条，尝试撤回 ${count} 条。`
+          `最多可撤回 ${length} 条，尝试撤回 ${count} 条。`
         )
       }
     })
