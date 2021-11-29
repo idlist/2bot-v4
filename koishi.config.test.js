@@ -33,9 +33,6 @@ module.exports = defineConfig({
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
 
-    './plugins/admin': {},
-    './plugins/parrot': {},
-
     // Customize plugin behaviours
     './koishi.tweaks': {}
   }

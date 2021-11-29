@@ -88,10 +88,12 @@ module.exports = ctx => {
       }
       const type = options.adps ? 'adps' : 'rdps'
 
-      const logsUrl = 'https://www.fflogs.com/zone/statistics/table/'
-        + `${boss.zoneId}/dps/${boss.id}/${boss.diff}/${boss.teamsize}/`
-        + `${server}/100/1/${duration}/0/Global/${job.logsCode}/All/0/`
-        + `normalized/single/0/-1/?keystone=15&dpstype=${type}`
+      const logsUrl = (
+        'https://www.fflogs.com/zone/statistics/table/' +
+        `${boss.zoneId}/dps/${boss.id}/${boss.diff}/${boss.teamsize}/` +
+        `${server}/100/1/${duration}/0/Global/${job.logsCode}/All/0/` +
+        `normalized/single/0/-1/?keystone=15&dpstype=${type}`
+      )
 
       let data
       try {

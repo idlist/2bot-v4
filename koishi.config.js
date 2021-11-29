@@ -37,6 +37,7 @@ module.exports = defineConfig({
     // Local plugins
     'ffxiv': {},
     './plugins/admin': {},
+    './plugins/about': {},
     './plugins/parrot': {},
 
     // Customize plugin behaviours

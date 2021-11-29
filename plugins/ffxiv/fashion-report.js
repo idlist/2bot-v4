@@ -47,7 +47,7 @@ module.exports.apply = ctx => {
         const rawReport = reportData.data.desc
 
         const reportContent = rawReport.split('\n')
-        let report = []
+        const report = []
         let isContent = false
         for (const line of reportContent) {
           if (line.startsWith('【')) {
@@ -59,11 +59,12 @@ module.exports.apply = ctx => {
             report.push(line)
           }
         }
-        report = reportData.data.title.split()[0] + '\n' +
-          `(bv: ${reportData.data.aid})\n` +
-          report.join('\n').replace(/\*/g, '').replace(/—/g, '')
 
-        return report
+        return (
+          reportData.data.title.split()[0] + '\n' +
+          `(av: ${reportData.data.aid})\n` +
+          report.join('\n').replace(/\*/g, '').replace(/—/g, '')
+        )
       } catch (error) {
         logger.warn(error)
         return '出现了网络错误。'
