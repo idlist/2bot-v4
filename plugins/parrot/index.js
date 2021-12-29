@@ -41,7 +41,8 @@ module.exports.apply = ctx => {
   const cooldown = 60 * 10000
 
   ctx.middleware((session, next) => {
-    const channel = ParrotData[session.cid]
+    const cid = session.cid
+    const channel = ParrotData[cid]
 
     if (channel) {
       if (channel.message == session.content) {
@@ -64,7 +65,7 @@ module.exports.apply = ctx => {
         channel.count = 1
       }
     } else {
-      ParrotData[session.cid] = {
+      ParrotData[cid] = {
         message: session.content,
         count: 1,
         trigger: randomTrigger(),

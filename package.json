@@ -32,15 +32,16 @@
     "mysql": "^2.0.0"
   },
   "devDependencies": {
-    "@koishijs/cli": "^4.0.0-beta.0",
-    "@koishijs/plugin-adapter-onebot": "^4.0.0-beta.0",
-    "@koishijs/plugin-common": "^5.0.0-beta.0",
-    "@koishijs/plugin-database-mysql": "^4.0.0-beta.0",
-    "@koishijs/plugin-schedule": "^4.0.0-beta.0",
-    "@koishijs/plugin-teach": "^3.0.0-beta.0",
+    "@koishijs/cli": "^4.0.0-rc.0",
+    "@koishijs/plugin-adapter-onebot": "^4.0.0-rc.0",
+    "@koishijs/plugin-console": "^1.0.0-rc.0",
+    "@koishijs/plugin-database-mysql": "^4.0.0rc.0",
+    "@koishijs/plugin-schedule": "^4.0.0-rc.0",
+    "@koishijs/plugin-status": "^5.0.0-rc.0",
+    "@koishijs/plugin-teach": "^3.0.0-rc.0",
     "eslint": "^8.0.0",
-    "koishi": "^4.0.0-beta.0",
-    "koishi-plugin-assets-smms": "^1.0.0-beta.0"
+    "koishi": "^4.0.0-rc.0",
+    "koishi-plugin-assets-smms": "^1.0.0-rc.0"
   },
   "workspaces": [
     "plugins/*"

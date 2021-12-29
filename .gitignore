@@ -1,5 +1,6 @@
 node_modules
 test
+logs
 
 koishi.secret.js
 koishi.secret.prod.js

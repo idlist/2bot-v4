@@ -3,7 +3,7 @@ const { s } = require('koishi')
 /**
  * @type {Record<string, number>}
  */
-const Status = {}
+const State = {}
 
 /**
  * @param {import('koishi').Context} ctx
@@ -28,20 +28,22 @@ module.exports = ctx => {
       session.senderId != session.selfId &&
       session.targetId == session.selfId
     ) {
-      if (!Status[session.cid]) Status[session.cid] = 0
+      const cid = cid
 
-      switch (Status[session.cid]) {
+      if (!State[cid]) State[cid] = 0
+
+      switch (State[cid]) {
         case 0:
           session.send('戳什么戳！(ﾉ｀□´)ﾉ')
-          if (Math.random() < 0.25) Status[session.cid]++
+          if (Math.random() < 0.25) State[cid]++
           break
         case 1:
           session.send('再戳我就戳回去了！(╯￣Д￣)╯')
-          Status[session.cid]++
+          State[cid]++
           break
         default:
           session.send(s('poke', { qq: session.userId }))
-          Status[session.cid] = 0
+          State[cid] = 0
       }
     }
   })
