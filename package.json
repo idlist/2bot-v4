@@ -24,14 +24,12 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "canvas": "^2.8.0",
     "cheerio": "^1.0.0-rc.10",
     "js-yaml": "^4.0.0",
     "lodash": "^4.0.0",
     "luxon": "^2.0.0",
     "mysql": "^2.0.0",
-    "simplify-chinese": "^1.1.0",
-    "skia-canvas": "^0.9.0"
+    "simplify-chinese": "^1.0.0"
   },
   "devDependencies": {
     "@koishijs/cli": "^4.0.0",

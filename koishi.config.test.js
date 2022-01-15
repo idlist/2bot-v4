@@ -35,13 +35,6 @@ module.exports = defineConfig({
   // Plugins.
   plugins: {
     'adapter-onebot': secret.onebot,
-    'database-mysql': secret.mysql,
-
-    'canvas': {
-      fonts: [
-        { path: 'fonts/msyh.ttf', family: 'msyh' }
-      ]
-    },
-    './plugins/ffxiv': {}
+    'database-mysql': secret.mysql
   }
 })

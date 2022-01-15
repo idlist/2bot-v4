@@ -1,14 +1,12 @@
-const { registerFont } = require('canvas')
-
-registerFont('./fonts/msyh.ttf', { family: 'ffxiv-text' })
-registerFont('./fonts/bahnschrift.ttf', { family: 'ffxiv-number' })
-
 module.exports.name = 'ffxiv'
+
+module.exports.using = ['canvas']
 
 /**
  * @param {import('koishi').Context} ctx
+ * @param {import('./index').Config} config
  */
-module.exports.apply = ctx => {
+module.exports.apply = (ctx, config) => {
   ctx.command('ff', 'FFXIV 功能')
 
   ctx.plugin(require('./random-gate'))
@@ -17,8 +15,8 @@ module.exports.apply = ctx => {
   ctx.plugin(require('./simulate-melding'))
   ctx.plugin(require('./search-wiki'))
   ctx.plugin(require('./search-item'))
-  ctx.plugin(require('./logs'))
-  ctx.plugin(require('./market'))
-  ctx.plugin(require('./market-list'))
+  // ctx.plugin(require('./logs'))
+  ctx.plugin(require('./market'), config)
+  // ctx.plugin(require('./market-list'))
   ctx.plugin(require('./misc'))
 }

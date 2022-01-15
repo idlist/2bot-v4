@@ -1,10 +1,6 @@
-const { resolve } = require('path')
 const { defineConfig } = require('@koishijs/cli')
-const { registerFont } = require('canvas')
 
 const secret = require('./koishi.secret')
-
-registerFont(resolve(__dirname, 'fonts/msyh.ttf'), { family: 'msyh' })
 
 module.exports = defineConfig({
   // Basic settings.
@@ -42,19 +38,27 @@ module.exports = defineConfig({
     'teach': { prefix: '->' },
     'schedule': {},
 
-    // Local packages
+    // Local packages.
     'canvas': {
       fonts: [
-        { path: 'fonts/MSYH.ttf', family: 'msyh' }
+        { path: 'fonts/MSYH.ttf', family: 'msyh' },
+        { path: 'fonts/Bahnschrift.ttf', family: 'bahnschrift' },
+        { path: 'fonts/SourceHanSans-Heavy.otf', family: 'sans-heavy' },
+        { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'serif-heavy' }
       ]
     },
 
-    // Local plugins
-    // './plugins/ffxiv': {},
-    // './plugins/admin': {},
+    // Local plugins.
+    './plugins/ffxiv': {
+      fonts: {
+        text: { name: 'msyh' },
+        number: { name: 'bahnschrift' }
+      }
+    },
+    './plugins/admin': {},
     './plugins/about': {},
-    // './plugins/parrot': {},
-    // './plugins/fun': {},
+    './plugins/parrot': {},
+    './plugins/fun': {},
 
     // Customize plugin behaviours.
     './koishi.tweaks': {}

@@ -6,7 +6,7 @@ const canvasResources = new Map()
 module.exports.using = ['canvas']
 
 /**
- * @param {import('koishi').Canvas} ctx
+ * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
   Promise.all([
@@ -16,13 +16,15 @@ module.exports = ctx => {
     })()
   ])
 
+  const ctxCanvas = ctx.canvas
+
   /**
    * @param {string} left
    * @param {string} right
    * @returns {string | import('koishi-plugin-canvas').Canvas}
    */
   const generateImage = (left, right) => {
-    const canvas = ctx.canvas.createCanvas()
+    const canvas = ctxCanvas.createCanvas()
     canvas.width = 450
     canvas.height = 373
 
@@ -31,7 +33,6 @@ module.exports = ctx => {
     ctx.drawImage(canvasResources.get('base-image'), 0, 0, 450, 373)
 
     const widthLimit = 195
-    ctx.textDrawingMode = 'glyph'
 
     const fillIn = (text, centerX, centerY, color) => {
       let fontSize = 24, lineNumber = 1
