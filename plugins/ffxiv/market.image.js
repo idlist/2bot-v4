@@ -72,7 +72,7 @@ module.exports = async (data) => {
   ctx.fillStyle = '#000'
   ctx.fillRect(10, 120, canvas.width - 20, 4)
   ctx.fillRect(10, 580, canvas.width - 20, 4)
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 10; i++) {
     ctx.fillRect(10, 160 + i * 42, canvas.width - 20, 1)
   }
 

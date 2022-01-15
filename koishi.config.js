@@ -7,7 +7,7 @@ const secret = require('./koishi.secret')
 registerFont(resolve(__dirname, 'fonts/msyh.ttf'), { family: 'msyh' })
 
 module.exports = defineConfig({
-  // Basic settings
+  // Basic settings.
   prefix: '-',
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
   minSimilarity: 0,
@@ -24,7 +24,7 @@ module.exports = defineConfig({
     shortcut: false
   },
 
-  // Logger settings
+  // Logger settings.
   logger: {
     levels: {
       command: 3
@@ -33,9 +33,9 @@ module.exports = defineConfig({
     showDiff: false
   },
 
-  // Plugins
+  // Plugins.
   plugins: {
-    // official plugins
+    // Official plugins.
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
@@ -50,7 +50,7 @@ module.exports = defineConfig({
     './plugins/parrot': {},
     './plugins/fun': {},
 
-    // Customize plugin behaviours
+    // Customize plugin behaviours.
     './koishi.tweaks': {}
   }
 })

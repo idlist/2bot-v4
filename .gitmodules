@@ -1,0 +1,3 @@
+[submodule "packages/canvas"]
+	path = packages/canvas
+	url = https://github.com/idlist/koishi-plugin-canvas.git

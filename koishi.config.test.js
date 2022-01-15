@@ -7,7 +7,7 @@ const secret = require('./koishi.secret')
 registerFont(resolve(__dirname, 'fonts/msyh.ttf'), { family: 'msyh' })
 
 module.exports = defineConfig({
-  // Basic settings
+  // Basic settings.
   prefix: '.',
   minSimilarity: 0,
   port: 21919,
@@ -23,7 +23,7 @@ module.exports = defineConfig({
     shortcut: false
   },
 
-  // Logger settings
+  // Logger settings.
   logger: {
     levels: {
       command: 3
@@ -32,11 +32,16 @@ module.exports = defineConfig({
     showDiff: false
   },
 
-  // Plugins
+  // Plugins.
   plugins: {
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
 
-    './koishi.tweaks': {}
+    'canvas': {
+      fonts: [
+        { path: 'fonts/msyh.ttf', family: 'msyh' }
+      ]
+    },
+    './plugins/ffxiv': {}
   }
 })
