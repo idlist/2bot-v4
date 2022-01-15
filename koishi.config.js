@@ -41,14 +41,20 @@ module.exports = defineConfig({
     'assets-smms': secret.smms,
     'teach': { prefix: '->' },
     'schedule': {},
-    'console': {},
+
+    // Local packages
+    'canvas': {
+      fonts: [
+        { path: 'fonts/MSYH.ttf', family: 'msyh' }
+      ]
+    },
 
     // Local plugins
-    'ffxiv': {},
-    './plugins/admin': {},
+    // './plugins/ffxiv': {},
+    // './plugins/admin': {},
     './plugins/about': {},
-    './plugins/parrot': {},
-    './plugins/fun': {},
+    // './plugins/parrot': {},
+    // './plugins/fun': {},
 
     // Customize plugin behaviours.
     './koishi.tweaks': {}
