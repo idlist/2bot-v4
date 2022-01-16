@@ -10,8 +10,8 @@ const State = {}
  * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
-  ctx.command('ffgame.roll', '模拟 Roll 点')
-    .alias('fg.roll')
+  ctx.command('ff.roll', '模拟 Roll 点')
+    .alias('ff.roll')
     .option('start', '-s [teamsize] 发起 Roll 点，默认人数为轻锐小队')
     .option('end', '-e 停止 roll 点')
     .usage('teamsize 可以是 2 - 8 人')
@@ -19,7 +19,7 @@ module.exports = ctx => {
     .example('fg.roll  参与 Roll 点')
     .example('fg.roll -e  中途结束 Roll 点')
     .action(({ session, options }) => {
-      const cid = `${session.platform}:${session.channelId}`
+      const cid = session.cid
 
       if (
         State[cid] &&

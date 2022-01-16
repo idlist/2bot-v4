@@ -4,3 +4,6 @@
 [submodule "packages/duplicate-checker"]
 	path = packages/duplicate-checker
 	url = https://github.com/idlist/koishi-plugin-duplicate-checker.git
+[submodule "packages/gosen-choyen"]
+	path = packages/gosen-choyen
+	url = https://github.com/idlist/koishi-plugin-gosen-choyen.git

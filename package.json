@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@koishijs/cli": "^4.0.0",
+    "@koishijs/plugin-adapter-discord": "^2.0.0",
     "@koishijs/plugin-adapter-onebot": "^4.0.0",
     "@koishijs/plugin-admin": "^1.0.0",
     "@koishijs/plugin-console": "^1.0.0",

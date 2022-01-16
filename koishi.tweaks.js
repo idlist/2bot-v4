@@ -23,5 +23,5 @@ module.exports = ctx => {
   })
 
   // Quick fixes.
-  ctx.dispose('user')
+  ctx.command('admin/user', '用户管理')
 }

@@ -45,6 +45,10 @@ module.exports = defineConfig({
         { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'SHSerif-Heavy' }
       ]
     },
+    'gosen-choyen': {
+      upper: { name: 'SHSans-Heavy' },
+      lower: { name: 'SHSerif-Heavy' }
+    },
     'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
 
     // Local plugins.
@@ -53,12 +57,9 @@ module.exports = defineConfig({
     './plugins/parrot': {},
     './plugins/fun': {},
     './plugins/ffxiv': {
-      fonts: {
-        text: { name: 'SHSans' },
-        number: { name: 'Din' }
-      }
+      text: { name: 'SHSans' },
+      number: { name: 'Din' }
     },
-    './plugins/ffxiv-game': {},
 
     // Scoped plugins.
     './plugins.scoped/gacha': {},

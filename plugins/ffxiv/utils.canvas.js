@@ -80,10 +80,10 @@ class ImageGenerator {
      */
     this.ctxCanvas = ctxCanvas
 
-    this.textFont = config.fonts.text.name
-    this.textWeight = config.fonts.text.weight ?? 'normal'
-    this.numberFont = config.fonts.number.name
-    this.numberWeight = config.fonts.number.weight ?? 'normal'
+    this.textFont = config.text.name
+    this.textWeight = config.text.weight ?? 'normal'
+    this.numberFont = config.number.name
+    this.numberWeight = config.number.weight ?? 'normal'
 
     /**
      * @param {number} size
