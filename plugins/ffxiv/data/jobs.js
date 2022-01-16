@@ -72,7 +72,7 @@ module.exports = [
     name: 'Sage'
   },
   {
-    keywords: ['钐镰师', 'rpr'],
+    keywords: ['钐镰师', 'rpr', '镰刀'],
     name: 'Reaper'
   }
 ]

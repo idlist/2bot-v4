@@ -80,7 +80,11 @@ class LogsImageGenerator extends ImageGenerator {
     ex.drawText(logsData.server, 32 + offX, offY)
 
     ctx.textAlign = 'right'
-    offX = ex.drawText(logsData.record, canvas.width - 20, offY)
+    ctx.font = f.text(32)
+    offX = ex.drawText('条', canvas.width - 20, offY)
+
+    ctx.font = f.number(32)
+    offX += ex.drawMonoNumber(logsData.record, canvas.width - offX - 24, offY)
 
     ctx.font = f.text(28)
     ex.drawText(logsData.duration, canvas.width - offX - 28, offY)
@@ -103,6 +107,7 @@ class LogsImageGenerator extends ImageGenerator {
 
     ctx.font = f.text(24)
     ctx.fillStyle = '#333'
+    ctx.textAlign = 'left'
     ex.drawText('此结果由2bot查询fflogs生成', 20, canvas.height - 16)
 
     size = 120

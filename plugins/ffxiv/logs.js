@@ -140,7 +140,7 @@ module.exports = (ctx, config) => {
         server: serverArea == SERVER.CN ? '国服' : '国际服',
         type: type == 'adps' ? 'aDPS' : 'rDPS',
         duration: durationText,
-        record: recordNumber + '条',
+        record: recordNumber,
         data: seriesData.map(str => parseFloat(str).toFixed(2))
       }
 
