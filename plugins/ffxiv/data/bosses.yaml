@@ -11,6 +11,30 @@
   diff: 100
   server: { global: 7, cn: 9 }
 
+- keywords:
+    - zodirak
+    - 佐迪亚克
+    - 黑色
+    - 黑色极神
+  name: 黑色极神
+  zoneId: 42
+  id: 1058
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - hydaelyn
+    - 海德琳
+    - 白色
+    - 白色极神
+  name: 白色蛮神
+  zoneId: 42
+  id: 1059
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
 # Unreals
 
 - keywords:
@@ -28,6 +52,7 @@
   server: { global: 1, cn: 3 }
 
 # Normal Raids
+
 - keywords:
     - e9
   name: 暗黑之云 (E9)
@@ -60,6 +85,50 @@
   name: 伊甸之约 (E12)
   zoneId: 38
   id: 76
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p1
+    - erichthonios
+    - 厄瑞克透斯
+  name: 厄瑞克透斯 (P1)
+  zoneId: 44
+  id: 78
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p2
+    - hippocampus
+    - 海马
+  name: 海马 (P2)
+  zoneId: 44
+  id: 79
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p3
+    - phoinix
+    - 火鸟
+  name: 火鸟（P3）
+  zoneId: 44
+  id: 80
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p4
+    - hesperos
+    - 赫斯珀洛斯
+  name: 赫斯珀洛斯（P4）
+  zoneId: 44
+  id: 81
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }
@@ -119,6 +188,61 @@
   name: 暗之巫女(E12S P2)
   zoneId: 38
   id: 77
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p1s
+    - erichthonios
+    - 厄瑞克透斯
+  name: 厄瑞克透斯 (P1S)
+  zoneId: 44
+  id: 78
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p2s
+    - hippocampus
+    - 海马
+  name: 海马 (P2S)
+  zoneId: 44
+  id: 79
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p3s
+    - phoinix
+    - 火鸟
+  name: 火鸟（P3S）
+  zoneId: 44
+  id: 80
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p4s
+    - p4s1
+    - hesperos
+    - 赫斯珀洛斯
+  name: 赫斯珀洛斯（P4S P1）
+  zoneId: 44
+  id: 81
+  teamsize: 8
+  diff: 101
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - p4s2
+    - hesperos2
+  name: 赫斯珀洛斯（P4S P2）
+  zoneId: 44
+  id: 82
   teamsize: 8
   diff: 101
   server: { global: 1, cn: 3 }

@@ -67,7 +67,7 @@ class LogsImageGenerator extends ImageGenerator {
 
     ctx.textAlign = 'right'
     ctx.font = f.text(32)
-    ex.drawText(logsData.job, canvas.width - size - 24, offY)
+    ex.drawText(logsData.job, canvas.width - size - 24, offY + 4)
 
     offY = 108
 
@@ -103,7 +103,7 @@ class LogsImageGenerator extends ImageGenerator {
 
     ctx.font = f.text(24)
     ctx.fillStyle = '#333'
-    ex.drawText('此结果由 2bot 查询 fflogs 生成', 20, canvas.height - 16)
+    ex.drawText('此结果由2bot查询fflogs生成', 20, canvas.height - 16)
 
     size = 120
     ctx.drawImage(ImageRes.get('look-phone'), canvas.width - size, canvas.height - size, size, size)

@@ -66,5 +66,13 @@ module.exports = [
   {
     keywords: ['绝枪战士', 'gnb', '绝枪', '枪刃'],
     name: 'Gunbreaker'
+  },
+  {
+    keywords: ['贤者', 'sge'],
+    name: 'Sage'
+  },
+  {
+    keywords: ['钐镰师', 'rpr'],
+    name: 'Reaper'
   }
 ]
