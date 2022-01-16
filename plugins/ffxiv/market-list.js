@@ -2,7 +2,7 @@ const { s, sleep } = require('koishi')
 const Server = require('./market.server')
 const API = require('./market.api')
 const ListAPI = require('./market-list.api')
-const generateMarketListImage = require('./market-list.image')
+const MarketListImageGenerator = require('./market-list.image')
 
 /**
  * @param {boolean | string} name
@@ -43,11 +43,12 @@ const showListDetail = name => {
 }
 
 /**
+ * @param {MarketListImageGenerator} generator
  * @param {string} rawServer
  * @param {string} name
- * @returns {Promise<string | import('canvas').Canvas>}
+ * @returns {Promise<string | import('koishi-plugin-canvas').Canvas>}
  */
-const getMarketListData = async (rawServer, name) => {
+const getMarketListData = async (generator, rawServer, name) => {
   const server = Server.parse(rawServer)
   const list = ListAPI.showMarketList(name)
   if (!list) return '未找到清单。'
@@ -93,7 +94,7 @@ const getMarketListData = async (rawServer, name) => {
     return '所有请求均失败，请检查输入或尝试查询单件物品。'
   }
 
-  return generateMarketListImage({
+  return await generator.generate({
     name: name,
     server: server,
     list: parsedList
@@ -102,9 +103,11 @@ const getMarketListData = async (rawServer, name) => {
 
 /**
  * @param {import('koishi').Context} ctx
+ * @param {import('./index').Config} config
  */
-module.exports = ctx => {
+module.exports = (ctx, config) => {
   const logger = ctx.logger('ff.marketlist')
+  const generator = new MarketListImageGenerator(ctx.canvas, config)
 
   ctx
     .command('ff.marketlist <server> <listname>', '查询市场清单')
@@ -122,11 +125,11 @@ module.exports = ctx => {
       if (options.list && options.detail) return '不可以同时查询多个项目。'
     })
     .action(async (_, server, name) => {
-      const result = await getMarketListData(server, name)
+      const result = await getMarketListData(generator, server, name)
       if (typeof result == 'string') return result
 
       try {
-        const imageData = result.toBuffer().toString('base64')
+        const imageData = result.toBase64()
         return s('image', { url: `base64://${imageData}` })
       } catch (error) {
         logger.error(error)

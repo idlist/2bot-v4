@@ -7,7 +7,6 @@ class ContextEx {
   }
 
   /**
-   *
    * @param {string} text
    * @returns {number} Width of the rendered text.
    */
@@ -16,7 +15,6 @@ class ContextEx {
   }
 
   /**
-   *
    * @param {string} text
    * @param {number} x
    * @param {number} y
@@ -71,4 +69,37 @@ class ContextEx {
   }
 }
 
+class ImageGenerator {
+  /**
+   * @param {import('koishi-plugin-canvas').default} ctxCanvas
+   * @param {import('./index').Config} config
+   */
+  constructor(ctxCanvas, config) {
+    /**
+     * @type {import('koishi-plugin-canvas').default}
+     */
+    this.ctxCanvas = ctxCanvas
+
+    this.textFont = config.fonts.text.name
+    this.textWeight = config.fonts.text.weight ?? 'normal'
+    this.numberFont = config.fonts.number.name
+    this.numberWeight = config.fonts.number.weight ?? 'normal'
+
+    /**
+     * @param {number} size
+     */
+    this.ftext = size => {
+      return `${this.textWeight} ${size}px ${this.textFont}`
+    }
+
+    /**
+     * @param {number} size
+     */
+    this.fnumber = size => {
+      return `${this.numberWeight} ${size}px ${this.numberFont}`
+    }
+  }
+}
+
 module.exports.ContextEx = ContextEx
+module.exports.ImageGenerator = ImageGenerator

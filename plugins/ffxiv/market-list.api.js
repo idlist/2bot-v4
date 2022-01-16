@@ -21,6 +21,7 @@ class ListAPI {
     if (!name) return MarketList
     else return MarketList.filter(item => item.name.match(name))
   }
+
   /**
    *
    * @param {string} name

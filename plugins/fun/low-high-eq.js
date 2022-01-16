@@ -39,9 +39,9 @@ module.exports = ctx => {
       let firstLine = '', secondLine = ''
       ctx.fillStyle = color
 
-      ctx.font = `${fontSize}px msyh`
+      ctx.font = `${fontSize}px SHSans`
       while (ctx.measureText(text).width > widthLimit && fontSize > 16) {
-        ctx.font = `${--fontSize}px msyh`
+        ctx.font = `${--fontSize}px SHSans`
       }
 
       if (fontSize == 16 && ctx.measureText(text).width > widthLimit) {

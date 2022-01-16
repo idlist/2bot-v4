@@ -1,142 +1,151 @@
 const { resolve } = require('path')
-const { createCanvas, loadImage } = require('canvas')
 const { formatTimestamp } = require('./utils')
+const { ContextEx, ImageGenerator } = require('./utils.canvas')
 
-const canvasResources = new Map()
-Promise.all([
-  (async () => {
-    const hqIcon = await loadImage(resolve(__dirname, 'assets/hq-icon.png'))
-    canvasResources.set('hq-icon', hqIcon)
-  })(),
-  (async () => {
-    const lookPhone = await loadImage(resolve(__dirname, 'assets/2bot_look-phone.png'))
-    canvasResources.set('look-phone', lookPhone)
-  })()
-])
+const ImageRes = new Map()
 
-/**
- * @param {import('./market').MarketListImageData} data
- * @return {import('canvas').Canvas}
- */
-module.exports = async (data) => {
-  const canvas = createCanvas()
-  canvas.width = 1240
-  canvas.height = data.list.length * 84 + 220
+class MarketListImageGenerator extends ImageGenerator {
+  /**
+   * @param {import('koishi-plugin-canvas').default} ctxCanvas
+   * @param {import('./index').Config} config
+   */
+  constructor(ctxCanvas, config) {
+    super(ctxCanvas, config)
 
-  const ctx = canvas.getContext('2d')
-  ctx.textDrawingMode = 'glyph'
-
-  ctx.fillStyle = '#F9F8F5'
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-  let offsetY, text
-
-  ctx.font = '40px ffxiv-text'
-  ctx.fillStyle = '#000'
-  ctx.fillText(data.name, 10, 50)
-  const offsetX = ctx.measureText(data.name).width
-  ctx.font = '32px ffxiv-text'
-  ctx.fillText(data.server, offsetX + 18, 50)
-
-  ctx.font = '24px ffxiv-text'
-  offsetY = 90
-  ctx.fillText('物品', 10, offsetY)
-  ctx.fillText('单价', 210, offsetY)
-  ctx.fillText('数量', 320, offsetY)
-  ctx.fillText('总价', 570, offsetY)
-  ctx.fillText('出售雇员', 630, offsetY)
-  ctx.fillText('最后更新时间', 920, offsetY)
-
-  ctx.fillStyle = '#f5f3ed'
-  for (let i = 0; i < data.list.length; i++) {
-    ctx.fillRect(10, 102 + i * 84, canvas.width - 20, 40)
+    Promise.all([
+      (async () => {
+        const hqIcon = await ctxCanvas.loadImage(resolve(__dirname, 'assets/hq-icon.png'))
+        ImageRes.set('hq-icon', hqIcon)
+      })(),
+      (async () => {
+        const lookPhone = await ctxCanvas.loadImage(resolve(__dirname, 'assets/2bot_look-phone.png'))
+        ImageRes.set('look-phone', lookPhone)
+      })()
+    ])
   }
 
   /**
-   * @param {import('./market').MarketListItemParsed} item
-   * @param {number} setY
+   * @param {import('./market').MarketListImageData} data
+   * @returns {Promise<import('koishi-plugin-canvas').Canvas>}
    */
-  const listItem = (item, setY) => {
-    if (item.status == 'error') {
-      ctx.font = '32px ffxiv-text'
-      ctx.textAlign = 'left'
-      ctx.fillText(item.item ?? '[ 物品未解析成功 ]', 10, setY)
-      ctx.font = '24px ffxiv-text'
-      ctx.textAlign = 'center'
-      ctx.fillText(item.message, canvas.width / 2, setY + 40)
-    } else {
-      ctx.font = '32px ffxiv-text'
-      ctx.textAlign = 'left'
-      text = item.item
-      ctx.fillText(text, 10, setY)
-      if (item.itemhq) {
-        const setX = ctx.measureText(text).width
-        ctx.drawImage(canvasResources.get('hq-icon'), setX + 14, setY - 28, 32, 32)
-      }
-      setY = setY + 42
-      if (item.reshq) {
-        ctx.drawImage(canvasResources.get('hq-icon'), 10, setY - 28, 32, 32)
-      }
-      ctx.font = '32px ffxiv-number'
-      ctx.textAlign = 'right'
-      ctx.fillText(item.unit.toLocaleString('en-US'), 260, setY)
-      ctx.fillText('×', 286, setY)
-      ctx.fillText(item.qty.toLocaleString('en-US'), 370, setY)
-      ctx.fillText('=', 396, setY)
-      ctx.fillText(item.total.toLocaleString('en-US'), 620, setY)
-      ctx.font = '24px ffxiv-text'
-      ctx.textAlign = 'left'
-      ctx.fillText(`${item.seller} @ ${item.server}`, 630, setY)
-      ctx.fillStyle = '#ebedef'
-      ctx.fillRect(910, setY - 32, canvas.width - 20, 42)
-      ctx.fillStyle = '#000'
-      ctx.font = '32px ffxiv-number'
-      ctx.fillText(formatTimestamp(item.lastUpdate), 920, setY)
+  async generate(data) {
+    const ftext = this.ftext
+    const fnumber = this.fnumber
+
+    const canvas = this.ctxCanvas.createCanvas()
+    canvas.width = 1240
+    canvas.height = data.list.length * 84 + 220
+
+    const ctx = canvas.getContext('2d')
+    const ex = new ContextEx(ctx)
+
+    ctx.fillStyle = '#F9F8F5'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    let offsetY
+
+    ctx.fillStyle = '#000'
+    ctx.font = ftext(40)
+    const offsetX = ex.drawText(data.name, 10, 50)
+
+    ctx.font = ftext(32)
+    ex.drawText(data.server, offsetX + 18, 50)
+
+    ctx.font = ftext(24)
+    offsetY = 92
+    ex.drawText('物品', 10, offsetY)
+    ex.drawText('单价', 210, offsetY)
+    ex.drawText('数量', 320, offsetY)
+    ex.drawText('总价', 570, offsetY)
+    ex.drawText('出售雇员', 630, offsetY)
+    ex.drawText('最后更新时间', 920, offsetY)
+
+    ctx.fillStyle = '#f5f3ed'
+    for (let i = 0; i < data.list.length; i++) {
+      ctx.fillRect(10, 102 + i * 84, canvas.width - 20, 40)
     }
+
+    /**
+     * @param {import('./market').MarketListItemParsed} item
+     * @param {number} y
+     */
+    const listItem = (item, y) => {
+      if (item.status == 'error') {
+        ctx.textAlign = 'left'
+        ctx.font = ftext(32)
+        ex.drawText(item.item ?? '[ 物品未解析成功 ]', 10, y)
+
+        ctx.textAlign = 'center'
+        ctx.font = ftext(24)
+        ex.drawText(item.message, canvas.width / 2, y + 40)
+      } else {
+        ctx.font = ftext(32)
+        ctx.textAlign = 'left'
+        const offsetX = ex.drawText(item.item, 10, y)
+
+        if (item.itemhq) {
+          ctx.drawImage(ImageRes.get('hq-icon'), offsetX + 14, y - 28, 32, 32)
+        }
+
+        y = y + 42 // Go to next line.
+
+        if (item.reshq) {
+          ctx.drawImage(ImageRes.get('hq-icon'), 10, y - 28, 32, 32)
+        }
+
+        ctx.textAlign = 'right'
+        ctx.font = fnumber(32)
+
+        ex.drawMonoNumber(item.unit.toLocaleString('en-US'), 260, y)
+        ex.drawText('×', 286, y)
+        ex.drawMonoNumber(item.qty.toLocaleString('en-US'), 370, y)
+        ex.drawText('=', 396, y)
+        ex.drawMonoNumber(item.total.toLocaleString('en-US'), 620, y)
+
+        ctx.textAlign = 'left'
+        ctx.font = ftext(24)
+        ex.drawText(`${item.seller} @ ${item.server}`, 630, y)
+
+        ctx.fillStyle = '#ebedef'
+        ctx.fillRect(910, y - 32, canvas.width - 20, 42)
+
+        ctx.fillStyle = '#000'
+        ctx.font = ftext(32)
+        ctx.fillText(formatTimestamp(item.lastUpdate), 920, y)
+      }
+    }
+
+    ctx.fillStyle = '#000'
+    for (let i = 0; i < data.list.length; i++) {
+      const item = data.list[i]
+      offsetY = 134 + 84 * i
+      listItem(item, offsetY)
+    }
+
+    ctx.fillStyle = '#000'
+    ctx.fillRect(10, 60, canvas.width - 20, 4)
+    ctx.fillRect(10, data.list.length * 84 + 102, canvas.width - 20, 4)
+    for (let i = 0; i < data.list.length * 2; i++) {
+      ctx.fillRect(10, 100 + i * 42, canvas.width - 20, 1)
+    }
+
+    ctx.fillStyle = '#333'
+    ctx.font = ftext(24)
+    ctx.fillText('此结果由2bot查询Universalis生成', 10, canvas.height - 40)
+    ctx.fillText('Universalis地址：https://universalis.app/', 10, canvas.height - 10)
+
+    const size = 120
+    ctx.drawImage(ImageRes.get('look-phone'), canvas.width - size, canvas.height - size, size, size)
+
+    const outputCanvas = await canvas.renderResize(0.5)
+
+    /*
+    const targetPath = './test/test.png'
+    outputCanvas.saveAsSync(targerPath)
+    */
+
+    return outputCanvas
   }
-
-  ctx.fillStyle = '#000'
-  for (let i = 0; i < data.list.length; i++) {
-    const item = data.list[i]
-    offsetY = 134 + 84 * i
-    listItem(item, offsetY)
-  }
-
-  ctx.fillStyle = '#000'
-  ctx.fillRect(10, 60, canvas.width - 20, 4)
-  ctx.fillRect(10, data.list.length * 84 + 102, canvas.width - 20, 4)
-  for (let i = 0; i < data.list.length * 2; i++) {
-    ctx.fillRect(10, 100 + i * 42, canvas.width - 20, 1)
-  }
-
-  ctx.font = '24px ffxiv-text'
-  ctx.fillStyle = '#333'
-  ctx.fillText('此结果由2bot查询Universalis生成', 10, canvas.height - 40)
-  ctx.fillText('Universalis地址：https://universalis.app/', 10, canvas.height - 10)
-
-  const size = 120
-  ctx.drawImage(
-    canvasResources.get('look-phone'),
-    canvas.width - size,
-    canvas.height - size,
-    size,
-    size
-  )
-
-  const outputCanvas = createCanvas()
-  const outputCtx = outputCanvas.getContext('2d')
-  outputCanvas.width = canvas.width / 2
-  outputCanvas.height = canvas.height / 2
-  outputCtx.drawImage(canvas, 0, 0, outputCanvas.width, outputCanvas.height)
-
-  /*
-  const { createWriteStream } = require('fs')
-  const targetPath = './test/test.png'
-
-  const stream = outputCanvas.createPNGStream()
-  const out = createWriteStream(targetPath)
-  stream.pipe(out)
-  */
-
-  return outputCanvas
 }
+
+module.exports = MarketListImageGenerator

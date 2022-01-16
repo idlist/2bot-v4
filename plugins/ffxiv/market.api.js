@@ -43,6 +43,7 @@ class API {
     })
     return name
   }
+
   /**
    * @param {string} keyword
    * @returns {'cn' | 'en' | 'ja'}
@@ -60,6 +61,7 @@ class API {
         return 'cn'
     }
   }
+
   /**
    * @param {string} keyword
    * @param {import('./market').SearchShortcodeOptions} options
@@ -81,6 +83,7 @@ class API {
 
     return result
   }
+
   /**
    * @param {string} name
    * @param {string} langCode
@@ -125,6 +128,7 @@ class API {
       }
     }
   }
+
   /**
    * @param {string} server
    * @param {string | string[]} item

@@ -1,24 +1,16 @@
 const { resolve } = require('path')
 const { formatTimestamp } = require('./utils')
-const { ContextEx } = require('./utils.canvas')
+const { ContextEx, ImageGenerator } = require('./utils.canvas')
 
 const ImageRes = new Map()
 
-class MarketImageGenerator {
+class MarketImageGenerator extends ImageGenerator {
   /**
    * @param {import('koishi-plugin-canvas').default} ctxCanvas
    * @param {import('./index').Config} config
    */
   constructor(ctxCanvas, config) {
-    /**
-     * @type {import('koishi-plugin-canvas').default}
-     */
-    this.ctxCanvas = ctxCanvas
-
-    this.textFont = config.fonts.text.name
-    this.textWeight = config.fonts.text.weight ?? 'normal'
-    this.numberFont = config.fonts.number.name
-    this.numberWeight = config.fonts.number.weight ?? 'normal'
+    super(ctxCanvas, config)
 
     Promise.all([
       (async () => {
@@ -33,24 +25,12 @@ class MarketImageGenerator {
   }
 
   /**
-   * @param {import('koishi-plugin-canvas').default} ctxCanvas
    * @param {import('./market').MarketImageData} data
    * @returns {Promise<import('koishi-plugin-canvas').Canvas>}
    */
   async generate(data) {
-    /**
-     * @param {number} size
-     */
-    const ftext = size => {
-      return `${this.textWeight} ${size}px ${this.textFont}`
-    }
-
-    /**
-     * @param {number} size
-     */
-    const fnumber = size => {
-      return `${this.numberWeight} ${size}px ${this.numberFont}`
-    }
+    const ftext = this.ftext
+    const fnumber = this.fnumber
 
     const canvas = this.ctxCanvas.createCanvas(1020, 700)
 
@@ -60,10 +40,10 @@ class MarketImageGenerator {
     ctx.fillStyle = '#F9F8F5'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    let offsetX, offsetY, text
+    let offsetX, offsetY
 
-    ctx.font = ftext(40)
     ctx.fillStyle = '#000'
+    ctx.font = ftext(40)
     offsetX = ex.drawText(data.item, 10, 50)
 
     if (data.hq) {
@@ -82,8 +62,7 @@ class MarketImageGenerator {
     ex.drawMonoNumber(data.average, 84 + offsetX, 108)
 
     ctx.textAlign = 'right'
-    text = formatTimestamp(data.lastUpdate)
-    offsetX = ex.drawText(text, canvas.width - 10, 108)
+    offsetX = ex.drawText(formatTimestamp(data.lastUpdate), canvas.width - 10, 108)
 
     ctx.font = ftext(24)
     ex.drawText('最后更新时间', canvas.width - 14 - offsetX, 108)
@@ -117,25 +96,18 @@ class MarketImageGenerator {
         ctx.drawImage(ImageRes.get('hq-icon'), 108, y - 28, 32, 32)
       }
 
-      ctx.font = fnumber(32)
       ctx.textAlign = 'right'
+      ctx.font = fnumber(32)
       if (item.repeat > 1) ex.drawMonoNumber(item.repeat, 80, y)
 
-      text = item.unit.toLocaleString('en-US')
-      ex.drawMonoNumber(text, 360, y)
+      ex.drawMonoNumber(item.unit.toLocaleString('en-US'), 360, y)
+      ex.drawText('×', 386, y)
+      ex.drawMonoNumber(item.qty.toLocaleString('en-US'), 470, y)
+      ex.drawText('=', 496, y)
+      ex.drawMonoNumber(item.qty.toLocaleString('en-US'), 720, y)
 
-      ctx.fillText('×', 386, y)
-
-      text = item.qty.toLocaleString('en-US')
-      ex.drawMonoNumber(text, 470, y)
-
-      ctx.fillText('=', 496, y)
-
-      text = item.total.toLocaleString('en-US')
-      ex.drawMonoNumber(text, 720, y)
-
-      ctx.font = ftext(24)
       ctx.textAlign = 'left'
+      ctx.font = ftext(24)
       ex.drawText(`${item.seller} @ ${item.server}`, 730, y)
     }
 
@@ -146,8 +118,8 @@ class MarketImageGenerator {
       listItem(item, offsetY)
     }
 
-    ctx.font = ftext(24)
     ctx.fillStyle = '#333'
+    ctx.font = ftext(24)
     ex.drawText('此结果由2bot查询Universalis生成', 10, canvas.height - 40)
     ex.drawText('Universalis地址：https://universalis.app/', 10, canvas.height - 10)
 
