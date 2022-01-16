@@ -104,7 +104,7 @@ module.exports = (ctx, config) => {
       }
     }
 
-    return generator.generate({
+    return await generator.generate({
       item: name,
       hq: hq,
       nq: nq,

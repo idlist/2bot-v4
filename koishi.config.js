@@ -41,18 +41,18 @@ module.exports = defineConfig({
     // Local packages.
     'canvas': {
       fonts: [
-        { path: 'fonts/MSYH.ttf', family: 'msyh' },
-        { path: 'fonts/Bahnschrift.ttf', family: 'bahnschrift' },
-        { path: 'fonts/SourceHanSans-Heavy.otf', family: 'sans-heavy' },
-        { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'serif-heavy' }
+        { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
+        { path: 'fonts/Din1451Alt.ttf', family: 'Din' },
+        { path: 'fonts/SourceHanSans-Heavy.otf', family: 'SHSans-Heavy' },
+        { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'SHSerif-Heavy' }
       ]
     },
 
     // Local plugins.
     './plugins/ffxiv': {
       fonts: {
-        text: { name: 'msyh' },
-        number: { name: 'bahnschrift' }
+        text: { name: 'SHSans' },
+        number: { name: 'Din' }
       }
     },
     './plugins/admin': {},
