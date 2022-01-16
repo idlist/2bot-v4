@@ -3,7 +3,7 @@ const { resolve } = require('path')
 const axios = require('axios').default
 const yaml = require('js-yaml')
 const { s } = require('koishi')
-const generateLogsImage = require('./logs.image')
+const LogsImageGenerator = require('./logs.image')
 
 const Jobs = require('./data/jobs')
 
@@ -46,10 +46,12 @@ const resolveJob = str => {
 
 /**
  * @param {import('koishi').Context} ctx
+ * @param {import('./index').Config} config
  * @returns
  */
-module.exports = ctx => {
+module.exports = (ctx, config) => {
   const logger = ctx.logger('ff.logs')
+  const generator = new LogsImageGenerator(ctx.canvas, config)
 
   const shortcutConfig = { fuzzy: true, prefix: true }
 
@@ -142,10 +144,10 @@ module.exports = ctx => {
         data: seriesData.map(str => parseFloat(str).toFixed(2))
       }
 
-      const canvas = generateLogsImage(logsData)
+      const canvas = await generator.generate(logsData)
 
       try {
-        const imageData = canvas.toBuffer().toString('base64')
+        const imageData = canvas.toBase64()
         return s('image', { url: `base64://${imageData}` })
       } catch (error) {
         logger.error(error)

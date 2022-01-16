@@ -29,8 +29,10 @@ class MarketListImageGenerator extends ImageGenerator {
    * @returns {Promise<import('koishi-plugin-canvas').Canvas>}
    */
   async generate(data) {
-    const ftext = this.ftext
-    const fnumber = this.fnumber
+    const f = {
+      text: this.fonts.text,
+      number: this.fonts.number
+    }
 
     const canvas = this.ctxCanvas.createCanvas()
     canvas.width = 1240
@@ -42,23 +44,24 @@ class MarketListImageGenerator extends ImageGenerator {
     ctx.fillStyle = '#F9F8F5'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    let offsetY
+    let offY
 
     ctx.fillStyle = '#000'
-    ctx.font = ftext(40)
+    ctx.font = f.text(40)
     const offsetX = ex.drawText(data.name, 10, 50)
 
-    ctx.font = ftext(32)
+    ctx.font = f.text(32)
     ex.drawText(data.server, offsetX + 18, 50)
 
-    ctx.font = ftext(24)
-    offsetY = 92
-    ex.drawText('物品', 10, offsetY)
-    ex.drawText('单价', 210, offsetY)
-    ex.drawText('数量', 320, offsetY)
-    ex.drawText('总价', 570, offsetY)
-    ex.drawText('出售雇员', 630, offsetY)
-    ex.drawText('最后更新时间', 920, offsetY)
+    offY = 92
+
+    ctx.font = f.text(24)
+    ex.drawText('物品', 10, offY)
+    ex.drawText('单价', 210, offY)
+    ex.drawText('数量', 320, offY)
+    ex.drawText('总价', 570, offY)
+    ex.drawText('出售雇员', 630, offY)
+    ex.drawText('最后更新时间', 920, offY)
 
     ctx.fillStyle = '#f5f3ed'
     for (let i = 0; i < data.list.length; i++) {
@@ -72,14 +75,14 @@ class MarketListImageGenerator extends ImageGenerator {
     const listItem = (item, y) => {
       if (item.status == 'error') {
         ctx.textAlign = 'left'
-        ctx.font = ftext(32)
+        ctx.font = f.text(32)
         ex.drawText(item.item ?? '[ 物品未解析成功 ]', 10, y)
 
         ctx.textAlign = 'center'
-        ctx.font = ftext(24)
+        ctx.font = f.text(24)
         ex.drawText(item.message, canvas.width / 2, y + 40)
       } else {
-        ctx.font = ftext(32)
+        ctx.font = f.text(32)
         ctx.textAlign = 'left'
         const offsetX = ex.drawText(item.item, 10, y)
 
@@ -94,7 +97,7 @@ class MarketListImageGenerator extends ImageGenerator {
         }
 
         ctx.textAlign = 'right'
-        ctx.font = fnumber(32)
+        ctx.font = f.number(32)
 
         ex.drawMonoNumber(item.unit.toLocaleString('en-US'), 260, y)
         ex.drawText('×', 286, y)
@@ -103,23 +106,23 @@ class MarketListImageGenerator extends ImageGenerator {
         ex.drawMonoNumber(item.total.toLocaleString('en-US'), 620, y)
 
         ctx.textAlign = 'left'
-        ctx.font = ftext(24)
+        ctx.font = f.text(24)
         ex.drawText(`${item.seller} @ ${item.server}`, 630, y)
 
         ctx.fillStyle = '#ebedef'
         ctx.fillRect(910, y - 32, canvas.width - 20, 42)
 
         ctx.fillStyle = '#000'
-        ctx.font = ftext(32)
-        ctx.fillText(formatTimestamp(item.lastUpdate), 920, y)
+        ctx.font = f.text(32)
+        ex.drawText(formatTimestamp(item.lastUpdate), 920, y)
       }
     }
 
     ctx.fillStyle = '#000'
     for (let i = 0; i < data.list.length; i++) {
       const item = data.list[i]
-      offsetY = 134 + 84 * i
-      listItem(item, offsetY)
+      offY = 134 + 84 * i
+      listItem(item, offY)
     }
 
     ctx.fillStyle = '#000'
@@ -130,7 +133,7 @@ class MarketListImageGenerator extends ImageGenerator {
     }
 
     ctx.fillStyle = '#333'
-    ctx.font = ftext(24)
+    ctx.font = f.text(24)
     ctx.fillText('此结果由2bot查询Universalis生成', 10, canvas.height - 40)
     ctx.fillText('Universalis地址：https://universalis.app/', 10, canvas.height - 10)
 

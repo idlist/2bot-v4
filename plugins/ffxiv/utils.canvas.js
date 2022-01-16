@@ -88,15 +88,20 @@ class ImageGenerator {
     /**
      * @param {number} size
      */
-    this.ftext = size => {
+    const text = (size) => {
       return `${this.textWeight} ${size}px ${this.textFont}`
     }
 
     /**
      * @param {number} size
      */
-    this.fnumber = size => {
+    const number = (size) => {
       return `${this.numberWeight} ${size}px ${this.numberFont}`
+    }
+
+    this.fonts = {
+      text: text,
+      number: number
     }
   }
 }
