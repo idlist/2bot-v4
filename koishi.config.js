@@ -1,10 +1,9 @@
 const { defineConfig } = require('@koishijs/cli')
-
 const secret = require('./koishi.secret')
 
 module.exports = defineConfig({
   // Basic settings.
-  prefix: '-',
+  prefix: '.',
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
   minSimilarity: 0,
   port: 21919,
@@ -15,16 +14,11 @@ module.exports = defineConfig({
     else return 1
   },
 
-  help: {
-    hidden: true,
-    shortcut: false
-  },
+  help: { hidden: true, shortcut: false },
 
   // Logger settings.
   logger: {
-    levels: {
-      command: 3
-    },
+    levels: { command: 3 },
     showTime: 'MM/dd hh:mm:ss',
     showDiff: false
   },
@@ -38,6 +32,9 @@ module.exports = defineConfig({
     'teach': { prefix: '->' },
     'schedule': {},
 
+    // Web console.
+    'console': {},
+
     // Local packages.
     'canvas': {
       fonts: [
@@ -47,6 +44,7 @@ module.exports = defineConfig({
         { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'SHSerif-Heavy' }
       ]
     },
+    'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
 
     // Local plugins.
     './plugins/ffxiv': {
@@ -59,6 +57,10 @@ module.exports = defineConfig({
     './plugins/about': {},
     './plugins/parrot': {},
     './plugins/fun': {},
+
+    // Scoped plugins.
+    './plugins.scoped/gacha': {},
+    './plugins.scoped/tigang': {},
 
     // Customize plugin behaviours.
     './koishi.tweaks': {}

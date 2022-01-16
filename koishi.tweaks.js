@@ -4,18 +4,8 @@ const { t } = require('koishi')
  * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
-  /*
-  // modify description
+  // Modify descriptions.
   ctx.command('schedule', '定时命令')
-  ctx.command('github', 'GitHub 功能')
-  ctx.command('status', '查看 2bot 的状态')
-
-  // move command
-  ctx.command('common/5k')
-  ctx.command('common/animal')
-  ctx.command('common/aircon')
-  ctx.command('common/jrrp')
-  */
 
   ctx
     .command('teach', { hidden: true })
@@ -24,9 +14,9 @@ module.exports = ctx => {
   ctx.command('teach.status', { hidden: true })
   ctx.command('dialogue', { hidden: true })
 
-  // Modify internal template
+  // Modify internal template.
   t.set('internal', {
-    // Remove redundant punctuations
+    // Remove redundant punctuations.
     'command-aliases': '别名：{0}',
     'command-authority': '最低权限：{0} 级',
     'command-max-usage': '已调用次数：{0}/{1}',

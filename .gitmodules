@@ -1,3 +1,6 @@
 [submodule "packages/canvas"]
 	path = packages/canvas
 	url = https://github.com/idlist/koishi-plugin-canvas.git
+[submodule "packages/duplicate-checker"]
+	path = packages/duplicate-checker
+	url = https://github.com/idlist/koishi-plugin-duplicate-checker.git

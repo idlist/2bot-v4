@@ -40,7 +40,7 @@ module.exports = ctx => {
   const logger = ctx.logger('vnstat')
 
   ctx
-    .command('admin/vnstat', '服务器数据用量', { authority: 4 })
+    .command('vnstat', '服务器数据用量', { authority: 4 })
     .action(async () => {
       try {
         const resolve = await exec('vnstat --iface eth0 --json 1')

@@ -1,10 +1,5 @@
-const { resolve } = require('path')
 const { defineConfig } = require('@koishijs/cli')
-const { registerFont } = require('canvas')
-
 const secret = require('./koishi.secret')
-
-registerFont(resolve(__dirname, 'fonts/msyh.ttf'), { family: 'msyh' })
 
 module.exports = defineConfig({
   // Basic settings.
@@ -35,6 +30,7 @@ module.exports = defineConfig({
   // Plugins.
   plugins: {
     'adapter-onebot': secret.onebot,
-    'database-mysql': secret.mysql
+    'database-mysql': secret.mysql,
+    'rate-limit': {}
   }
 })

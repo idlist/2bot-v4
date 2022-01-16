@@ -5,6 +5,6 @@ const { DateTime } = require('luxon')
  */
 module.exports = ctx => {
   ctx
-    .command('admin/ping', '看看 2bot 是不是又挂了')
+    .command('ping', '看看 2bot 是不是又挂了')
     .action(() => `Pong! [${DateTime.local().toFormat('LL/dd TT')}]`)
 }
