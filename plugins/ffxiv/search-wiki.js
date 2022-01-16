@@ -44,8 +44,7 @@ const extractSearchResult = (payload, keyword) => {
 module.exports = ctx => {
   const logger = ctx.logger('ff.search')
 
-  ctx
-    .command('ff.search <keyword>', '搜索 Wiki')
+  ctx.command('ff.search <keyword>', '搜索 Wiki')
     .alias('ff.s')
     .option('share', '-s 使用分享卡片发送结果（大概率发不出来）')
     .shortcut('查维基', { fuzzy: true, prefix: true })

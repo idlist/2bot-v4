@@ -17,8 +17,7 @@ Promise.all(range(6).map(async (i) => {
 module.exports = ctx => {
   const logger = ctx.logger('ff.draw')
 
-  ctx
-    .command('ff.draw', '抽一张占星卡')
+  ctx.command('ff.draw', '抽一张占星卡')
     .shortcut('抽卡', { prefix: true })
     .action(() => {
       try {

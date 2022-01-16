@@ -12,8 +12,7 @@ const mockHeader = {
 module.exports.apply = ctx => {
   const logger = ctx.logger('ff.fashion')
 
-  ctx
-    .command('ff.fashion', '时尚品鉴', { minInterval: 60 * 1000 })
+  ctx.command('ff.fashion', '时尚品鉴', { minInterval: 60 * 1000 })
     .alias('ff.nuan')
     .usage('抄一道 游玩C哩酱 (UID: 15503317) 的最新视频简介给你看。')
     .action(async () => {

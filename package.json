@@ -34,9 +34,9 @@
   "devDependencies": {
     "@koishijs/cli": "^4.0.0",
     "@koishijs/plugin-adapter-onebot": "^4.0.0",
+    "@koishijs/plugin-admin": "^1.0.0",
     "@koishijs/plugin-console": "^1.0.0",
     "@koishijs/plugin-database-mysql": "^4.0.0",
-    "@koishijs/plugin-echo": "^1.0.0",
     "@koishijs/plugin-rate-limit": "^1.0.0",
     "@koishijs/plugin-recall": "^1.0.0",
     "@koishijs/plugin-schedule": "^4.0.0",

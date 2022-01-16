@@ -23,7 +23,6 @@ Promise.all[
  * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
-  ctx
-    .command('silly', '弱智句子')
+  ctx.command('silly', '弱智句子')
     .action(() => Silly[Random.int(0, Silly.length - 1)])
 }

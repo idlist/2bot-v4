@@ -5,12 +5,12 @@ const { s } = require('koishi')
  */
 module.exports = ctx => {
   ctx
-    .command('admin/myauth', '查看我的权限')
+    .command('myauth', '查看我的权限')
     .userFields(['authority'])
     .action(({ session }) => `你的权限为 ${session.user.authority} 级。`)
 
   ctx
-    .command('admin/auth <level> <id>', '用户授权', { authority: 4 })
+    .command('auth <level> <id>', '用户授权', { authority: 4 })
     .userFields(['authority'])
     .before(({ session }, ...args) => {
       if (args.length < 2) return session.execute('help auth')

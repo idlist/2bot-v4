@@ -1,16 +1,17 @@
-const echo = require('@koishijs/plugin-echo')
-const recall = require('@koishijs/plugin-recall')
-
 module.exports.name = 'admin'
 
 module.exports.apply = ctx => {
   ctx.command('admin', '管理工具')
 
-  ctx.plugin(echo)
-  ctx.command('admin/echo', '复述')
+  ctx.plugin(require('./auth'))
+  ctx.command('admin/auth')
+  ctx.command('admin/myauth')
 
-  ctx.plugin(recall)
-  ctx.command('admin/recall', '撤回消息')
+  ctx.plugin(require('./echo'))
+  ctx.command('admin/echo')
+
+  ctx.plugin(require('./recall'))
+  ctx.command('admin/recall')
 
   ctx.plugin(require('./ping'))
   ctx.command('admin/ping')

@@ -41,8 +41,7 @@ const extractSearchResult = (payload, item) => {
 module.exports = ctx => {
   const logger = ctx.logger('ff.item')
 
-  ctx
-    .command('ff.item <item>', '搜索 Wiki 物品')
+  ctx.command('ff.item <item>', '搜索 Wiki 物品')
     .alias('ff.i')
     .option('share', '-s 使用分享卡片发送结果（大概率发不出来）')
     .shortcut('查物品', { fuzzy: true, prefix: true })

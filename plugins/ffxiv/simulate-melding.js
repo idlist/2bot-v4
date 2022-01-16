@@ -28,8 +28,7 @@ const getRandomNumbers = async () => {
 module.exports = ctx => {
   const logger = ctx.logger('ff.advmeld')
 
-  ctx
-    .command('ff.advmeld <prob>', '模拟禁断镶嵌')
+  ctx.command('ff.advmeld <prob>', '模拟禁断镶嵌')
     .shortcut('模拟禁断', { prefix: true, fuzzy: true })
     .usage('使用 random.org 的随机数表来模拟禁断镶嵌')
     .example('ff-amsim 5  模拟 5% 概率下的禁断镶嵌')

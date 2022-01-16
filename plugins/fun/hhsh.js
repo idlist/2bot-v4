@@ -6,8 +6,7 @@ const axios = require('axios').default
 module.exports = ctx => {
   const logger = ctx.logger('hhsh')
 
-  ctx
-    .command('hhsh <abbr>', '好好说话')
+  ctx.command('hhsh <abbr>', '好好说话')
     .usage('调用外部 API，不对其结果负责。')
     .action(async ({ session }, abbr) => {
       try {

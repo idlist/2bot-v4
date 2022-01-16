@@ -10,8 +10,7 @@ const State = {}
  * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
-  ctx
-    .command('ffgame.roll', '模拟 Roll 点')
+  ctx.command('ffgame.roll', '模拟 Roll 点')
     .alias('fg.roll')
     .option('start', '-s [teamsize] 发起 Roll 点，默认人数为轻锐小队')
     .option('end', '-e 停止 roll 点')

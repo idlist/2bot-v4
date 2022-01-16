@@ -34,33 +34,31 @@ module.exports = ctx => {
    */
   let handler
 
-  ctx
-    .on('ready', () => {
-      const now = new Date()
+  ctx.on('ready', () => {
+    const now = new Date()
 
-      if (now.getHours() < 16) {
-        nextAlarm = calcNextAlarm(now, false)
-        if (nextAlarm < Date.now()) nextAlarm = calcNextAlarm(now)
-      } else nextAlarm = calcNextAlarm(now)
+    if (now.getHours() < 16) {
+      nextAlarm = calcNextAlarm(now, false)
+      if (nextAlarm < Date.now()) nextAlarm = calcNextAlarm(now)
+    } else nextAlarm = calcNextAlarm(now)
 
-      /**
-       * @param {number} timeout
-       * @returns {NodeJS.Timeout}
-       */
-      const alertTigang = timeout => {
-        handler = setTimeout(() => {
-          ctx.bots.get(`onebot:${bots[0].selfId}`).sendMessage(s1coders, '2bot 提醒您注意提肛。')
-          handler = null
+    /**
+     * @param {number} timeout
+     * @returns {NodeJS.Timeout}
+     */
+    const alertTigang = timeout => {
+      handler = setTimeout(() => {
+        ctx.bots.get(`onebot:${bots[0].selfId}`).sendMessage(s1coders, '2bot 提醒您注意提肛。')
+        handler = null
 
-          const now = Date.now()
-          nextAlarm = calcNextAlarm(now)
-          handler = alertTigang(nextAlarm - now)
-        }, timeout)
-      }
+        const now = Date.now()
+        nextAlarm = calcNextAlarm(now)
+        handler = alertTigang(nextAlarm - now)
+      }, timeout)
+    }
 
-      alertTigang(nextAlarm - Date.now())
-    })
+    alertTigang(nextAlarm - Date.now())
+  })
 
-  ctx
-    .on('dispose', () => { clearTimeout(handler) })
+  ctx.on('dispose', () => { clearTimeout(handler) })
 }

@@ -115,8 +115,7 @@ module.exports = (ctx, config) => {
   const logger = ctx.logger('ff.market')
   const generator = new MarketImageGenerator(ctx.canvas, config)
 
-  ctx
-    .command('ff.market <server> [...item]', '查询市场')
+  ctx.command('ff.market <server> [...item]', '查询市场')
     .alias('ff.m')
     .usage('部分缩写将被正则替换为全称，替换规则可用选项查询。')
     .option('lengthen', '-f <code> 查询缩写的全称')

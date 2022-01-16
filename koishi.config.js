@@ -29,6 +29,7 @@ module.exports = defineConfig({
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
+    'rate-limit': {},
     'teach': { prefix: '->' },
     'schedule': {},
 
@@ -47,16 +48,17 @@ module.exports = defineConfig({
     'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
 
     // Local plugins.
+    './plugins/admin': {},
+    './plugins/about': {},
+    './plugins/parrot': {},
+    './plugins/fun': {},
     './plugins/ffxiv': {
       fonts: {
         text: { name: 'SHSans' },
         number: { name: 'Din' }
       }
     },
-    './plugins/admin': {},
-    './plugins/about': {},
-    './plugins/parrot': {},
-    './plugins/fun': {},
+    './plugins/ffxiv-game': {},
 
     // Scoped plugins.
     './plugins.scoped/gacha': {},
