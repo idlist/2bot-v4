@@ -1,7 +1,7 @@
 module.exports.name = 'admin'
 
 module.exports.apply = ctx => {
-  ctx.command('admin', '管理工具')
+  ctx.command('admin', '管理功能')
 
   ctx.plugin(require('./auth'))
   ctx.command('admin/auth')

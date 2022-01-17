@@ -4,13 +4,16 @@ const { t } = require('koishi')
  * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
-  // Modify descriptions.
+  // Modify commands.
   ctx.command('schedule', '定时命令')
-
   ctx.command('teach', { hidden: true })
     .usage('指令速查： https://s.idl.ist/teach-v4')
   ctx.command('teach.status', { hidden: true })
   ctx.command('dialogue', { hidden: true })
+
+  // Move commands.
+  ctx.command('fun/5k')
+  ctx.command('fun/jrrp')
 
   // Modify internal template.
   t.set('internal', {

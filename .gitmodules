@@ -10,3 +10,6 @@
 [submodule "packages/blive"]
 	path = packages/blive
 	url = https://github.com/idlist/koishi-plugin-blive.git
+[submodule "packages/jrrp"]
+	path = packages/jrrp
+	url = https://github.com/idlist/koishi-plugin-jrrp.git

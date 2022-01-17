@@ -52,6 +52,7 @@ module.exports = defineConfig({
     },
     'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
     'blive': { maxSubsPerChannel: 20 },
+    'jrrp': {},
 
     // Local plugins.
     './plugins/admin': {},
