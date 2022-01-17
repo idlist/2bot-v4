@@ -1,7 +1,6 @@
 const { createPool } = require('mysql')
 
 const secret = require('../koishi.secret')
-
 const db = secret.mysql
 
 const pool = createPool({

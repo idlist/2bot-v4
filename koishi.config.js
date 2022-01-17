@@ -3,7 +3,7 @@ const secret = require('./koishi.secret')
 
 module.exports = defineConfig({
   // Basic settings.
-  prefix: '.',
+  prefix: '-',
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
   minSimilarity: 0,
   port: 21919,
@@ -28,10 +28,11 @@ module.exports = defineConfig({
   plugins: {
     // Official plugins.
     'adapter-onebot': secret.onebot,
+    'adapter-discord': secret.discord,
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
     'rate-limit': {},
-    'teach': { prefix: '->' },
+    'teach': { prefix: '.>' },  // Temporary measure.
     'schedule': {},
 
     // Web console.

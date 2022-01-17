@@ -106,7 +106,7 @@ class MarketImageGenerator extends ImageGenerator {
       ex.drawText('×', 386, y)
       ex.drawMonoNumber(item.qty.toLocaleString('en-US'), 470, y)
       ex.drawText('=', 496, y)
-      ex.drawMonoNumber(item.qty.toLocaleString('en-US'), 720, y)
+      ex.drawMonoNumber(item.total.toLocaleString('en-US'), 720, y)
 
       ctx.textAlign = 'left'
       ctx.font = f.text(24)

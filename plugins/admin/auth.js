@@ -20,7 +20,7 @@ module.exports = ctx => {
       if (level >= session.user.authority) return '只能授予比自己低的权限。'
 
       const target = s.parse(id)[0]
-      const db = session.database
+      const db = ctx.database
       const platform = session.platform
       let user
       if (target.type == 'at') {
