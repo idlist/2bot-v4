@@ -7,14 +7,15 @@ module.exports = defineConfig({
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
   minSimilarity: 0,
   port: 21919,
+  maxListeners: 100,
 
+  help: { hidden: true, shortcut: false },
   autoAssign: true,
   autoAuthorize: session => {
     if (secret.admin.includes(session.uid)) return 5
     else return 1
   },
 
-  help: { hidden: true, shortcut: false },
 
   // Logger settings.
   logger: {
@@ -50,6 +51,7 @@ module.exports = defineConfig({
       lower: { name: 'SHSerif-Heavy' }
     },
     'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
+    'blive': { maxSubsPerChannel: 20 },
 
     // Local plugins.
     './plugins/admin': {},

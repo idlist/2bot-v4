@@ -9,7 +9,6 @@ module.exports = ctx => {
 
   ctx.command('teach', { hidden: true })
     .usage('指令速查： https://s.idl.ist/teach-v4')
-
   ctx.command('teach.status', { hidden: true })
   ctx.command('dialogue', { hidden: true })
 

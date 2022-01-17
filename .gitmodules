@@ -7,3 +7,6 @@
 [submodule "packages/gosen-choyen"]
 	path = packages/gosen-choyen
 	url = https://github.com/idlist/koishi-plugin-gosen-choyen.git
+[submodule "packages/blive"]
+	path = packages/blive
+	url = https://github.com/idlist/koishi-plugin-blive.git
