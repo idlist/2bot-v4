@@ -115,6 +115,16 @@ module.exports = [
     server: 'HuPoYuan'
   },
   {
+    keywords: ['水晶塔'],
+    name: '水晶塔',
+    server: 'ShuiJingTa'
+  },
+  {
+    keywords: ['银泪湖'],
+    name: '银泪湖',
+    server: 'YinLeiHu'
+  },
+  {
     keywords: ['陆行鸟', '鸟', '鸟区'],
     name: '陆行鸟',
     server: 'LuXingNiao'
@@ -128,5 +138,10 @@ module.exports = [
     keywords: ['猫小胖', '猫', '猫区'],
     name: '猫小胖',
     server: 'MaoXiaoPang'
+  },
+  {
+    keywords: ['豆豆柴', '狗', '狗区'],
+    name: '豆豆柴',
+    server: 'DouDouChai'
   }
 ]
