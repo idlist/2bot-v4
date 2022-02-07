@@ -10,6 +10,7 @@
 | [koishi-plugin-duplicate-checker](https://github.com/idlist/koishi-plugin-duplicate-checker) | ![npm](https://img.shields.io/npm/v/koishi-plugin-duplicate-checker?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-duplicate-checker?style=flat-square) | 火星图文出警器 |
 | [koishi-plugin-blive](https://github.com/idlist/koishi-plugin-blive) | ![npm](https://img.shields.io/npm/v/koishi-plugin-blive?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-blive?style=flat-square) | Bilibili 直播订阅 |
 | [koishi-plugin-jrrp](https://github.com/idlist/koishi-plugin-jrrp) | ![npm](https://img.shields.io/npm/v/koishi-plugin-jrrp?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-jrrp?style=flat-square) | 今日人品 |
+| [koishi-plugin-jrrp](https://github.com/idlist/koishi-plugin-animal-picture) | ![npm](https://img.shields.io/npm/v/koishi-plugin-animal-picture?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-animal-picture?style=flat-square) | 动物图 |
 
 ## idlist 的服务集 (v4)
 

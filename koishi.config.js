@@ -54,6 +54,7 @@ module.exports = defineConfig({
     'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
     'blive': {},
     'jrrp': {},
+    'animal-picture': {},
 
     // Local plugins.
     './plugins/admin': {},
