@@ -15,9 +15,9 @@ module.exports = ctx => {
     .option('start', '-s [teamsize] 发起 Roll 点，默认人数为轻锐小队')
     .option('end', '-e 停止 roll 点')
     .usage('teamsize 可以是 2 - 8 人')
-    .example('fg.roll -s 4  发起轻锐小队 Roll 点')
-    .example('fg.roll  参与 Roll 点')
-    .example('fg.roll -e  中途结束 Roll 点')
+    .example('ff.roll -s 4  发起轻锐小队 Roll 点')
+    .example('ff.roll  参与 Roll 点')
+    .example('ff.roll -e  中途结束 Roll 点')
     .action(({ session, options }) => {
       const cid = session.cid
 
@@ -26,7 +26,7 @@ module.exports = ctx => {
         options.start &&
         !options.end
       ) {
-        return '已经开始 Roll 点，请使用 fg.roll 参与 Roll 点。'
+        return '已经开始 Roll 点，请使用 ff.roll 参与 Roll 点。'
       }
 
       let starterText
@@ -50,7 +50,7 @@ module.exports = ctx => {
         starterText = (
           s('at', { id: session.userId }) + ' 发起了 ' +
           (specialSizeText || `${teamsize} 人`) + ' Roll 点，' +
-          '使用 fg.roll 指令参加！'
+          '使用 ff.roll 指令参加！'
         )
       }
 
