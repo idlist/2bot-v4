@@ -14,6 +14,8 @@ module.exports = ctx => {
   // Move commands.
   ctx.command('fun/5k')
   ctx.command('fun/jrrp')
+  ctx.command('admin/usage')
+  ctx.command('admin/timer')
 
   // Modify internal template.
   t.set('internal', {
@@ -23,7 +25,4 @@ module.exports = ctx => {
     'command-max-usage': '已调用次数：{0}/{1}',
     'command-min-interval': '距离下次调用还需 {0}/{1} 秒'
   })
-
-  // Quick fixes.
-  ctx.command('admin/user', '用户管理')
 }

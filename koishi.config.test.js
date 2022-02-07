@@ -27,6 +27,7 @@ module.exports = defineConfig({
   plugins: {
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
-    'rate-limit': {}
+
+    'blive': {}
   }
 })

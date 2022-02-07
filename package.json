@@ -25,6 +25,7 @@
     "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },
   "dependencies": {
+    "@koishijs/plugin-commands": "^1.1.1",
     "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
     "js-yaml": "^4.0.0",
@@ -38,10 +39,13 @@
     "@koishijs/plugin-adapter-discord": "^2.0.0",
     "@koishijs/plugin-adapter-onebot": "^4.0.0",
     "@koishijs/plugin-admin": "^1.0.0",
+    "@koishijs/plugin-console": "^2.0.0",
     "@koishijs/plugin-database-mysql": "^4.0.0",
+    "@koishijs/plugin-manager": "^1.0.0",
     "@koishijs/plugin-rate-limit": "^1.0.0",
     "@koishijs/plugin-recall": "^1.0.0",
     "@koishijs/plugin-schedule": "^4.0.0",
+    "@koishijs/plugin-status": "^5.0.0",
     "@koishijs/plugin-teach": "^3.0.0",
     "eslint": "^8.0.0",
     "koishi": "^4.0.0",

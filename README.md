@@ -2,26 +2,17 @@
 
 使用 Koishi v4 的 2bot，并没有焕然一新。
 
+## idlist 的插件集 (v4)
 
-## idlist 的神秘插件集（v4 版本）
+| 名称 | 信息 | 简介 |
+| :- | :- | :- |
+| [koishi-plugin-gosen-choyen](https://github.com/idlist/koishi-plugin-gosen-choyen) | ![npm](https://img.shields.io/npm/v/koishi-plugin-gosen-choyen?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-gosen-choyen?style=flat-square) | 5000 兆元图生成器 |
+| [koishi-plugin-duplicate-checker](https://github.com/idlist/koishi-plugin-duplicate-checker) | ![npm](https://img.shields.io/npm/v/koishi-plugin-duplicate-checker?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-duplicate-checker?style=flat-square) | 火星图文出警器 |
+| [koishi-plugin-blive](https://github.com/idlist/koishi-plugin-blive) | ![npm](https://img.shields.io/npm/v/koishi-plugin-blive?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-blive?style=flat-square) | Bilibili 直播订阅 |
+| [koishi-plugin-jrrp](https://github.com/idlist/koishi-plugin-jrrp) | ![npm](https://img.shields.io/npm/v/koishi-plugin-jrrp?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-jrrp?style=flat-square) | 今日人品 |
 
-- [koishi-plugin-gosen-choyen](https://github.com/idlist/koishi-plugin-gosen-choyen)
-  ![npm](https://img.shields.io/npm/v/koishi-plugin-gosen-choyen?style=flat-square)
-  ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-gosen-choyen?style=flat-square)
-  ![last-update](https://img.shields.io/github/last-commit/idlist/koishi-plugin-blive?style=flat-square)
+## idlist 的服务集 (v4)
 
-  5000 兆元图生成器
-
-- [koishi-plugin-duplicate-checker](https://github.com/idlist/koishi-plugin-duplicate-checker)
-  ![npm](https://img.shields.io/npm/v/koishi-plugin-duplicate-checker?style=flat-square)
-  ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-duplicate-checker?style=flat-square)
-  ![last-update](https://img.shields.io/github/last-commit/idlist/koishi-plugin-duplicate-checker?style=flat-square)
-
-  火星图文出警器
-
-- [koishi-plugin-blive](https://github.com/idlist/koishi-plugin-blive)
-  ![npm](https://img.shields.io/npm/v/koishi-plugin-blive?style=flat-square)
-  ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-blive?style=flat-square)
-  ![last-update](https://img.shields.io/github/last-commit/idlist/koishi-plugin-blive?style=flat-square)
-
-  Bilibili 直播订阅
+| 名称 | 信息 | 简介 |
+| :- | :- | :- |
+| [koishi-plugin-canvas](https://github.com/idlist/koishi-plugin-canvas) | ![npm](https://img.shields.io/npm/v/koishi-plugin-jrrp?style=flat-square) ![npm-download](https://img.shields.io/npm/dw/koishi-plugin-canvas?style=flat-square) | 提供 `ctx.canvas` 服务 |

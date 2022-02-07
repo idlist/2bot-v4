@@ -7,7 +7,6 @@ module.exports = defineConfig({
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
   minSimilarity: 0,
   port: 21919,
-  maxListeners: 100,
 
   help: { hidden: true, shortcut: false },
   autoAssign: true,
@@ -32,11 +31,12 @@ module.exports = defineConfig({
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
     'rate-limit': {},
-    'teach': { prefix: '.>' },  // Temporary measure.
+    'teach': { prefix: '->' },
     'schedule': {},
 
     // Web console.
     'console': {},
+    'status': {},
 
     // Local packages.
     'canvas': {
@@ -52,7 +52,7 @@ module.exports = defineConfig({
       lower: { name: 'SHSerif-Heavy' }
     },
     'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
-    'blive': { maxSubsPerChannel: 20 },
+    'blive': {},
     'jrrp': {},
 
     // Local plugins.
