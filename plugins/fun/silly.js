@@ -16,7 +16,8 @@ const readTextFile = async (path) => {
 
 Promise.all[
   readTextFile('data/silly.2019.txt'),
-  readTextFile('data/silly.2020.txt')
+  readTextFile('data/silly.2020.txt'),
+  readTextFile('data/silly.2021.txt')
 ]
 
 /**

@@ -39,6 +39,7 @@ const showListDetail = name => {
   if (!name) return '未提供清单名。'
   const list = ListAPI.showMarketList(name)
 
+  if (!list) return `没有找到清单 ${name}。`
   return `清单 ${name} 包括：\n${list.items.join('\n')}`
 }
 
@@ -116,12 +117,20 @@ module.exports = (ctx, config) => {
     .option('detail', '-d <listname> 显示清单内容')
     .shortcut('查清单', { fuzzy: true, prefix: true })
     .before(({ session, options }, ...args) => {
-      if (args.length < 2 && (!options.list || !options.detail)) {
+      if (args.length < 2 && (!options.list && !options.detail)) {
         return session.execute('help ff.marketlist')
       }
     })
     .before(({ options }) => {
       if (options.list && options.detail) return '不可以同时查询多个项目。'
+    })
+    .action(({ options, next }) => {
+      if (!('list' in options)) return next()
+      return findMarketList(options.list)
+    })
+    .action(({ options, next }) => {
+      if (!('detail' in options)) return next()
+      return showListDetail(options.detail)
     })
     .action(async (_, server, name) => {
       const result = await getMarketListData(generator, server, name)
@@ -134,13 +143,5 @@ module.exports = (ctx, config) => {
         logger.error(error)
         return '图片发送出错。'
       }
-    })
-    .action(({ options }) => {
-      if (!options.detail) return
-      return showListDetail(options.detail)
-    })
-    .action(({ options }) => {
-      if (!options.list) return
-      return findMarketList(options.list)
     })
 }

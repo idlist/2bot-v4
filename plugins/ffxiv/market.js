@@ -134,6 +134,14 @@ module.exports = (ctx, config) => {
     .before(({ options }) => {
       if (options.find && options.shorten) return '不可以同时查询缩写与全称。'
     })
+    .action(({ options, next }) => {
+      if (!options.lengthen) return next()
+      return findSubsTable(options.lengthen, 'lengthen')
+    })
+    .action(({ options, next }) => {
+      if (!options.shorten) return next()
+      return findSubsTable(options.shorten, 'shorten')
+    })
     .action(async ({ options }, server, ...item) => {
       const result = await getMarketData(generator, server, item, options.language)
       if (typeof result == 'string') return result
@@ -145,13 +153,5 @@ module.exports = (ctx, config) => {
         logger.error(error)
         return '图片发送出错。'
       }
-    })
-    .action(({ options }) => {
-      if (!options.lengthen) return
-      return findSubsTable(options.lengthen, 'lengthen')
-    })
-    .action(({ options }) => {
-      if (!options.shorten) return
-      return findSubsTable(options.shorten, 'shorten')
     })
 }
