@@ -28,7 +28,7 @@ module.exports = ctx => {
       session.senderId != session.selfId &&
       session.targetId == session.selfId
     ) {
-      const cid = cid
+      const cid = session.cid
 
       if (!State[cid]) State[cid] = 0
 

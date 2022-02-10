@@ -14,11 +14,11 @@ const readTextFile = async (path) => {
   Silly.push(...lines.filter(line => line.trim()))
 }
 
-Promise.all[
+Promise.all([
   readTextFile('data/silly.2019.txt'),
   readTextFile('data/silly.2020.txt'),
   readTextFile('data/silly.2021.txt')
-]
+])
 
 /**
  * @param {import('koishi').Context} ctx
