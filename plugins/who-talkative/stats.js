@@ -43,7 +43,7 @@ module.exports = ctx => {
           timeWindow.setDate(timeWindow.getDate() - 31)
           break
         case 'year':
-          timeWindow.setDate(timeWindow.getDate() - 365)
+          timeWindow.setDate(timeWindow.getDate() - 366)
           break
         case 'overall':
           isOverall = true
@@ -56,31 +56,31 @@ module.exports = ctx => {
       let ranking
 
       // Since koishi ORM does not support GROUP BY, use direct query instead.
-      const query = async (...args) => await ctx.database.mysql.query(...args)
+      const query = async (q, args) => await ctx.database.mysql.query(outdent`${q}`, args)
 
       if (isOverall) {
-        ranking = await query(outdent`
+        ranking = await query(`
           SELECT user, SUM(message) as message
           FROM talkative
           WHERE platform = ? AND channel = ?
           GROUP BY user
           ORDER BY message DESC
           LIMIT 10`, [platform, channel])
-      } else if (!isPeriod) {
-        ranking = await query(outdent`
-          SELECT user, message
-          FROM talkative
-          WHERE platform = ? AND channel = ? AND date = ?
-          ORDER BY message DESC
-          LIMIT 10`, [platform, channel, yesterday])
-      } else {
-        ranking = await query(outdent`
+      } else if (isPeriod) {
+        ranking = await query(`
           SELECT user, SUM(message) as message
           FROM talkative
           WHERE platform = ? AND channel = ? AND date <= ? AND date >= ?
           GROUP BY user
           ORDER BY message DESC
           LIMIT 10`, [platform, channel, yesterday, timeWindow])
+      } else {
+        ranking = await query(`
+          SELECT user, message
+          FROM talkative
+          WHERE platform = ? AND channel = ? AND date = ?
+          ORDER BY message DESC
+          LIMIT 10`, [platform, channel, yesterday])
       }
 
       const statsChannel = validate(platform, channel)

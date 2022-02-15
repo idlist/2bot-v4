@@ -1,7 +1,7 @@
 const { t } = require('koishi')
 const { formatRanking } = require('./utils')
 
-const Interval = 10 * 60 * 1000
+const Interval = 5 * 60 * 1000
 
 const channelUsage = {}
 
@@ -26,7 +26,7 @@ module.exports = ctx => {
       date: now,
       user: session.userId,
       message: { $add: [{ $: 'message' }, 1] }
-    }])
+    }], ['platform', 'channel', 'date', 'user'])
   })
 
   ctx.command('tktv.now', t('tktv.now'))
