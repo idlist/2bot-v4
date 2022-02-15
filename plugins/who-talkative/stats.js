@@ -120,7 +120,7 @@ module.exports = ctx => {
         if (!ranking.length) return t('tktv.no-data')
         ranking = ranking.slice(0, limit)
 
-        return t(`tktv.${duration}.title`) + await formatRanking(session, ranking)
+        return t(`tktv.${duration}-title`) + await formatRanking(session, ranking)
       })
   })
 }

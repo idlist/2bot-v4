@@ -21,11 +21,11 @@ module.exports = ctx => {
       date: now,
       user: session.userId,
       message: { $add: [{ $: 'message' }, 1] }
-    }], ['platform', 'channel', 'date', 'user'])
+    }])
   })
 
   ctx.command('tktv.now <limit>', t('tktv.now'))
-    .shortcut('tktv.now-shortcut')
+    .shortcut(t('tktv.now-shortcut'))
     .action(async ({ session }, limit = 5) => {
       limit = clamp(limit, 5, 1, 10)
 

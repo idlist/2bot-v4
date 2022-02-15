@@ -25,7 +25,7 @@ t.set('tktv', {
   'year-title': '今年话痨榜（从昨天算起 365 天）：\n',
   'overall': '总计话痨榜',
   'overall-shortcut': '总计话痨榜',
-  'overall-title': '全时段话痨榜：\n',
+  'overall-title': '全时段话痨榜（每日更新）：\n',
 
   'seconds': ' {0} 秒',
   'too-frequent': '不要看话痨榜看得太频繁啦！还有{0}才能再次查看！',
