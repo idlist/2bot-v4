@@ -21,8 +21,6 @@ module.exports = ctx => {
         )
         const data = resolve.data[0]
 
-        console.log(data)
-
         if ('trans' in data) {
           const word = data
           return `${word.name} 可能代表：${word.trans.join('、')}。`

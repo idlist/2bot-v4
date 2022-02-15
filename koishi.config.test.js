@@ -28,15 +28,6 @@ module.exports = defineConfig({
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
 
-    'canvas': {
-      fonts: [
-        { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
-        { path: 'fonts/Din1451Alt.ttf', family: 'Din' }
-      ]
-    },
-    './plugins/ffxiv': {
-      text: { name: 'SHSans' },
-      number: { name: 'Din' }
-    }
+    'blive': { pollInterval: 5000 }
   }
 })
