@@ -13,7 +13,7 @@ export interface TalkativeStats {
   overall: UserMessageCount[]
 }
 
-export interface CachedStats {
+export interface SummarizedStats {
   [platform: string]: {
     [channel: string]: TalkativeStats
   }

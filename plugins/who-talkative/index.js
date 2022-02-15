@@ -27,7 +27,6 @@ t.set('tktv', {
   'overall-shortcut': '总计话痨榜',
   'overall-title': '全时段话痨榜：\n',
 
-  'minutes': ' {0} 分',
   'seconds': ' {0} 秒',
   'too-frequent': '不要看话痨榜看得太频繁啦！还有{0}才能再次查看！',
   'no-data': '尚无数据，让话痨们再得瑟一会儿。'

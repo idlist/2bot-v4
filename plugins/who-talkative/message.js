@@ -1,16 +1,11 @@
 const { t } = require('koishi')
-const { formatRanking } = require('./utils')
+const { formatRanking, clamp } = require('./utils')
 
-const Interval = 5 * 60 * 1000
+const Interval = 60 * 1000
 
 const channelUsage = {}
 
-const formatDuration = milliseconds => {
-  const seconds = Math.ceil(milliseconds / 1000)
-  if (seconds < 60) return t('tktv.seconds', seconds)
-  const minutes = Math.floor(seconds / 60)
-  return t('tktv.minutes', minutes) + t('tktv.seconds', seconds % 60)
-}
+const formatDuration = m => t('tktv.seconds', Math.floor(m / 1000))
 
 /**
  * @param {import('koishi').Context} ctx
@@ -29,9 +24,11 @@ module.exports = ctx => {
     }], ['platform', 'channel', 'date', 'user'])
   })
 
-  ctx.command('tktv.now', t('tktv.now'))
+  ctx.command('tktv.now <limit>', t('tktv.now'))
     .shortcut('tktv.now-shortcut')
-    .action(async ({ session }) => {
+    .action(async ({ session }, limit = 5) => {
+      limit = clamp(limit, 5, 1, 10)
+
       const now = new Date()
       const lastUsage = channelUsage[session.cid]
       if (lastUsage) {
@@ -51,7 +48,7 @@ module.exports = ctx => {
         date: now
       }, {
         sort: { message: 'desc' },
-        limit: 10
+        limit: limit
       })
 
       return t('tktv.now-title') + await formatRanking(session, ranking)

@@ -17,7 +17,8 @@ module.exports = defineConfig({
   // Logger settings.
   logger: {
     levels: {
-      command: 3
+      command: 3,
+      mysql: 3
     },
     showTime: 'MM/dd hh:mm:ss',
     showDiff: false

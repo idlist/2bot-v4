@@ -1,10 +1,10 @@
 const { t } = require('koishi')
 const schedule = require('node-schedule')
 const outdent = require('outdent')
-const { formatRanking } = require('./utils')
+const { formatRanking, clamp } = require('./utils')
 
 /**
- * @type {import('./stats').CachedStats}
+ * @type {import('./stats').SummarizedStats}
  */
 const Stats = {}
 
@@ -108,12 +108,18 @@ module.exports = ctx => {
   })
 
   Scopes.forEach(duration => {
-    ctx.command(`tktv.${duration}`, t(`tktv.${duration}`), {
+    ctx.command(`tktv.${duration} <limit>`, t(`tktv.${duration}`), {
       authority: ['year', 'overall'].includes(duration) ? 2 : 1
     }).shortcut(t(`tktv.${duration}-shortcut`))
-      .action(async ({ session }) => {
-        const ranking = Stats[session.platform][session.channelId][duration]
+      .action(async ({ session }, limit = 5) => {
+        limit = clamp(limit, 5, 1, 10)
+        /**
+         * @type {import('./stats').UserMessageCount[]}
+         */
+        let ranking = Stats[session.platform][session.channelId][duration]
         if (!ranking.length) return t('tktv.no-data')
+        ranking = ranking.slice(0, limit)
+
         return t(`tktv.${duration}.title`) + await formatRanking(session, ranking)
       })
   })
