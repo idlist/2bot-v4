@@ -1,0 +1,60 @@
+{
+  "Koishi: named plugin bootstrap": {
+	  "scope": "javascript",
+    "prefix": "k-plugin-named",
+    "body": [
+      "module.exports.name = '${1:plugin-name}'",
+      "",
+      "/**",
+      " * @param {import('koishi').Context} ctx",
+      " */",
+      "module.exports.apply = ctx => {",
+      "\t${2:/* your code here */}",
+      "}"
+    ]
+  },
+  "Koishi: function plugin bootstrap": {
+	  "scope": "javascript",
+    "prefix": "k-plugin-function",
+    "body": [
+      "/**",
+      " * @param {import('koishi').Context} ctx",
+      " */",
+      "module.exports = ctx => {",
+      "\t${2:/* your code here */}",
+      "}"
+    ]
+  },
+  "Koishi: middleware": {
+	  "scope": "javascript",
+    "prefix": "k-middleware",
+    "body": [
+      "ctx",
+      "\t.middleware((ctx, next) => {",
+      "\t\t${1:/* your code here */}",
+      "\t\treturn next()",
+      "\t})",
+    ]
+  },
+  "Koishi: command bootstrap": {
+	  "scope": "javascript",
+    "prefix": "k-command",
+    "body": [
+      "ctx",
+      "\t.command('${1:name}')",
+      "\t.action(({ session, options }, ${2:/* args */}) => {",
+      "\t\t${3:/* your code here */}",
+      "\t})",
+    ]
+  },
+  "Koishi: event": {
+	  "scope": "javascript",
+    "prefix": "k-event",
+    "body": [
+      "ctx",
+      "\t.on('${1:event}', (${2:/* args */}) => {",
+      "\t\t${2:/* your code here */}",
+      "\t})",
+    ]
+  }
+}
