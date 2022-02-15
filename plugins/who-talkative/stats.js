@@ -108,12 +108,13 @@ module.exports = ctx => {
   })
 
   Scopes.forEach(duration => {
-    ctx.command(`tktv.${duration}`, t(`tktv.${duration}`))
-      .shortcut(t(`tktv.${duration}-shortcut`))
+    ctx.command(`tktv.${duration}`, t(`tktv.${duration}`), {
+      authority: ['year', 'overall'].includes(duration) ? 2 : 1
+    }).shortcut(t(`tktv.${duration}-shortcut`))
       .action(async ({ session }) => {
         const ranking = Stats[session.platform][session.channelId][duration]
         if (!ranking.length) return t('tktv.no-data')
-        return t(`tktv.${duration}-title`) + await formatRanking(session, ranking)
+        return t(`tktv.${duration}.title`) + await formatRanking(session, ranking)
       })
   })
 }

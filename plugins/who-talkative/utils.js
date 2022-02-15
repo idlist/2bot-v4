@@ -10,7 +10,7 @@ const formatRanking = async (session, ranking) => {
     })
   )
 
-  return ranking.map((item, i) => `${i} 位 - ${users[i]} [${item.user}]: ${item.message} 条`).join('\n')
+  return ranking.map((item, i) => `第 ${i + 1} - ${users[i]} [${item.user}]: ${item.message} 条`).join('\n')
 }
 
 module.exports.formatRanking = formatRanking

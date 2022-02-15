@@ -57,6 +57,7 @@ module.exports = defineConfig({
     'animal-picture': {},
 
     // Local plugins.
+    './plugins/who-talkative': {},
     './plugins/admin': {},
     './plugins/about': {},
     './plugins/parrot': {},
