@@ -17,22 +17,22 @@
   "main": "index.js",
   "scripts": {
     "update": "git pull && git submodule update --init",
-    "start": "npx koishi start",
-    "test": "npx koishi start koishi.config.test.js",
+    "start": "koishi start",
+    "test": "koishi start koishi.config.test.js",
     "build:canvas": "npm run build -w packages/canvas",
-    "prod": "npx concurrently \"build:canvas\" && npm start",
+    "prod": "concurrently \"npm:build:*\" && npm start",
     "reindex": "node scripts/reindex-teach.js",
     "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },
   "dependencies": {
-    "@koishijs/plugin-commands": "^1.1.1",
     "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
     "js-yaml": "^4.0.0",
     "lodash": "^4.0.0",
     "luxon": "^2.0.0",
     "mysql": "^2.0.0",
-    "node-schedule": "^2.1.0",
+    "node-schedule": "^2.0.0",
+    "outdent": "^0.8.0",
     "simplify-chinese": "^1.0.0"
   },
   "devDependencies": {

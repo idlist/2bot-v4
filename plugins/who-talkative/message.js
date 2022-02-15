@@ -1,3 +1,6 @@
+const { t } = require('koishi')
+const { formatRanking } = require('./utils')
+
 /**
  * @param {import('koishi').Context} ctx
  */
@@ -6,35 +9,30 @@ module.exports = ctx => {
     const now = new Date()
     now.setHours(0, 0, 0, 0)
 
-    await ctx.database.upsert('talkative_daily', [{
+    await ctx.database.upsert('talkative', [{
       platform: session.platform,
       channel: session.channelId,
-      user: session.userId,
       date: now,
+      user: session.userId,
       message: { $add: [{ $: 'message' }, 1] }
     }])
   })
 
-  ctx.command('tktv', '话痨统计')
-
-  ctx.command('tktv.now', '今日话痨')
+  ctx.command('tktv.now', t('tktv.now'))
+    .shortcut('tktv.now-shortcut')
     .action(async ({ session }) => {
-      const ranking = await ctx.database.get('talkative_daily', {
+      const now = new Date()
+      now.setHours(0, 0, 0, 0)
+
+      const ranking = await ctx.database.get('talkative', {
         platform: session.platform,
-        channel: session.channelId
+        channel: session.channelId,
+        date: now
       }, {
         sort: { message: 'desc' },
         limit: 10
       })
 
-      const users = await Promise.all(
-        ranking.map(async (item) => {
-          const user = await session.bot.getGuildMember(session.guildId, item.user)
-          return user.nickname || user.username
-        })
-      )
-
-      return '今日话痨榜：\n' +
-        ranking.map((item, i) => `${users[i]} [${item.user}]: ${item.message} 条`).join('\n')
+      return t('tktv.now-title') + await formatRanking(session, ranking)
     })
 }
