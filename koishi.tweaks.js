@@ -15,6 +15,7 @@ module.exports = ctx => {
   ctx.command('fun/5k')
   ctx.command('fun/jrrp')
   ctx.command('fun/animal')
+  ctx.command('fun/hexagram')
   ctx.command('admin/usage')
   ctx.command('admin/timer')
 

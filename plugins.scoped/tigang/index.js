@@ -1,5 +1,5 @@
 const { Random } = require('koishi')
-const { onebot: { bots }, s1coders } = require('../koishi.secret')
+const { onebot: { bots }, s1coders } = require('../../koishi.secret')
 
 /**
  * @type {number}

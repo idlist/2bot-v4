@@ -1,4 +1,4 @@
-const { s1coders, adminGroup } = require('../../koishi.secret')
+const { s1coders, adminGroup } = require('../koishi.secret')
 
 /**
  * @param {import('koishi').Context} ctx
@@ -6,7 +6,6 @@ const { s1coders, adminGroup } = require('../../koishi.secret')
 module.exports = ctx => {
   ctx = ctx.platform('onebot').guild(s1coders, ...adminGroup)
 
-  ctx.plugin(require('./tigang'))
   ctx.plugin(require('./gacha'))
-  ctx.plugin(require('./hexagram'))
+  ctx.plugin(require('./tigang'))
 }
