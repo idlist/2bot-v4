@@ -3,8 +3,6 @@ const { resolve } = require('path')
 const yaml = require('js-yaml')
 const { Random } = require('koishi')
 
-const { s1coders, adminGroup } = require('../../koishi.secret')
-
 let Pool
 (async () => {
   Pool = yaml.load(await readFile(resolve(__dirname, 'data.yaml'), 'utf-8'))
@@ -27,8 +25,6 @@ const gachaOnce = () => {
  * @param { import('koishi').Context } ctx
  */
 module.exports = ctx => {
-  ctx = ctx.platform('onebot').guild(s1coders, ...adminGroup)
-
   ctx.command('gacha', '抽卡', { maxUsage: 1, hidden: true })
     .shortcut('十连抽卡', { options: { tenfold: true } })
     .option('show', '-s 展示概率', { notUsage: true })

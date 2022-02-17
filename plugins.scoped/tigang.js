@@ -27,8 +27,6 @@ const calcNextAlarm = (timestamp, nextDay = true) => {
  * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
-  ctx = ctx.platform('onebot').guild(s1coders)
-
   /**
    * @type {NodeJS.Timeout}
    */

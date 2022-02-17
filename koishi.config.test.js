@@ -17,8 +17,7 @@ module.exports = defineConfig({
   // Logger settings.
   logger: {
     levels: {
-      command: 3,
-      mysql: 3
+      command: 3
     },
     showTime: 'MM/dd hh:mm:ss',
     showDiff: false
@@ -29,6 +28,6 @@ module.exports = defineConfig({
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
 
-    './plugins/who-talkative': {}
+    './plugins.scoped/hexagram': {}
   }
 })
