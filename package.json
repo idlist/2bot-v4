@@ -39,6 +39,7 @@
     "@koishijs/cli": "^4.0.0",
     "@koishijs/plugin-adapter-discord": "^2.0.0",
     "@koishijs/plugin-adapter-onebot": "^4.0.0",
+    "@koishijs/plugin-commands": "^1.2.0",
     "@koishijs/plugin-console": "^3.0.0",
     "@koishijs/plugin-database-mysql": "^4.0.0",
     "@koishijs/plugin-manager": "^1.0.0",

@@ -37,6 +37,7 @@ module.exports = defineConfig({
     // Web console.
     'console': {},
     'status': {},
+    'commands': {},
 
     // Local packages.
     'canvas': {

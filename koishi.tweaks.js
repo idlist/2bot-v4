@@ -1,15 +1,28 @@
-const { t } = require('koishi')
+const { t, sleep } = require('koishi')
 
 /**
  * @param {import('koishi').Context} ctx
  */
 module.exports = ctx => {
-  // Modify commands.
-  ctx.command('schedule', '定时指令')
-  ctx.command('teach', { hidden: true })
-    .usage('指令速查： https://s.idl.ist/teach-v4')
-  ctx.command('teach.status', { hidden: true })
-  ctx.command('dialogue', { hidden: true })
+  ctx.on('command-added', async (command) => {
+    switch (command.name) {
+      // Modify commands.
+      case 'schedule':
+        ctx.command('schedule', '定时指令')
+        break
+      case 'teach':
+        await sleep(0)
+        ctx.command('teach', { hidden: true })
+          .usage('指令速查： https://s.idl.ist/teach-v4')
+        break
+      case 'teach.status':
+        ctx.command('teach.status', { hidden: true })
+        break
+      case 'dialogue':
+        ctx.command('dialogue', { hidden: true })
+        break
+    }
+  })
 
   // Move commands.
   ctx.command('admin/usage')
