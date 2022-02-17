@@ -37,7 +37,7 @@ const getOrder = (order, side) => {
     case 5:
       return Orders[order] + Display[side]
     default:
-      return Orders[side] + Display[order]
+      return Display[side] + Orders[order]
   }
 }
 
