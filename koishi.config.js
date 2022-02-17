@@ -68,8 +68,7 @@ module.exports = defineConfig({
     },
 
     // Scoped plugins.
-    './plugins.scoped/gacha': {},
-    './plugins.scoped/tigang': {},
+    './plugins.scoped/s1coders': {},
 
     // Customize plugin behaviours.
     './koishi.tweaks': {}

@@ -27,7 +27,7 @@ module.exports = ctx => {
   ctx.command('tktv.now <limit>', t('tktv.now'))
     .shortcut(t('tktv.now-shortcut'))
     .action(async ({ session }, limit = 5) => {
-      limit = clamp(limit, 5, 1, 10)
+      limit = clamp(limit, 5, 1, 20)
 
       const now = new Date()
       const lastUsage = channelUsage[session.cid]

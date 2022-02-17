@@ -65,7 +65,7 @@ module.exports = ctx => {
           WHERE platform = ? AND channel = ?
           GROUP BY user
           ORDER BY message DESC
-          LIMIT 10`, [platform, channel])
+          LIMIT 20`, [platform, channel])
       } else if (isPeriod) {
         ranking = await query(`
           SELECT user, SUM(message) as message
@@ -73,14 +73,14 @@ module.exports = ctx => {
           WHERE platform = ? AND channel = ? AND date <= ? AND date >= ?
           GROUP BY user
           ORDER BY message DESC
-          LIMIT 10`, [platform, channel, yesterday, timeWindow])
+          LIMIT 20`, [platform, channel, yesterday, timeWindow])
       } else {
         ranking = await query(`
           SELECT user, message
           FROM talkative
           WHERE platform = ? AND channel = ? AND date = ?
           ORDER BY message DESC
-          LIMIT 10`, [platform, channel, yesterday])
+          LIMIT 20`, [platform, channel, yesterday])
       }
 
       const statsChannel = validate(platform, channel)
@@ -112,7 +112,7 @@ module.exports = ctx => {
       authority: ['year', 'overall'].includes(duration) ? 2 : 1
     }).shortcut(t(`tktv.${duration}-shortcut`))
       .action(async ({ session }, limit = 5) => {
-        limit = clamp(limit, 5, 1, 10)
+        limit = clamp(limit, 5, 1, 20)
         /**
          * @type {import('./stats').UserMessageCount[]}
          */

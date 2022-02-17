@@ -36,6 +36,7 @@ module.exports.name = 'hexagram'
  */
 module.exports.apply = ctx => {
   ctx.command('hexagram', '六爻算卦（迫真）', { hidden: true })
+    .shortcut('迫真算卦')
     .action(async () => {
       const results = []
 
@@ -69,9 +70,9 @@ module.exports.apply = ctx => {
         if (MapIsChange[result]) changeSymbols.push(i + 1)
       })
 
-      return '2bot 为你迫真算卦：\n' +
+      return '2bot 为您迫真算卦：\n' +
         `主卦：${main.display} 第 ${main.code} 卦 ${main.name}卦（${main.fullName}）\n` +
         `变卦：${change.display} 第 ${change.code} 卦 ${change.name}卦（${change.fullName}）\n` +
-        `变第 ${changeSymbols.join('、')} 卦`
+        (changeSymbols.length ? `变第 ${changeSymbols.join('、')} 卦` : '无变卦')
     })
 }
