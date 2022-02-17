@@ -28,6 +28,6 @@ module.exports = defineConfig({
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
 
-    './plugins.scoped/hexagram': {}
+    './plugins/hexagram': {}
   }
 })

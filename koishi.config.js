@@ -57,11 +57,13 @@ module.exports = defineConfig({
     'animal-picture': {},
 
     // Local plugins.
-    './plugins/who-talkative': {},
     './plugins/admin': {},
+    './plugins/fun': {},
+    './plugins/imgen': {},
     './plugins/about': {},
     './plugins/parrot': {},
-    './plugins/fun': {},
+    './plugins/who-talkative': {},
+    './plugins/hexagram': {},
     './plugins/ffxiv': {
       text: { name: 'SHSans' },
       number: { name: 'Din' }

@@ -72,8 +72,9 @@ module.exports.name = 'hexagram'
  * @param {import('koishi').Context} ctx
  */
 module.exports.apply = ctx => {
-  ctx.command('hexagram', '六爻算卦（迫真）', { hidden: true })
+  ctx.command('hexagram', '电子迫真算卦')
     .shortcut('迫真算卦')
+    .usage('说句老实话，我也不知道怎么算，纯正瞎几把算！')
     .action(async ({ session }) => {
       const results = []
 

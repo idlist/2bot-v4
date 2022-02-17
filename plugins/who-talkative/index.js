@@ -4,7 +4,7 @@ module.exports.name = 'who-talkative'
 
 module.exports.using = ['database']
 
-t.set('tktv', {
+t.set('talkative', {
   'desc': '话痨统计',
   'usage': '看看群里谁最话痨',
 
@@ -36,8 +36,8 @@ t.set('tktv', {
  * @param {import('koishi').Context} ctx
  */
 module.exports.apply = ctx => {
-  ctx.command('tktv', t('tktv.desc'))
-    .usage(t('tktv.usage'))
+  ctx.command('talkative', t('talkative.desc'))
+    .usage(t('talkative.usage'))
 
   ctx.plugin(require('./database'))
 

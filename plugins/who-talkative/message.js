@@ -5,7 +5,7 @@ const Interval = 60 * 1000
 
 const channelUsage = {}
 
-const formatDuration = m => t('tktv.seconds', Math.floor(m / 1000))
+const formatDuration = m => t('talkative.seconds', Math.floor(m / 1000))
 
 /**
  * @param {import('koishi').Context} ctx
@@ -24,8 +24,8 @@ module.exports = ctx => {
     }])
   })
 
-  ctx.command('tktv.now <limit>', t('tktv.now'))
-    .shortcut(t('tktv.now-shortcut'))
+  ctx.command('talkative.now <limit>', t('talkative.now'))
+    .shortcut(t('talkative.now-shortcut'))
     .action(async ({ session }, limit = 5) => {
       limit = clamp(limit, 5, 1, 20)
 
@@ -35,7 +35,7 @@ module.exports = ctx => {
         const cooldown = now.getTime() - lastUsage
         if (cooldown < Interval) {
           const remainingDuration = formatDuration(Interval - cooldown)
-          return t('tktv.too-frequent', remainingDuration)
+          return t('talkative.too-frequent', remainingDuration)
         }
       }
 
@@ -51,6 +51,6 @@ module.exports = ctx => {
         limit: limit
       })
 
-      return t('tktv.now-title') + await formatRanking(session, ranking)
+      return t('talkative.now-title') + await formatRanking(session, ranking)
     })
 }

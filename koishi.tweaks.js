@@ -5,19 +5,19 @@ const { t } = require('koishi')
  */
 module.exports = ctx => {
   // Modify commands.
-  ctx.command('schedule', '定时命令')
+  ctx.command('schedule', '定时指令')
   ctx.command('teach', { hidden: true })
     .usage('指令速查： https://s.idl.ist/teach-v4')
   ctx.command('teach.status', { hidden: true })
   ctx.command('dialogue', { hidden: true })
 
   // Move commands.
-  ctx.command('fun/5k')
+  ctx.command('admin/usage')
+  ctx.command('admin/timer')
   ctx.command('fun/jrrp')
   ctx.command('fun/animal')
   ctx.command('fun/hexagram')
-  ctx.command('admin/usage')
-  ctx.command('admin/timer')
+  ctx.command('imgen/5k')
 
   // Modify internal template.
   t.set('internal', {

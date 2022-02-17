@@ -12,9 +12,6 @@ module.exports.apply = ctx => {
   ctx.plugin(require('./hhsh'))
   ctx.command('fun/hhsh')
 
-  ctx.plugin(require('./low-high-eq'))
-  ctx.command('fun/lheq')
-
   ctx.plugin(require('./silly'))
   ctx.command('fun/silly')
 }

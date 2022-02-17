@@ -108,19 +108,19 @@ module.exports = ctx => {
   })
 
   Scopes.forEach(duration => {
-    ctx.command(`tktv.${duration} <limit>`, t(`tktv.${duration}`), {
+    ctx.command(`talkative.${duration} <limit>`, t(`talkative.${duration}`), {
       authority: ['year', 'overall'].includes(duration) ? 2 : 1
-    }).shortcut(t(`tktv.${duration}-shortcut`))
+    }).shortcut(t(`talkative.${duration}-shortcut`))
       .action(async ({ session }, limit = 5) => {
         limit = clamp(limit, 5, 1, 20)
         /**
          * @type {import('./stats').UserMessageCount[]}
          */
         let ranking = Stats[session.platform][session.channelId][duration]
-        if (!ranking.length) return t('tktv.no-data')
+        if (!ranking.length) return t('talkative.no-data')
         ranking = ranking.slice(0, limit)
 
-        return t(`tktv.${duration}-title`) + await formatRanking(session, ranking)
+        return t(`talkative.${duration}-title`) + await formatRanking(session, ranking)
       })
   })
 }
