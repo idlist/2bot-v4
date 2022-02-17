@@ -20,7 +20,7 @@
     "start": "koishi start",
     "test": "koishi start koishi.config.test.js",
     "build:canvas": "npm run build -w packages/canvas",
-    "prod": "concurrently \"npm:build:*\" && npm start",
+    "prod": "concurrently 'npm:build:*' && npm start",
     "reindex": "node scripts/reindex-teach.js",
     "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },

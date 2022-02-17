@@ -54,7 +54,7 @@ const analyzeSymbols = (results, map) => {
 
   const figures = results.map(i => map[i])
   const orders = figures.map((side, i) => getOrder(i, side))
-  const display = figures.map(i => i ? '|' : '¦').join('')
+  const display = figures.map(i => i ? '|' : '¦').join(' ')
   const code = NameListMap[upper][lower]
   const name = Names[upper][lower]
   const meaning = Meanings[code - 1].meaning
@@ -168,8 +168,8 @@ module.exports.apply = ctx => {
         : s('at', { id: session.userId })
 
       return `2bot 为 ${user} 迫真算卦（仅作娱乐用途，不要迷信哦！）\n` +
-        `主卦：${main.display} ${main.fullName} (${main.code})\n` +
-        `变卦：${change.display} ${change.fullName} (${change.code})\n` +
+        `主卦：${main.display}  ${main.fullName} (${main.code})\n` +
+        `变卦：${change.display}  ${change.fullName} (${change.code})\n` +
         (changeSymbols.length ? `变${changeSymbols.map(c => Orders[c]).join('、')}爻，` : '无变爻，') +
         `启蒙断爻：${HowTo[changeSymbols.length]}\n` + comments
     })
