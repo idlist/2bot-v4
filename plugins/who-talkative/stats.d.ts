@@ -1,5 +1,3 @@
-/// <reference path="database.d.ts"/>
-
 export interface UserMessageCount {
   user: string
   message: number

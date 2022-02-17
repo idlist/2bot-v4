@@ -1,7 +1,8 @@
+const { s } = require('koishi')
 const NameList = require('./name-list.json')
 const NameListMap = require('./name-list-map.json')
-const Names = NameListMap.map(rows => rows.map(i => NameList[i - 1]))
 
+const Names = NameListMap.map(rows => rows.map(i => NameList[i - 1]))
 const Radix = [1, 2, 4]
 const MapMain = [0, 0, 1, 1]
 const MapChange = [1, 0, 1, 0]
@@ -12,6 +13,7 @@ const Elements = ['地', '雷', '水', '泽', '山', '火', '风', '天']
 /**
  * @param {number[]} results
  * @param {number[]} map
+ * @return {import('./index').AnalyzeResult}
  */
 const analyzeSymbols = (results, map) => {
   let upper = 0, lower = 0
@@ -37,7 +39,7 @@ module.exports.name = 'hexagram'
 module.exports.apply = ctx => {
   ctx.command('hexagram', '六爻算卦（迫真）', { hidden: true })
     .shortcut('迫真算卦')
-    .action(async () => {
+    .action(async ({ session }) => {
       const results = []
 
       try {
@@ -70,7 +72,7 @@ module.exports.apply = ctx => {
         if (MapIsChange[result]) changeSymbols.push(i + 1)
       })
 
-      return '2bot 为您迫真算卦：\n' +
+      return `2bot 为 ${s('at', { id: session.id })} 迫真算卦\n` +
         `主卦：${main.display} 第 ${main.code} 卦 ${main.name}卦（${main.fullName}）\n` +
         `变卦：${change.display} 第 ${change.code} 卦 ${change.name}卦（${change.fullName}）\n` +
         (changeSymbols.length ? `变第 ${changeSymbols.join('、')} 卦` : '无变卦')
