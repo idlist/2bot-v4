@@ -8,7 +8,7 @@ module.exports = ctx => {
     switch (command.name) {
       // Modify commands.
       case 'schedule':
-        ctx.command('schedule', '定时指令')
+        ctx.command('schedule', '指令定时')
         break
       case 'teach':
         await sleep(0)

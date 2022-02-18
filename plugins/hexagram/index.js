@@ -72,9 +72,11 @@ module.exports.name = 'hexagram'
  * @param {import('koishi').Context} ctx
  */
 module.exports.apply = ctx => {
+  const logger = ctx.logger('hexagram')
+
   ctx.command('hexagram', '电子迫真算卦')
     .shortcut('迫真算卦')
-    .usage('说句老实话，我也不知道怎么算，纯正瞎几把算！')
+    .usage('说句老实话，我也不知道怎么算，看个乐就好！')
     .action(async ({ session }) => {
       const results = []
 
@@ -96,8 +98,8 @@ module.exports.apply = ctx => {
           const result = sides.slice(i * 3, i * 3 + 3).reduce((a, b) => a + b)
           results.push(result)
         }
-      } catch (err) {
-        console.log(err)
+      } catch (error) {
+        logger.warn(error)
         return '未能从 random.org 获取随机数，请稍后再试。'
       }
 
@@ -105,8 +107,10 @@ module.exports.apply = ctx => {
       const change = analyzeSymbols(results, MapChange)
 
       const changeSymbols = []
+      const staticSymbols = []
       results.forEach((result, i) => {
         if (MapIsChange[result]) changeSymbols.push(i)
+        else staticSymbols.push(i)
       })
 
       let comments
@@ -133,15 +137,15 @@ module.exports.apply = ctx => {
             `${change.name}卦辞：${change.meaning}`
           break
         case 4: {
-          const lower = changeSymbols[0]
-          const upper = changeSymbols[1]
+          const upper = staticSymbols[1]
+          const lower = staticSymbols[0]
           comments =
             `上爻 - ${change.name}卦${change.orders[upper]}：${change.details[upper]}\n` +
             `下爻 - ${change.name}卦${change.orders[lower]}：${change.details[lower]}`
           break
         }
         case 5: {
-          const target = changeSymbols[0]
+          const target = staticSymbols[0]
           comments = `${change.name}卦${change.orders[target]}：${change.details[target]}`
           break
         }
