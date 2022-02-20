@@ -26,8 +26,10 @@ module.exports = ctx => {
 
   ctx.command('talkative.now <limit>', t('talkative.now'))
     .shortcut(t('talkative.now-shortcut'))
+    .userFields(['authority'])
     .action(async ({ session }, limit = 5) => {
-      limit = clamp(limit, 5, 1, 20)
+      if (session.user.authority <= 1) limit = clamp(limit, 5, 1, 5)
+      else limit = clamp(limit, 5, 1, 20)
 
       const now = new Date()
       const lastUsage = channelUsage[session.cid]

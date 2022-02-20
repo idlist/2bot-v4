@@ -111,8 +111,11 @@ module.exports = ctx => {
     ctx.command(`talkative.${duration} <limit>`, t(`talkative.${duration}`), {
       authority: ['year', 'overall'].includes(duration) ? 2 : 1,
     }).shortcut(t(`talkative.${duration}-shortcut`))
+      .userFields(['authority'])
       .action(async ({ session }, limit = 5) => {
-        limit = clamp(limit, 5, 1, 20)
+        if (session.user.authority <= 1) limit = clamp(limit, 5, 1, 5)
+        else limit = clamp(limit, 5, 1, 20)
+
         /**
          * @type {import('./stats').UserMessageCount[]}
          */

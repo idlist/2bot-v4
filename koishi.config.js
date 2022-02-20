@@ -62,14 +62,14 @@ module.exports = defineConfig({
     './plugins/about': {},
     './plugins/parrot': {},
     './plugins/who-talkative': {},
-    './plugins/hexagram': {},
+    './plugins/hexagram': { ...secret.ctx['hexagram'] },
     './plugins/ffxiv': {
       text: { name: 'SHSans' },
       number: { name: 'Din' },
     },
 
     // Scoped plugins.
-    './plugins.scoped/s1coders': {},
+    './plugins.scoped/s1coders': { ...secret.ctx['s1coders'] },
 
     // Customize plugin behaviours.
     './koishi.tweaks': {},
