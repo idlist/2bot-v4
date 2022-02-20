@@ -17,10 +17,10 @@ module.exports = defineConfig({
   // Logger settings.
   logger: {
     levels: {
-      command: 3
+      command: 3,
     },
     showTime: 'MM/dd hh:mm:ss',
-    showDiff: false
+    showDiff: false,
   },
 
   // Plugins.
@@ -28,6 +28,14 @@ module.exports = defineConfig({
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
 
-    './packages/duplicate-checker': { calloutSelf: true, cooldown: {} }
-  }
+    'blive': {
+      useDatabase: false,
+      pollInterval: 5000,
+      subscriptions: {
+        'onebot:2905168455': {
+          '3449237': ['627957401'],
+        },
+      },
+    },
+  },
 })

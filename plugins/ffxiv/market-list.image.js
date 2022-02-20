@@ -20,7 +20,7 @@ class MarketListImageGenerator extends ImageGenerator {
       (async () => {
         const lookPhone = await ctxCanvas.loadImage(resolve(__dirname, 'assets/2bot_look-phone.png'))
         ImageRes.set('look-phone', lookPhone)
-      })()
+      })(),
     ])
   }
 
@@ -31,7 +31,7 @@ class MarketListImageGenerator extends ImageGenerator {
   async generate(data) {
     const f = {
       text: this.fonts.text,
-      number: this.fonts.number
+      number: this.fonts.number,
     }
 
     const canvas = this.ctxCanvas.createCanvas()

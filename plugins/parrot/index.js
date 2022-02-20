@@ -69,7 +69,7 @@ module.exports.apply = ctx => {
         message: session.content,
         count: 1,
         trigger: randomTrigger(),
-        lastTriggered: Date.now() - cooldown
+        lastTriggered: Date.now() - cooldown,
       }
     }
 

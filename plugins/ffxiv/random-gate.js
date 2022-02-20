@@ -12,7 +12,7 @@ Promise.all([
   (async () => {
     const image = await readFile(resolve(__dirname, 'assets/choose-right.png'))
     imageResources.set('right', image.toString('base64'))
-  })()
+  })(),
 ])
 
 /**

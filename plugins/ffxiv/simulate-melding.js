@@ -14,8 +14,8 @@ const getRandomNumbers = async () => {
       col: 1,
       base: 10,
       format: 'plain',
-      rnd: 'new'
-    }
+      rnd: 'new',
+    },
   })
   let numbers = data.split('\n')
   numbers = numbers.slice(0, numbers.length - 1).map(n => Number(n))

@@ -3,7 +3,7 @@ const axios = require('axios').default
 const bSpaceAPI = 'https://api.bilibili.com/x/space/arc/search'
 const bVideoAPI = 'https://api.bilibili.com/x/web-interface/view'
 const mockHeader = {
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36 Edg/92.0.902.78'
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36 Edg/92.0.902.78',
 }
 
 /**
@@ -22,7 +22,7 @@ module.exports.apply = ctx => {
          */
         const { data: listData } = await axios.get(bSpaceAPI, {
           params: { mid: 15503317 },
-          header: { ...mockHeader }
+          header: { ...mockHeader },
         })
 
         let latestReport
@@ -40,7 +40,7 @@ module.exports.apply = ctx => {
          */
         const { data: reportData } = await axios.get(bVideoAPI, {
           params: { aid: latestReport.aid },
-          header: { ...mockHeader }
+          header: { ...mockHeader },
         })
 
         const rawReport = reportData.data.desc

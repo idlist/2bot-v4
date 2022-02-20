@@ -91,8 +91,8 @@ module.exports = ctx => {
 
     await Promise.all(channels.map(async (channel) =>
       await Promise.all(Scopes.map(async (duration) =>
-        await summarize(channel.platform, channel.id, duration)
-      ))
+        await summarize(channel.platform, channel.id, duration),
+      )),
     ))
   }
 
@@ -109,7 +109,7 @@ module.exports = ctx => {
 
   Scopes.forEach(duration => {
     ctx.command(`talkative.${duration} <limit>`, t(`talkative.${duration}`), {
-      authority: ['year', 'overall'].includes(duration) ? 2 : 1
+      authority: ['year', 'overall'].includes(duration) ? 2 : 1,
     }).shortcut(t(`talkative.${duration}-shortcut`))
       .action(async ({ session }, limit = 5) => {
         limit = clamp(limit, 5, 1, 20)

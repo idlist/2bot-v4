@@ -7,8 +7,8 @@ module.exports = ctx => {
     channel: 'string',
     date: 'date',
     user: 'string',
-    message: 'unsigned'
+    message: 'unsigned',
   }, {
-    primary: ['platform', 'channel', 'date', 'user']
+    primary: ['platform', 'channel', 'date', 'user'],
   })
 }

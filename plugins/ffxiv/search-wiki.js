@@ -17,7 +17,7 @@ const extractPage = (payload, keyword) => {
   return {
     url: `${wikiUrl}/wiki/${encodeURI(keyword)}`,
     title: title,
-    content: truncateString(content)
+    content: truncateString(content),
   }
 }
 
@@ -34,7 +34,7 @@ const extractSearchResult = (payload, keyword) => {
   return {
     url: `${wikiUrl}/index.php?search=${encodeURI(keyword)}`,
     title: `页面搜索 - ${keyword}`,
-    content: content
+    content: content,
   }
 }
 
@@ -60,7 +60,7 @@ module.exports = ctx => {
           page: keyword,
           prop: 'text',
           utf8: '',
-          format: 'json'
+          format: 'json',
         })
         const searchParams = new URLSearchParams({
           action: 'query',
@@ -68,11 +68,11 @@ module.exports = ctx => {
           srsearch: keyword,
           srlimit: 1,
           utf8: '',
-          format: 'json'
+          format: 'json',
         })
         const [{ data: pageResult }, { data: searchResult }] = await Promise.all([
           axios.get(requestUrl, { params: pageParams }),
-          axios.get(requestUrl, { params: searchParams })
+          axios.get(requestUrl, { params: searchParams }),
         ])
 
         let extracted

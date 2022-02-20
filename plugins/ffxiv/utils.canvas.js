@@ -101,7 +101,7 @@ class ImageGenerator {
 
     this.fonts = {
       text: text,
-      number: number
+      number: number,
     }
   }
 }

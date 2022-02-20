@@ -1,78 +1,78 @@
 module.exports = [
   {
     keywords: ['占星术士', 'ast', '占星'],
-    name: 'Astrologian'
+    name: 'Astrologian',
   },
   {
     keywords: ['吟游诗人', 'brd', '诗人', 'bard'],
-    name: 'Bard'
+    name: 'Bard',
   },
   {
     keywords: ['黑魔法师', 'blm', '黑魔'],
-    name: 'BlackMage'
+    name: 'BlackMage',
   },
   {
     keywords: ['暗黑骑士', 'drk', '黑骑','嗨骑', 'dk'],
-    name: 'DarkKnight'
+    name: 'DarkKnight',
   },
   {
     keywords: ['龙骑士', 'drg', '龙骑', '擦炮工'],
-    name: 'Dragoon'
+    name: 'Dragoon',
   },
   {
     keywords: ['机工士', 'mch', '机工', '鸡公'],
-    name: 'Machinist'
+    name: 'Machinist',
   },
   {
     keywords: ['武僧', 'mnk', '打拳', '拳师'],
-    name: 'Monk'
+    name: 'Monk',
   },
   {
     keywords: ['忍者', 'nin', '背刺人'],
-    name: 'Ninja'
+    name: 'Ninja',
   },
   {
     keywords: ['骑士', 'pld'],
-    name: 'Paladin'
+    name: 'Paladin',
   },
   {
     keywords: ['学者', 'sch'],
-    name: 'Scholar'
+    name: 'Scholar',
   },
   {
     keywords: ['召唤师', 'smn', '召唤'],
-    name: 'Summoner'
+    name: 'Summoner',
   },
   {
     keywords: ['战士', 'war'],
-    name: 'Warrior'
+    name: 'Warrior',
   },
   {
     keywords: ['白魔法师', 'whm', '白魔'],
-    name: 'WhiteMage'
+    name: 'WhiteMage',
   },
   {
     keywords: ['赤魔法师', 'rdm', '赤魔', '吃馍'],
-    name: 'RedMage'
+    name: 'RedMage',
   },
   {
     keywords: ['武士', 'sam', '萨姆来'],
-    name: 'Samurai'
+    name: 'Samurai',
   },
   {
     keywords: ['舞者', 'dnc', '舞娘'],
-    name: 'Dancer'
+    name: 'Dancer',
   },
   {
     keywords: ['绝枪战士', 'gnb', '绝枪', '枪刃'],
-    name: 'Gunbreaker'
+    name: 'Gunbreaker',
   },
   {
     keywords: ['贤者', 'sge'],
-    name: 'Sage'
+    name: 'Sage',
   },
   {
     keywords: ['钐镰师', 'rpr', '镰刀'],
-    name: 'Reaper'
-  }
+    name: 'Reaper',
+  },
 ]

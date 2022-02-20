@@ -13,7 +13,7 @@ module.exports = ctx => {
     (async () => {
       const baseImage = await ctx.canvas.loadImage(resolve(__dirname, 'assets/low-high-eq.jpg'))
       canvasResources.set('base-image', baseImage)
-    })()
+    })(),
   ])
 
   const ctxCanvas = ctx.canvas

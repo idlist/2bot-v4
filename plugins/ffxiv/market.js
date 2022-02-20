@@ -60,7 +60,7 @@ const getMarketData = async (generator, rawServer, item, lang) => {
       hq: item.hq,
       unit: item.pricePerUnit,
       qty: item.quantity,
-      total: item.total
+      total: item.total,
     }
   }
 
@@ -86,7 +86,7 @@ const getMarketData = async (generator, rawServer, item, lang) => {
     } else {
       const countedItem = {
         ...lastItem,
-        repeat: itemRepeat
+        repeat: itemRepeat,
       }
       itemRepeat = 1
       extractedList.push(countedItem)
@@ -103,7 +103,7 @@ const getMarketData = async (generator, rawServer, item, lang) => {
     server: server,
     average: average,
     lastUpdate: lastUpdate,
-    list: extractedList
+    list: extractedList,
   })
 }
 
@@ -124,7 +124,7 @@ module.exports = (ctx, config) => {
     .shortcut('查市场', { fuzzy: true, prefix: true })
     .shortcut(/^查(.+)区市场\s+(.+)$/, { args: ['$1', '$2'], prefix: true })
     .shortcut(/^用(.+)(语|文)查市场\s+(.+)\s+(.+)/, {
-      args: ['$3', '$4'], options: { language: '$1' }, prefix: true
+      args: ['$3', '$4'], options: { language: '$1' }, prefix: true,
     })
     .before(({ session, options }, ...args) => {
       if (args.length < 2 && (!options.shorten && !options.lengthen)) {

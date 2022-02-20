@@ -45,7 +45,7 @@ module.exports = ctx => {
         State[cid] = {
           isRolling: true,
           teamsize: teamsize,
-          member: []
+          member: [],
         }
         starterText = (
           s('at', { id: session.userId }) + ' 发起了 ' +
@@ -73,7 +73,7 @@ module.exports = ctx => {
 
         State[cid].member.push({
           id: session.userId,
-          result: rollResult
+          result: rollResult,
         })
         rollText = s('at', { id: session.userId }) + ' 参与了 Roll 点。'
       }

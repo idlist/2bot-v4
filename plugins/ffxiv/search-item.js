@@ -16,7 +16,7 @@ const extractPage = (payload, item) => {
   return {
     url: `${wikiUrl}/wiki/${encodeURI(`物品:${item}`)}`,
     title: `物品：${item}`,
-    content: truncateString(content)
+    content: truncateString(content),
   }
 }
 
@@ -31,7 +31,7 @@ const extractSearchResult = (payload, item) => {
   return {
     url: `${wikiUrl}/wiki/ItemSearch?name=${encodeURI(item)}`,
     title: '物品搜索 - ' + item,
-    content: content
+    content: content,
   }
 }
 
@@ -57,7 +57,7 @@ module.exports = ctx => {
           page: '物品:' + item,
           prop: 'text',
           utf8: '',
-          format: 'json'
+          format: 'json',
         })
         const itemParams = new URLSearchParams({
           action: 'parse',
@@ -65,11 +65,11 @@ module.exports = ctx => {
           prop: 'text',
           text: `{{ItemSearch|name=${item}}}`,
           utf8: '',
-          format: 'json'
+          format: 'json',
         })
         const [{ data: pageResult }, { data: searchResult }] = await Promise.all([
           axios.get(requestUrl, { params: pageParams }),
-          axios.get(requestUrl, { params: itemParams })
+          axios.get(requestUrl, { params: itemParams }),
         ])
 
         let extracted

@@ -8,7 +8,7 @@ const formatRanking = async (session, ranking) => {
     ranking.map(async (item) => {
       const user = await session.bot.getGuildMember(session.guildId, item.user)
       return user ? (user.nickname || user.username) : '[找不到该用户]'
-    })
+    }),
   )
 
   return ranking.map((item, i) => `第 ${i + 1} - ${users[i]}: ${item.message} 条`).join('\n')

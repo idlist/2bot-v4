@@ -38,6 +38,6 @@ module.exports = ctx => {
     'command-aliases': '别名：{0}',
     'command-authority': '最低权限：{0} 级',
     'command-max-usage': '已调用次数：{0}/{1}',
-    'command-min-interval': '距离下次调用还需 {0}/{1} 秒'
+    'command-min-interval': '距离下次调用还需 {0}/{1} 秒',
   })
 }

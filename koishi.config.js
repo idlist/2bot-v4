@@ -15,12 +15,11 @@ module.exports = defineConfig({
     else return 1
   },
 
-
   // Logger settings.
   logger: {
     levels: { command: 3 },
     showTime: 'MM/dd hh:mm:ss',
-    showDiff: false
+    showDiff: false,
   },
 
   // Plugins.
@@ -44,12 +43,12 @@ module.exports = defineConfig({
         { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
         { path: 'fonts/Din1451Alt.ttf', family: 'Din' },
         { path: 'fonts/SourceHanSans-Heavy.otf', family: 'SHSans-Heavy' },
-        { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'SHSerif-Heavy' }
-      ]
+        { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'SHSerif-Heavy' },
+      ],
     },
     'gosen-choyen': {
       upper: { name: 'SHSans-Heavy' },
-      lower: { name: 'SHSerif-Heavy' }
+      lower: { name: 'SHSerif-Heavy' },
     },
     'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
     'blive': {},
@@ -66,13 +65,13 @@ module.exports = defineConfig({
     './plugins/hexagram': {},
     './plugins/ffxiv': {
       text: { name: 'SHSans' },
-      number: { name: 'Din' }
+      number: { name: 'Din' },
     },
 
     // Scoped plugins.
     './plugins.scoped/s1coders': {},
 
     // Customize plugin behaviours.
-    './koishi.tweaks': {}
-  }
+    './koishi.tweaks': {},
+  },
 })

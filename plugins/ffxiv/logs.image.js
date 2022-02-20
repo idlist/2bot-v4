@@ -27,7 +27,7 @@ class LogsImageGenerator extends ImageGenerator {
           const icon = await ctxCanvas.loadImage(resolve(__dirname, 'assets/jobs', iconPath))
           ImageRes.set(shortCode, icon)
         }))
-      })()
+      })(),
     ])
   }
 
@@ -38,7 +38,7 @@ class LogsImageGenerator extends ImageGenerator {
   async generate(logsData) {
     const f = {
       text: this.fonts.text,
-      number: this.fonts.number
+      number: this.fonts.number,
     }
 
     const logsPrec = [1]

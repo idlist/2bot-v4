@@ -27,7 +27,7 @@ const ErrorMessage = {
   202: '物品不可出售。',
 
   // Request error
-  301: '请求失败，可能是物品无人出售或服务器名字错误。'
+  301: '请求失败，可能是物品无人出售或服务器名字错误。',
 }
 Object.freeze(ErrorMessage)
 
@@ -104,27 +104,27 @@ class API {
         params: {
           indexes: 'Item',
           language: lang,
-          string: name
-        }
+          string: name,
+        },
       })
 
       if (results.length) {
         return {
           status: 'success',
           name: results[0].Name,
-          id: results[0].ID
+          id: results[0].ID,
         }
       } else {
         return {
           status: 'error',
-          message: ErrorMessage[201]
+          message: ErrorMessage[201],
         }
       }
     } catch (error) {
       logger.warn(error)
       return {
         status: 'error',
-        message: ErrorMessage[111]
+        message: ErrorMessage[111],
       }
     }
   }
@@ -162,7 +162,7 @@ class API {
       name: targetItem.name,
       server: server,
       hq: hq,
-      nq: nq
+      nq: nq,
     }
 
     try {
@@ -174,20 +174,20 @@ class API {
         return {
           ...query,
           status: 'error',
-          message: ErrorMessage[101]
+          message: ErrorMessage[101],
         }
       }
       if (!data.listings.length) {
         return {
           ...query,
           status: 'error',
-          message: ErrorMessage[301]
+          message: ErrorMessage[301],
         }
       }
 
       return {
         ...query,
-        payload: data
+        payload: data,
       }
     } catch (error) {
       /**
@@ -201,21 +201,21 @@ class API {
             return {
               ...query,
               status: 'error',
-              message: ErrorMessage[202]
+              message: ErrorMessage[202],
             }
           case 403:
           case 500:
             return {
               ...query,
               status: 'error',
-              message: ErrorMessage[101]
+              message: ErrorMessage[101],
             }
           default:
             logger.warn(error)
             return {
               ...query,
               status: 'error',
-              message: ErrorMessage[100]
+              message: ErrorMessage[100],
             }
         }
       }
@@ -224,7 +224,7 @@ class API {
       return {
         ...query,
         status: 'error',
-        message: ErrorMessage[100]
+        message: ErrorMessage[100],
       }
     }
   }

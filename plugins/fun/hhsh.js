@@ -17,7 +17,7 @@ module.exports = ctx => {
          */
         const resolve = await axios.post(
           'https://lab.magiconch.com/api/nbnhhsh/guess',
-          { text: abbr }
+          { text: abbr },
         )
         const data = resolve.data[0]
 

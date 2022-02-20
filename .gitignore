@@ -4,3 +4,4 @@ logs
 
 koishi.secret.js
 koishi.secret.prod.js
+koishi.config.yaml

@@ -87,7 +87,7 @@ const getMarketListData = async (generator, rawServer, name) => {
       unit: lowest?.pricePerUnit,
       qty: lowest?.quantity,
       total: lowest?.total,
-      lastUpdate: 'payload' in item ? item.payload.lastUploadTime : undefined
+      lastUpdate: 'payload' in item ? item.payload.lastUploadTime : undefined,
     }
   })
 
@@ -98,7 +98,7 @@ const getMarketListData = async (generator, rawServer, name) => {
   return await generator.generate({
     name: name,
     server: server,
-    list: parsedList
+    list: parsedList,
   })
 }
 

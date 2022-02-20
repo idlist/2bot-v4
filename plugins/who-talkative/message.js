@@ -20,7 +20,7 @@ module.exports = ctx => {
       channel: session.channelId,
       date: now,
       user: session.userId,
-      message: { $add: [{ $: 'message' }, 1] }
+      message: { $add: [{ $: 'message' }, 1] },
     }])
   })
 
@@ -45,10 +45,10 @@ module.exports = ctx => {
       const ranking = await ctx.database.get('talkative', {
         platform: session.platform,
         channel: session.channelId,
-        date: now
+        date: now,
       }, {
         sort: { message: 'desc' },
-        limit: limit
+        limit: limit,
       })
 
       return t('talkative.now-title') + await formatRanking(session, ranking)

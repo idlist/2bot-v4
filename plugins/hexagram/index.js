@@ -23,7 +23,7 @@ const HowTo = [
   '以本卦与变卦的卦辞占，以本卦卦辞为主',
   '以变卦中不变爻的爻辞占，以下爻爻辞为主',
   '以变卦中不变爻的爻辞占',
-  '乾以用九，坤以用六，其他以变卦卦辞占'
+  '乾以用九，坤以用六，其他以变卦卦辞占',
 ]
 
 /**
@@ -84,8 +84,8 @@ module.exports.apply = ctx => {
         const data = await ctx.http.get('https://www.random.org/cgi-bin/randbyte', {
           params: {
             nbytes: 3,
-            format: 'b'
-          }
+            format: 'b',
+          },
         })
 
         const sides = []

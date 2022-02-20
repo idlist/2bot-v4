@@ -8,7 +8,7 @@ const pool = createPool({
   port: db.port,
   user: db.user,
   password: db.password,
-  database: db.database
+  database: db.database,
 })
 
 const query = (sql, values = []) => new Promise((resolve, reject) => {

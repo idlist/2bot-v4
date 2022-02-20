@@ -38,7 +38,7 @@ const resolveJob = str => {
       return {
         name: job.keywords[0],
         code: job.keywords[1],
-        logsCode: job.name
+        logsCode: job.name,
       }
     }
   }
@@ -101,8 +101,8 @@ module.exports = (ctx, config) => {
       try {
         const res = await axios.get(logsUrl, {
           headers: {
-            referer: 'https://www.fflogs.com'
-          }
+            referer: 'https://www.fflogs.com',
+          },
         })
         data = res.data
       } catch (error) {
@@ -141,7 +141,7 @@ module.exports = (ctx, config) => {
         type: type == 'adps' ? 'aDPS' : 'rDPS',
         duration: durationText,
         record: recordNumber,
-        data: seriesData.map(str => parseFloat(str).toFixed(2))
+        data: seriesData.map(str => parseFloat(str).toFixed(2)),
       }
 
       const canvas = await generator.generate(logsData)
