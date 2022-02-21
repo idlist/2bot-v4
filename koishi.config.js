@@ -61,7 +61,7 @@ module.exports = defineConfig({
     './plugins/imgen': {},
     './plugins/about': {},
     './plugins/parrot': {},
-    './plugins/who-talkative': {},
+    './plugins/talkative': {},
     './plugins/hexagram': { ...secret.ctx['hexagram'] },
     './plugins/ffxiv': {
       text: { name: 'SHSans' },
