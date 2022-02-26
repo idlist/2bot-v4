@@ -1,4 +1,4 @@
-const { defineConfig } = require('@koishijs/cli')
+const { defineConfig } = require('koishi')
 const secret = require('./koishi.secret')
 
 module.exports = defineConfig({

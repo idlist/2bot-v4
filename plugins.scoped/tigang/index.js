@@ -46,7 +46,7 @@ module.exports = ctx => {
      */
     const alertTigang = timeout => {
       handler = setTimeout(() => {
-        ctx.bots.get(`onebot:${bots[0].selfId}`).sendMessage(s1coders, '2bot 提醒您注意提肛。')
+        ctx.bots.get(`onebot:${bots[0].selfId}`).sendMessage(s1coders[0], '2bot 提醒您注意提肛。')
         handler = null
 
         const now = Date.now()
