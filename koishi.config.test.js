@@ -1,4 +1,4 @@
-const { defineConfig } = require('@koishijs/cli')
+const { defineConfig } = require('koishi')
 const secret = require('./koishi.secret')
 
 module.exports = defineConfig({
@@ -18,6 +18,7 @@ module.exports = defineConfig({
   logger: {
     levels: {
       command: 3,
+      blive: 3,
     },
     showTime: 'MM/dd hh:mm:ss',
     showDiff: false,

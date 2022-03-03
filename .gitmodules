@@ -16,3 +16,6 @@
 [submodule "packages/animal-picture"]
 	path = packages/animal-picture
 	url = https://github.com/idlist/koishi-plugin-animal-picture.git
+[submodule "packages/aircon"]
+	path = packages/aircon
+	url = https://github.com/idlist/koishi-plugin-aircon
