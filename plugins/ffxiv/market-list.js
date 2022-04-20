@@ -110,7 +110,7 @@ module.exports = (ctx, config) => {
   const logger = ctx.logger('ff.marketlist')
   const generator = new MarketListImageGenerator(ctx.canvas, config)
 
-  ctx.command('ff.marketlist <server> <listname>', '查询市场清单')
+  ctx.command('ff.marketlist <server> <listname>', '查询市场清单', { authority: 2 })
     .alias('ff.mlist')
     .usage('使用预设的清单查询市场。')
     .option('list', '-l [name] 显示或查询可用清单')

@@ -31,7 +31,7 @@ module.exports = ctx => {
   ctx.command('ff.advmeld <prob>', '模拟禁断镶嵌')
     .shortcut('模拟禁断', { prefix: true, fuzzy: true })
     .usage('使用 random.org 的随机数表来模拟禁断镶嵌')
-    .example('ff-amsim 5  模拟 5% 概率下的禁断镶嵌')
+    .example('ff.advmeld 5  模拟 5% 概率下的禁断镶嵌')
     .action(async ({ session }, prob) => {
       if (!prob) return session.execute('help ff.advmeld')
 

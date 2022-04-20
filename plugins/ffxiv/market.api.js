@@ -10,7 +10,7 @@ const axios = require('axios').default
 let Shortcodes
 (async () => {
   Shortcodes = yaml.load(await readFile(resolve(__dirname, 'data/market-shortcodes.yaml'), 'utf-8'))
-  Shortcodes = Shortcodes.sort((a, b) => a.code.localeCompare(b.code))
+  Shortcodes = Shortcodes.map(item => ({ code: RegExp(item.code), full: item.full }))
   Object.freeze(Shortcodes)
 })()
 
@@ -37,11 +37,26 @@ class API {
    * @returns {string}
    */
   static parseItemName(name) {
-    Shortcodes.forEach(item => {
-      const subsRegExp = new RegExp(item.code, 'g')
-      name = name.replace(subsRegExp, item.full)
-    })
-    return name
+    const original = [name]
+    const parsed = ['']
+    const compo = [false]
+    for (const shortcode of Shortcodes) {
+      if (original.filter(s => s != '').length == 0) break
+
+      for (let i = 0; i < original.length; i++) {
+        if (!original[i]) continue
+        const segment = original[i]
+        const place = segment.match(shortcode.code)
+        if (!place) continue
+        const remainedFormerSegment = segment.substring(0, place.index)
+        const remainedLatterSegment = segment.substring(place.index + place[0].length)
+        original.splice(i, 1, remainedFormerSegment, '', remainedLatterSegment)
+        parsed.splice(i, 1, '', shortcode.full, '')
+        compo.splice(i, 1, false, true, false)
+      }
+    }
+    const result = compo.map((which, i) => which ? parsed[i] : original[i]).join('')
+    return result
   }
 
   /**

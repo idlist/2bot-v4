@@ -24,20 +24,33 @@ module.exports = defineConfig({
 
   // Plugins.
   plugins: {
-    // Official plugins.
+    // Tweak behaviors.
+    './koishi.tweaks': {},
+
+    // Infrastructures.
     'adapter-onebot': secret.onebot,
     'adapter-discord': secret.discord,
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
+
+    // Environment plugins.
+    'admin': {},
+    'echo': {},
+    'locales': {},
     'rate-limit': {},
-    'teach': { prefix: '->' },
+    'recall': {},
+
+    // Functional plugins.
     'schedule': {},
+    'teach': { prefix: '->' },
 
     // Web console.
     'console': {},
     'status': {},
 
     // Local packages.
+    'animal-picture': {},
+    'blive': {},
     'canvas': {
       fonts: [
         { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
@@ -46,32 +59,27 @@ module.exports = defineConfig({
         { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'SHSerif-Heavy' },
       ],
     },
+    'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
     'gosen-choyen': {
       upper: { name: 'SHSans-Heavy' },
       lower: { name: 'SHSerif-Heavy' },
     },
-    'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
-    'blive': {},
     'jrrp': {},
-    'animal-picture': {},
 
     // Local plugins.
-    './plugins/admin': {},
-    './plugins/fun': {},
-    './plugins/imgen': {},
     './plugins/about': {},
-    './plugins/parrot': {},
-    './plugins/talkative': {},
-    './plugins/hexagram': { ...secret.ctx['hexagram'] },
+    './plugins/admin': {},
     './plugins/ffxiv': {
       text: { name: 'SHSans' },
       number: { name: 'Din' },
     },
+    './plugins/fun': {},
+    './plugins/hexagram': { ...secret.ctx['hexagram'] },
+    './plugins/imgen': {},
+    './plugins/parrot': {},
+    './plugins/talkative': {},
 
     // Scoped plugins.
     './plugins.scoped/s1coders': { ...secret.ctx['s1coders'] },
-
-    // Customize plugin behaviours.
-    './koishi.tweaks': {},
   },
 })

@@ -26,17 +26,10 @@ module.exports = defineConfig({
 
   // Plugins.
   plugins: {
+    './koishi.tweaks': {},
+
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
-
-    'blive': {
-      useDatabase: false,
-      pollInterval: 5000,
-      subscriptions: {
-        'onebot:2905168455': {
-          '3449237': ['627957401'],
-        },
-      },
-    },
+    'schedule': {},
   },
 })

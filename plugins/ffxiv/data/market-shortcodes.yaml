@@ -1,4 +1,8 @@
 # 地图
+- code: ^G14$
+  full: 陈旧的金毗罗鳄革地图
+- code: ^G13$
+  full: 陈旧的高鼻羚羊革地图
 - code: ^G12$
   full: 陈旧的缠尾蛟革地图
 - code: ^G11$
@@ -7,30 +11,8 @@
   full: 陈旧的瞪羚革地图
 - code: ^G9$
   full: 陈旧的迦迦纳怪鸟革地图
-
-# 伊修加德重建三期
-- code: ^第三最(.+)$
-  full: 第三期重建用的最高级$1检
-- code: ^第三特(.+)$
-  full: 第三期重建用的特供$1检
-- code: ^第三上(.+)$
-  full: 第三期重建用的上级$1检
-- code: ^第三中(.+)$
-  full: 第三期重建用的中级$1检
-- code: ^第三用(.+)$
-  full: 第三期重建用的$1检
-
-# 伊修加德重建四期
-- code: ^第四最(.+)$
-  full: 第四期重建用的最高级$1检
-- code: ^第四特(.+)$
-  full: 第四期重建用的特供$1检
-- code: ^第四上(.+)$
-  full: 第四期重建用的上级$1检
-- code: ^第四中(.+)$
-  full: 第四期重建用的中级$1检
-- code: ^第四用(.+)$
-  full: 第四期重建用的$1检
+- code: ^G5$
+  full: 陈旧的毒蜥蜴革地图
 
 # 魔晶石
 - code: ^直击
@@ -59,25 +41,24 @@
   full: 博识魔晶石
 - code: ^GP
   full: 器识魔晶石
-- code: 1型$
-  full: 壹型
-- code: 2型$
-  full: 贰型
-- code: 3型$
-  full: 叁型
-- code: 4型$
-  full: 肆型
-- code: 5型$
-  full: 伍型
-- code: 6型$
-  full: 陆型
-- code: 7型$
-  full: 柒型
+
+- code: 10型$
+  full: 拾型
+- code: 9型$
+  full: 玖型
 - code: 8型$
   full: 捌型
-
-# 临时
-- code: 9型$
-  full: のオメガマテリジャ
-- code: 10型
-  full: のアルテマテリジャ
+- code: 7型$
+  full: 柒型
+- code: 6型$
+  full: 陆型
+- code: 5型$
+  full: 伍型
+- code: 4型$
+  full: 肆型
+- code: 3型$
+  full: 叁型
+- code: 2型$
+  full: 贰型
+- code: 1型$
+  full: 壹型
