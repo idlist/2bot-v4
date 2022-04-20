@@ -76,6 +76,7 @@ module.exports = defineConfig({
     './plugins/fun': {},
     './plugins/hexagram': { ...secret.ctx['hexagram'] },
     './plugins/imgen': {},
+    './plugins/is-this-npm-package-exists': {},
     './plugins/parrot': {},
     './plugins/talkative': {},
 

@@ -45,6 +45,9 @@ module.exports = ctx => {
       case 'hexagram':
         ctx.command('fun/hexagram')
         break
+      case 'itnpe':
+        ctx.command('fun/itnpe')
+        break
       case '5k':
         ctx.command('imgen/5k')
         break

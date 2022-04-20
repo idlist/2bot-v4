@@ -30,6 +30,6 @@ module.exports = defineConfig({
 
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
-    'schedule': {},
+    './plugins/is-this-npm-package-exists': {},
   },
 })
