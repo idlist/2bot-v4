@@ -1,3 +1,5 @@
+const { sleep } = require('koishi')
+
 const packageRoute = 'https://www.npmjs.com/package'
 
 module.exports.name = 'is-this-npm-package-exists'
@@ -23,7 +25,6 @@ module.exports.apply = ctx => {
         try {
           await ctx.http.get(`${packageRoute}/${name}`)
           occupied.push(name)
-          // return `包名 ${name} 被占用了：\nhttps://www.npmjs.com/package/${name}`
         } catch (error) {
           if (error.response.status == 404) {
             free.push(name)
@@ -32,6 +33,7 @@ module.exports.apply = ctx => {
             errored.push(name)
           }
         }
+        await sleep(200)
       }
 
       let result = ''
