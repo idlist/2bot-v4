@@ -1,6 +1,7 @@
 const { sleep } = require('koishi')
 
 const packageRoute = 'https://www.npmjs.com/package'
+const MAX_RETRY = 5
 
 module.exports.name = 'is-this-npm-package-exists'
 
@@ -21,19 +22,30 @@ module.exports.apply = ctx => {
       const occupied = []
       const free = []
       const errored = []
+
       for (const name of names) {
-        try {
-          await ctx.http.get(`${packageRoute}/${name}`)
-          occupied.push(name)
-        } catch (error) {
-          if (error.response.status == 404) {
-            free.push(name)
-          } else {
-            logger.warn(error)
-            errored.push(name)
+        let retry = 0, errCode = -1
+
+        while (errCode == 429 && retry < MAX_RETRY) {
+          try {
+            await ctx.http.get(`${packageRoute}/${name}`)
+            occupied.push(name)
+            errCode = -1
+          } catch (error) {
+            errCode = error.response.status
+            if (errCode == 404) {
+              free.push(name)
+            } else if (errCode == 429) {
+              retry += 1
+              await sleep(1000)
+            } else {
+              logger.warn(error)
+              errored.push(name)
+            }
           }
         }
-        await sleep(200)
+
+        if (retry == MAX_RETRY) errored.push(name)
       }
 
       let result = ''
