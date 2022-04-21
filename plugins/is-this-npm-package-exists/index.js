@@ -2,6 +2,7 @@ const { sleep } = require('koishi')
 
 const packageRoute = 'https://www.npmjs.com/package'
 const MAX_RETRY = 5
+const WAIT_MS = [1000, 2000, 3000, 4000, 5000]
 
 module.exports.name = 'is-this-npm-package-exists'
 
@@ -24,7 +25,7 @@ module.exports.apply = ctx => {
       const errored = []
 
       for (const name of names) {
-        let retry = 0, errCode = -1
+        let retry = 0, errCode = 429
 
         while (errCode == 429 && retry < MAX_RETRY) {
           try {
@@ -37,7 +38,7 @@ module.exports.apply = ctx => {
               free.push(name)
             } else if (errCode == 429) {
               retry += 1
-              await sleep(1000)
+              await sleep(WAIT_MS[retry])
             } else {
               logger.warn(error)
               errored.push(name)
