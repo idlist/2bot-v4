@@ -18,7 +18,6 @@ module.exports = defineConfig({
   logger: {
     levels: {
       command: 3,
-      blive: 3,
     },
     showTime: 'MM/dd hh:mm:ss',
     showDiff: false,
@@ -30,6 +29,6 @@ module.exports = defineConfig({
 
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
-    './plugins/is-this-npm-package-exists': {},
+    './plugins/talkative': {},
   },
 })

@@ -3,12 +3,17 @@ export interface UserMessageCount {
   message: number
 }
 
+export interface TalkativeStatsByType {
+  ranking: UserMessageCount[]
+  total: number
+}
+
 export interface TalkativeStats {
-  yesterday: UserMessageCount[]
-  week: UserMessageCount[]
-  month: UserMessageCount[]
-  year: UserMessageCount[]
-  overall: UserMessageCount[]
+  yesterday: TalkativeStatsByType
+  week: TalkativeStatsByType
+  month: TalkativeStatsByType
+  year: TalkativeStatsByType
+  overall: TalkativeStatsByType
 }
 
 export interface SummarizedStats {

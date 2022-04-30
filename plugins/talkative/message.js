@@ -53,6 +53,14 @@ module.exports = ctx => {
         limit: limit,
       })
 
-      return t('talkative.now-title') + await formatRanking(session, ranking)
+      const total = await ctx.database.eval('talkative', {
+        $sum: 'message',
+      }, {
+        platform: session.platform,
+        channel: session.channelId,
+        date: now,
+      })
+
+      return t('talkative.now-title', total) + await formatRanking(session, ranking)
     })
 }

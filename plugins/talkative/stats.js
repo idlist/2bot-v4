@@ -53,7 +53,7 @@ module.exports = ctx => {
           break
       }
 
-      let ranking
+      let ranking, total
 
       // Since koishi ORM does not support GROUP BY, use direct query instead.
       const query = async (q, args) => await ctx.database.mysql.query(outdent`${q}`, args)
@@ -66,6 +66,13 @@ module.exports = ctx => {
           GROUP BY user
           ORDER BY message DESC
           LIMIT 20`, [platform, channel])
+
+        total = await ctx.database.eval('talkative', {
+          $sum: 'message',
+        }, {
+          platform: platform,
+          channel: channel,
+        })
       } else if (isPeriod) {
         ranking = await query(`
           SELECT user, SUM(message) as message
@@ -74,6 +81,14 @@ module.exports = ctx => {
           GROUP BY user
           ORDER BY message DESC
           LIMIT 20`, [platform, channel, yesterday, timeWindow])
+
+        total = await ctx.database.eval('talkative', {
+          $sum: 'message',
+        }, {
+          platform: platform,
+          channel: channel,
+          date: { $lte: yesterday, $gte: timeWindow },
+        })
       } else {
         ranking = await query(`
           SELECT user, message
@@ -81,10 +96,18 @@ module.exports = ctx => {
           WHERE platform = ? AND channel = ? AND date = ?
           ORDER BY message DESC
           LIMIT 20`, [platform, channel, yesterday])
+
+        total = await ctx.database.eval('talkative', {
+          $sum: 'message',
+        }, {
+          platform: platform,
+          channel: channel,
+          date: yesterday,
+        })
       }
 
       const statsChannel = validate(platform, channel)
-      statsChannel[duration] = ranking
+      statsChannel[duration] = { ranking: ranking, total: total }
     }
 
     const channels = await ctx.database.get('channel', {}, ['platform', 'id'])
@@ -117,13 +140,13 @@ module.exports = ctx => {
         else limit = clamp(limit, 5, 1, 20)
 
         /**
-         * @type {import('./stats').UserMessageCount[]}
+         * @type {import('./stats').TalkativeStatsByType}
          */
-        let ranking = Stats[session.platform][session.channelId][duration]
+        const { ranking, total } = Stats[session.platform][session.channelId][duration]
         if (!ranking.length) return t('talkative.no-data')
-        ranking = ranking.slice(0, limit)
+        const limitedRanking = ranking.slice(0, limit)
 
-        return t(`talkative.${duration}-title`) + await formatRanking(session, ranking)
+        return t(`talkative.${duration}-title`, total) + await formatRanking(session, limitedRanking)
       })
   })
 }

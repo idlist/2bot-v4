@@ -48,7 +48,6 @@
     "@koishijs/plugin-locales": "^1.0.0",
     "@koishijs/plugin-manager": "^1.0.0",
     "@koishijs/plugin-rate-limit": "^1.0.0",
-    "@koishijs/plugin-recall": "^1.1.0",
     "@koishijs/plugin-schedule": "^4.0.0",
     "@koishijs/plugin-status": "^5.0.0",
     "@koishijs/plugin-teach": "^3.0.0",
