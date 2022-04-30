@@ -38,7 +38,6 @@ module.exports = defineConfig({
     'echo': {},
     'locales': {},
     'rate-limit': {},
-    'recall': {},
 
     // Functional plugins.
     'schedule': {},

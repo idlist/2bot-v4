@@ -21,7 +21,7 @@ module.exports = ctx => {
     if (list.length > maxRecall) list.shift()
   })
 
-  ctx.command('recall [count]', '撤回消息', { authority: 2 })
+  ctx.command('admin/recall [count]', '撤回消息', { authority: 2 })
     .usage(`撤回发送的消息，最多 ${maxRecall} 条。`)
     .action(async ({ session }, count = 1) => {
       const cid = session.cid
@@ -35,12 +35,12 @@ module.exports = ctx => {
         const targets = list.splice(length - count, count)
         for (const message of targets) {
           session.bot.deleteMessage(cid, message)
-          await sleep(100)
+          await sleep(500)
         }
       } else {
         for (const message of list) {
           session.bot.deleteMessage(cid, message)
-          await sleep(100)
+          await sleep(500)
         }
         delete RecentSent[cid]
         return (
