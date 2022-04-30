@@ -73,7 +73,7 @@ module.exports = defineConfig({
       number: { name: 'Din' },
     },
     './plugins/fun': {},
-    './plugins/hexagram': { ...secret.ctx['hexagram'] },
+    './plugins/hexagram': { font: 'SHSans' },
     './plugins/imgen': {},
     './plugins/is-this-npm-package-exists': {},
     './plugins/parrot': {},

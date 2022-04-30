@@ -1,4 +1,5 @@
 const { s } = require('koishi')
+const imagify = require('./imagify')
 const NameList = require('./name-list.json')
 const NameListMap = require('./name-list-map.json')
 const Names = NameListMap.map(rows => rows.map(i => NameList[i - 1]))
@@ -68,15 +69,17 @@ const analyzeSymbols = (results, map) => {
 
 module.exports.name = 'hexagram'
 
+module.exports.using = ['canvas']
+
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports.apply = ctx => {
+module.exports.apply = (ctx, config) => {
   const logger = ctx.logger('hexagram')
 
-  ctx.command('hexagram', '电子迫真算卦')
+  ctx.command('hexagram', '电子算卦')
     .shortcut('迫真算卦')
-    .usage('说句老实话，我也不知道怎么算，看个乐就好！')
+    .usage('算卦结果无科学依据，仅供娱乐。')
     .action(async ({ session }) => {
       const results = []
 
@@ -113,56 +116,86 @@ module.exports.apply = ctx => {
         else staticSymbols.push(i)
       })
 
-      let comments
+      let comments, shortComments = '参见 - '
       switch (changeSymbols.length) {
         case 0:
-          comments = `${main.name}卦辞：${main.meaning}`
+          comments = [
+            `${main.name}卦辞：${main.meaning}`,
+          ]
+          shortComments += `${main.name}卦辞`
           break
         case 1: {
           const target = changeSymbols[0]
-          comments = `${main.name}卦${main.orders[target]}：${main.details[target]}`
+          const targetName = `${main.name}卦${main.orders[target]}`
+
+          comments = [
+            `${targetName}：${main.details[target]}`,
+          ]
+          shortComments += targetName
           break
         }
         case 2: {
           const upper = changeSymbols[1]
+          const upperName = `${main.name}卦${main.orders[upper]}`
           const lower = changeSymbols[0]
-          comments =
-            `上爻 - ${main.name}卦${main.orders[upper]}：${main.details[upper]}\n` +
-            `下爻 - ${main.name}卦${main.orders[lower]}：${main.details[lower]}`
+          const lowerName = `${main.name}卦${main.orders[lower]}`
+
+          comments = [
+            `上爻 - ${upperName}：${main.details[upper]}`,
+            `下爻 - ${lowerName}：${main.details[lower]}`,
+          ]
+          shortComments += `${upperName}；${lowerName}`
           break
         }
         case 3:
-          comments =
-            `${main.name}卦辞：${main.meaning}\n` +
-            `${change.name}卦辞：${change.meaning}`
+          comments = [
+            `${main.name}卦辞：${main.meaning}`,
+            `${change.name}卦辞：${change.meaning}`,
+          ]
+          shortComments += `${main.name}卦辞；${change.name}卦辞`
           break
         case 4: {
           const upper = staticSymbols[1]
+          const upperName = `${change.name}卦${change.orders[upper]}`
           const lower = staticSymbols[0]
-          comments =
-            `上爻 - ${change.name}卦${change.orders[upper]}：${change.details[upper]}\n` +
-            `下爻 - ${change.name}卦${change.orders[lower]}：${change.details[lower]}`
+          const lowerName = `${change.name}卦${change.orders[lower]}`
+
+          comments = [
+            `上爻 - ${upperName}：${change.details[upper]}`,
+            `下爻 - ${lowerName}：${change.details[lower]}`,
+          ]
+          shortComments += `${upperName}；${lowerName}`
           break
         }
         case 5: {
           const target = staticSymbols[0]
-          comments = `${change.name}卦${change.orders[target]}：${change.details[target]}`
+          const targetName = `${change.name}卦${change.orders[target]}`
+
+          comments = [
+            `${targetName}：${change.details[target]}`,
+          ]
+          shortComments += targetName
           break
         }
         case 6:
           switch (main.code) {
             case 1:
-              comments =
-                `用九：${Meanings[0].details[6]}\n` +
-                `坤卦：${Meanings[1].meaning}`
+              comments = [
+                `用九：${Meanings[0].details[6]}`,
+                `坤卦：${Meanings[1].meaning}`,
+              ]
+              shortComments = '乾卦用九；坤卦卦辞'
               break
             case 2:
-              comments =
-                `用六：${Meanings[1].details[6]}\n` +
-                `乾卦：${Meanings[0].meaning}`
+              comments = [
+                `用六：${Meanings[1].details[6]}`,
+                `乾卦：${Meanings[0].meaning}`,
+              ]
+              shortComments = '坤卦用六；乾卦卦辞'
               break
             default:
               comments = `${change.name}卦辞：${change.meaning}`
+              shortComments `${change.name}卦辞`
           }
           break
       }
@@ -171,10 +204,16 @@ module.exports.apply = ctx => {
         ? session.author.username
         : s('at', { id: session.userId })
 
-      return `2bot 为 ${user} 迫真算卦（仅作娱乐用途，不要迷信哦！）\n` +
-        `主卦：${main.display}  ${main.fullName} (${main.code})\n` +
-        `变卦：${change.display}  ${change.fullName} (${change.code})\n` +
-        (changeSymbols.length ? `变${changeSymbols.map(c => Orders[c]).join('、')}爻，` : '无变爻，') +
-        `启蒙断爻：${HowTo[changeSymbols.length]}\n` + comments
+      const textImage = await imagify(ctx, config.font, [
+        `主卦：${main.display}  ${main.fullName} (${main.code})`,
+        `变卦：${change.display}  ${change.fullName} (${change.code})`,
+        (changeSymbols.length ? `变${changeSymbols.map(c => Orders[c]).join('、')}爻；` : '无变爻；'),
+        `${HowTo[changeSymbols.length]}。`,
+        ...comments,
+      ])
+
+      return `2bot 为 ${user} 算卦：\n` +
+        s('image', { url: 'base64://' + textImage.toBase64() }) +
+        shortComments
     })
 }
