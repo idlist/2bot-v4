@@ -213,7 +213,7 @@ module.exports.apply = (ctx, config) => {
       ])
 
       return `2bot 为 ${user} 算卦：\n` +
-        s('image', { url: 'base64://' + textImage.toBase64() }) +
+        s('image', { url: 'base64://' + textImage.toBase64() }) + '\n' +
         shortComments
     })
 }
