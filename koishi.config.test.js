@@ -27,14 +27,8 @@ module.exports = defineConfig({
   plugins: {
     './koishi.tweaks': {},
 
-    'canvas': {
-      fonts: [
-        { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
-      ],
-    },
-
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
-    './plugins/hexagram': { font: 'SHSans' },
+    'blive': {},
   },
 })
