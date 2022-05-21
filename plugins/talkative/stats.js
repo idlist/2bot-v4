@@ -3,6 +3,20 @@ const schedule = require('node-schedule')
 const outdent = require('outdent')
 const { formatRanking, clamp } = require('./utils')
 
+// Fail safe
+/*
+const { createPool } = require('mariadb')
+const { mysql } = require('../../koishi.secret')
+const pool = createPool({
+  host: mysql.host,
+  port: mysql.port,
+  database: mysql.database,
+  user: mysql.user,
+  password: mysql.password,
+  connectionLimit: 5,
+})
+*/
+
 /**
  * @type {import('./stats').SummarizedStats}
  */
@@ -56,7 +70,7 @@ module.exports = ctx => {
       let ranking, total
 
       // Since koishi ORM does not support GROUP BY, use direct query instead.
-      const query = async (q, args) => await ctx.database.mysql.query(outdent`${q}`, args)
+      const query = async (q, args) => await ctx.database.drivers.mysql.query(outdent`${q}`, args)
 
       if (isOverall) {
         ranking = await query(`

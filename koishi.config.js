@@ -78,7 +78,7 @@ module.exports = defineConfig({
     './plugins/imgen': {},
     './plugins/is-this-npm-package-exists': {},
     './plugins/parrot': {},
-    // './plugins/talkative': {},
+    './plugins/talkative': {},
 
     // Scoped plugins.
     './plugins.scoped/s1coders': { ...secret.ctx['s1coders'] },
