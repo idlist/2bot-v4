@@ -20,8 +20,7 @@
     "start": "koishi start",
     "test": "koishi start koishi.config.test.js",
     "yaml": "koishi start koishi.config.yaml",
-    "build:canvas": "npm run build -w packages/canvas",
-    "prod": "npm run build:canvas && npm start",
+    "prod": "npm run build --workspaces --if-present && npm start",
     "reindex": "node scripts/reindex-teach.js",
     "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },
@@ -31,7 +30,6 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "luxon": "^2.4.0",
-    "mariadb": "^3.0.0",
     "mysql": "^2.18.1",
     "node-schedule": "^2.1.0",
     "outdent": "^0.8.0",
