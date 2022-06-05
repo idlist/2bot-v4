@@ -25,17 +25,6 @@
     "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },
   "dependencies": {
-    "axios": "^0.27.2",
-    "cheerio": "^1.0.0-rc.11",
-    "js-yaml": "^4.1.0",
-    "lodash": "^4.17.21",
-    "luxon": "^2.4.0",
-    "mysql": "^2.18.1",
-    "node-schedule": "^2.1.0",
-    "outdent": "^0.8.0",
-    "simplify-chinese": "^1.1.0"
-  },
-  "devDependencies": {
     "@koishijs/cli": "^4.7.0",
     "@koishijs/plugin-adapter-discord": "^2.1.0",
     "@koishijs/plugin-adapter-onebot": "^4.2.3",
@@ -51,9 +40,19 @@
     "@koishijs/plugin-schedule": "^4.2.0",
     "@koishijs/plugin-status": "^5.4.0",
     "@koishijs/plugin-teach": "^3.2.0",
-    "eslint": "^8.16.0",
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.11",
+    "js-yaml": "^4.1.0",
     "koishi": "^4.7.0",
-    "koishi-plugin-assets-smms": "^1.0.0"
+    "koishi-plugin-assets-smms": "^1.0.0",
+    "lodash": "^4.17.21",
+    "luxon": "^2.4.0",
+    "node-schedule": "^2.1.0",
+    "outdent": "^0.8.0",
+    "simplify-chinese": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.16.0"
   },
   "workspaces": [
     "packages/*"
