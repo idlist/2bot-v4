@@ -49,6 +49,7 @@ module.exports = defineConfig({
     'status': {},
 
     // Local packages.
+    'aircon': {},
     'animal-picture': {},
     'blive': {},
     'canvas': {
