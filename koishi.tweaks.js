@@ -36,6 +36,9 @@ module.exports = ctx => {
       case 'timer':
         ctx.command('admin/user/timer')
         break
+      case 'aircon':
+        ctx.command('fun/aircon')
+        break
       case 'jrrp':
         ctx.command('fun/jrrp')
         break

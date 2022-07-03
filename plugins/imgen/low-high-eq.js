@@ -84,7 +84,7 @@ module.exports = ctx => {
 
   const logger = ctx.logger('lheq')
 
-  ctx.command('lheq <left> <right>', '生成“低情商高情商”图')
+  ctx.command('imgen/lheq <left> <right>', '生成“低情商高情商”图')
     .example('lheq 男同竟在我身边 这里竟然就是大鸟转转转酒吧')
     .before(({ session }, ...args) => {
       if (args.length < 2) return session.execute('help lheq')
