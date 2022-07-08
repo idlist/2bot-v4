@@ -39,7 +39,6 @@ module.exports = defineConfig({
     'locales': {},
     'rate-limit': {},
 
-
     // Functional plugins.
     'schedule': {},
     'teach': { prefix: '->' },
