@@ -42,6 +42,7 @@
     "@koishijs/plugin-teach": "^3.2.0",
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.11",
+    "image-size": "^1.0.1",
     "js-yaml": "^4.1.0",
     "koishi": "^4.7.0",
     "koishi-plugin-assets-smms": "^1.0.0",
