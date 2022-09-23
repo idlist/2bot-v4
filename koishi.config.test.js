@@ -29,6 +29,6 @@ module.exports = defineConfig({
 
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
-    'blive': {},
+    'blive': { sessdata: secret.blive.sessdata },
   },
 })

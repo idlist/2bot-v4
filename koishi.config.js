@@ -50,7 +50,7 @@ module.exports = defineConfig({
     // Local packages.
     'aircon': {},
     'animal-picture': {},
-    'blive': {},
+    'blive': { sessdata: secret.blive.sessdata },
     'canvas': {
       fonts: [
         { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
