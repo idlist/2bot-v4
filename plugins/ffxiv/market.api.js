@@ -2,7 +2,7 @@ const { readFile } = require('fs/promises')
 const { resolve } = require('path')
 const { Logger } = require('koishi')
 const yaml = require('js-yaml')
-const axios = require('axios').default
+const axios = require('axios')
 
 /**
  * @type {import('./market').MarketShortcodeItem[]}

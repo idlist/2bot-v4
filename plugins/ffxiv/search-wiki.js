@@ -1,5 +1,5 @@
 const { s } = require('koishi')
-const axios = require('axios').default
+const axios = require('axios')
 const cheerio = require('cheerio')
 const { truncateString } = require('./utils')
 

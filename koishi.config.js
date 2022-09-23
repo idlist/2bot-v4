@@ -3,12 +3,10 @@ const secret = require('./koishi.secret')
 
 module.exports = defineConfig({
   // Basic settings.
-  prefix: '-',
+  prefix: '.',
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
-  minSimilarity: 0,
   port: 21919,
 
-  help: { hidden: true, shortcut: false },
   autoAssign: true,
   autoAuthorize: session => {
     if (secret.admin.includes(session.uid)) return 5
@@ -29,28 +27,27 @@ module.exports = defineConfig({
 
     // Infrastructures.
     'adapter-onebot': secret.onebot,
-    'adapter-discord': secret.discord,
+    // 'adapter-discord': secret.discord,
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
 
-    // Environment plugins.
-    'admin': {},
-    'echo': {},
-    'locales': {},
-    'rate-limit': {},
+    // Official plugins.
+    'admin': null,
+    'help': { hidden: true, shortcut: false },
+    'echo': null,
+    'locales': null,
+    'rate-limit': null,
+    'schedule': null,
+    'dialogue': { prefix: '->' },
 
-    // Functional plugins.
-    'schedule': {},
-    'teach': { prefix: '->' },
-
-    // Web console.
-    'console': {},
-    'status': {},
+    // Web console
+    'console': null,
+    'status': null,
 
     // Local packages.
     'aircon': {},
     'animal-picture': {},
-    'blive': {},
+    'blive': { sessdata: secret.blive.sessdata },
     'canvas': {
       fonts: [
         { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
@@ -59,7 +56,7 @@ module.exports = defineConfig({
         { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'SHSerif-Heavy' },
       ],
     },
-    'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
+    // 'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
     'gosen-choyen': {
       upper: { name: 'SHSans-Heavy' },
       lower: { name: 'SHSerif-Heavy' },

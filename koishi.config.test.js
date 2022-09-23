@@ -4,10 +4,8 @@ const secret = require('./koishi.secret')
 module.exports = defineConfig({
   // Basic settings.
   prefix: '.',
-  minSimilarity: 0,
   port: 21919,
 
-  help: { hidden: true, shortcut: false },
   autoAssign: true,
   autoAuthorize: session => {
     if (secret.admin.includes(session.uid)) return 5
@@ -29,6 +27,8 @@ module.exports = defineConfig({
 
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
-    'blive': {},
+    'help': { hidden: true, shortcut: false },
+
+    'blive': { sessdata: secret.blive.sessdata },
   },
 })

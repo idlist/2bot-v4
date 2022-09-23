@@ -1,6 +1,6 @@
 const { readFile } = require('fs/promises')
 const { resolve } = require('path')
-const axios = require('axios').default
+const axios = require('axios')
 const yaml = require('js-yaml')
 const { s } = require('koishi')
 const LogsImageGenerator = require('./logs.image')

@@ -1,4 +1,4 @@
-const axios = require('axios').default
+const axios = require('axios')
 
 const bSpaceAPI = 'https://api.bilibili.com/x/space/arc/search'
 const bVideoAPI = 'https://api.bilibili.com/x/web-interface/view'
