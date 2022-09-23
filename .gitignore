@@ -3,5 +3,6 @@ test
 logs
 
 koishi.secret.js
+koishi.secret.temp.js
 koishi.secret.prod.js
 koishi.config.yaml
