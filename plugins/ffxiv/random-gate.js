@@ -1,6 +1,6 @@
 const { readFile } = require('fs/promises')
 const { resolve } = require('path')
-const { s, Random } = require('koishi')
+const { segment, Random } = require('koishi')
 
 const imageResources = new Map()
 
@@ -23,6 +23,6 @@ module.exports = ctx => {
     .shortcut('选门', { prefix: true })
     .action(() => {
       const result = Random.pick(['left', 'right'])
-      return s('image', { url: `base64://${imageResources.get(result)}` })
+      return segment('image', { url: `base64://${imageResources.get(result)}` })
     })
 }

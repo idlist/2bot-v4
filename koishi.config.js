@@ -29,7 +29,7 @@ module.exports = defineConfig({
 
     // Infrastructures.
     'adapter-onebot': secret.onebot,
-    // 'adapter-discord': secret.discord,
+    'adapter-discord': secret.discord,
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
 
@@ -40,7 +40,7 @@ module.exports = defineConfig({
     'rate-limit': null,
     'admin': null,
     'schedule': null,
-    'dialogue': { prefix: '->' },
+    'dialogue': { prefix: '?' },
 
     // Scoped official plugins.
     'group:novelai': {

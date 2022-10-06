@@ -1,5 +1,5 @@
 const { isDeepStrictEqual } = require('util')
-const { s } = require('koishi')
+const { segment } = require('koishi')
 const Server = require('./market.server')
 const API = require('./market.api')
 const MarketImageGenerator = require('./market.image')
@@ -148,7 +148,7 @@ module.exports = (ctx, config) => {
 
       try {
         const imageData = result.toBase64()
-        return s('image', { url: `base64://${imageData}` })
+        return segment('image', { url: `base64://${imageData}` })
       } catch (error) {
         logger.error(error)
         return '图片发送出错。'

@@ -1,4 +1,4 @@
-const { s } = require('koishi')
+const { segment } = require('koishi')
 
 /**
  * @type {Record<string, number>}
@@ -13,12 +13,12 @@ module.exports = ctx => {
     .shortcut('戳戳我', { prefix: true })
     .shortcut('戳戳', { prefix: true, fuzzy: true })
     .action(({ session }, target) => {
-      const parsedTarget = target ? s.parse(target)[0] : null
+      const parsedTarget = target ? segment.parse(target)[0] : null
 
       if (!parsedTarget) {
-        return s('poke', { qq: session.userId })
+        return segment('poke', { qq: session.userId })
       } else {
-        return s('poke', { qq: parsedTarget.data.id })
+        return segment('poke', { qq: parsedTarget.data.id })
       }
     })
 
@@ -42,7 +42,7 @@ module.exports = ctx => {
           State[cid]++
           break
         default:
-          session.send(s('poke', { qq: session.userId }))
+          session.send(segment('poke', { qq: session.userId }))
           State[cid] = 0
       }
     }

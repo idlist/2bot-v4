@@ -1,4 +1,4 @@
-const { s } = require('koishi')
+const { segment } = require('koishi')
 const axios = require('axios')
 const cheerio = require('cheerio')
 const { truncateString } = require('./utils')
@@ -83,7 +83,7 @@ module.exports = ctx => {
         }
 
         if (options.share) {
-          return extracted.title + ' - ' + s('share', extracted)
+          return extracted.title + ' - ' + segment('share', extracted)
         } else {
           return `${extracted.title}\n${extracted.content}\n${extracted.url}`
         }

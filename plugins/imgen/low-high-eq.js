@@ -1,5 +1,5 @@
 const { resolve } = require('path')
-const { s } = require('koishi')
+const { segment } = require('koishi')
 
 const canvasResources = new Map()
 
@@ -95,7 +95,7 @@ module.exports = ctx => {
 
       try {
         const imageData = canvas.toBase64()
-        return s('image', { url: `base64://${imageData}` })
+        return segment('image', { url: `base64://${imageData}` })
       } catch (error) {
         logger.warn(error)
         return '发生了神秘错误。'

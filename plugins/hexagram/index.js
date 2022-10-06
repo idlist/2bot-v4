@@ -1,4 +1,4 @@
-const { s } = require('koishi')
+const { segment } = require('koishi')
 const imagify = require('./imagify')
 const NameList = require('./name-list.json')
 const NameListMap = require('./name-list-map.json')
@@ -202,7 +202,7 @@ module.exports.apply = (ctx, config) => {
 
       const user = session.subtype == 'private'
         ? session.author.username
-        : s('at', { id: session.userId })
+        : segment('at', { id: session.userId })
 
       const textImage = await imagify(ctx, config.font, [
         `主卦：${main.display}  ${main.fullName} (${main.code})`,
@@ -213,7 +213,7 @@ module.exports.apply = (ctx, config) => {
       ])
 
       return `2bot 为 ${user} 算卦：\n` +
-        s('image', { url: 'base64://' + textImage.toBase64() }) + '\n' +
+        segment('image', { url: 'base64://' + textImage.toBase64() }) + '\n' +
         shortComments
     })
 }

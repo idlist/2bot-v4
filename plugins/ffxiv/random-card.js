@@ -1,6 +1,6 @@
 const { readFile } = require('fs/promises')
 const { resolve } = require('path')
-const { s, Random } = require('koishi')
+const { segment, Random } = require('koishi')
 const { range } = require('./utils')
 
 const imageResources = new Map()
@@ -43,7 +43,7 @@ module.exports = ctx => {
             cardMeaning = '[星 / 远程]'
             break
         }
-        return s('image', { url: `base64://${imageResources.get(card)}` }) +
+        return segment('image', { url: `base64://${imageResources.get(card)}` }) +
           ' ' + cardMeaning
       } catch (err) {
         logger.warn(err)

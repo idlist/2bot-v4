@@ -2,7 +2,7 @@ const { readFile } = require('fs/promises')
 const { resolve } = require('path')
 const axios = require('axios')
 const yaml = require('js-yaml')
-const { s } = require('koishi')
+const { segment } = require('koishi')
 const LogsImageGenerator = require('./logs.image')
 
 const Jobs = require('./data/jobs')
@@ -148,7 +148,7 @@ module.exports = (ctx, config) => {
 
       try {
         const imageData = canvas.toBase64()
-        return s('image', { url: `base64://${imageData}` })
+        return segment('image', { url: `base64://${imageData}` })
       } catch (error) {
         logger.error(error)
         return '图片发送出错。'

@@ -1,5 +1,5 @@
 const { maxBy } = require('lodash')
-const { s, Random } = require('koishi')
+const { segment, Random } = require('koishi')
 
 /**
  * @type {import('./roll').RollStatus}
@@ -48,7 +48,7 @@ module.exports = ctx => {
           member: [],
         }
         starterText = (
-          s('at', { id: session.userId }) + ' 发起了 ' +
+          segment('at', { id: session.userId }) + ' 发起了 ' +
           (specialSizeText || `${teamsize} 人`) + ' Roll 点，' +
           '使用 ff.roll 指令参加！'
         )
@@ -75,7 +75,7 @@ module.exports = ctx => {
           id: session.userId,
           result: rollResult,
         })
-        rollText = s('at', { id: session.userId }) + ' 参与了 Roll 点。'
+        rollText = segment('at', { id: session.userId }) + ' 参与了 Roll 点。'
       }
 
 
@@ -89,10 +89,10 @@ module.exports = ctx => {
 
         const resultText = (
           result.map((member) => (
-            s('at', { id: member.id }) +
+            segment('at', { id: member.id }) +
             ` Roll 到了 ${member.result} 点。\n`
           )).join('') +
-          `恭喜 ${s('at', { id: winner.id })} 获得了箱子！`
+          `恭喜 ${segment('at', { id: winner.id })} 获得了箱子！`
         )
 
         if (!options.end) {
@@ -102,7 +102,7 @@ module.exports = ctx => {
           )
         }
 
-        const terminateText = s('at', { id: session.userId }) + ' 中止了 Roll 点。'
+        const terminateText = segment('at', { id: session.userId }) + ' 中止了 Roll 点。'
         if (result.length <= 1) return terminateText
 
         return (

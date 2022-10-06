@@ -1,4 +1,4 @@
-const { s, sleep } = require('koishi')
+const { segment, sleep } = require('koishi')
 const Server = require('./market.server')
 const API = require('./market.api')
 const ListAPI = require('./market-list.api')
@@ -138,7 +138,7 @@ module.exports = (ctx, config) => {
 
       try {
         const imageData = result.toBase64()
-        return s('image', { url: `base64://${imageData}` })
+        return segment('image', { url: `base64://${imageData}` })
       } catch (error) {
         logger.error(error)
         return '图片发送出错。'
