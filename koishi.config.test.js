@@ -23,12 +23,13 @@ module.exports = defineConfig({
 
   // Plugins.
   plugins: {
-    './koishi.tweaks': {},
+    './koishi.tweaks': null,
 
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
     'help': { hidden: true, shortcut: false },
 
-    'blive': { sessdata: secret.blive.sessdata },
+    // 'blive': { sessdata: secret.blive.sessdata },
+    './plugins/talkative': null,
   },
 })

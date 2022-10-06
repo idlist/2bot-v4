@@ -1,11 +1,10 @@
-const { t } = require('koishi')
 const { formatRanking, clamp } = require('./utils')
 
 const Interval = 60 * 1000
 
 const channelUsage = {}
 
-const formatDuration = m => t('talkative.seconds', Math.floor(m / 1000))
+const formatDuration = m => `${Math.floor(m / 1000)} 秒`
 
 /**
  * @param {import('koishi').Context} ctx
@@ -24,8 +23,8 @@ module.exports = ctx => {
     }])
   })
 
-  ctx.command('talkative.now <limit>', t('talkative.now'))
-    .shortcut(t('talkative.now-shortcut'))
+  ctx.command('talkative.now <limit>', '今日话痨榜')
+    .shortcut('今日话痨榜')
     .userFields(['authority'])
     .action(async ({ session }, limit = 5) => {
       if (session.user.authority <= 1) limit = clamp(limit, 5, 1, 5)
@@ -37,7 +36,7 @@ module.exports = ctx => {
         const cooldown = now.getTime() - lastUsage
         if (cooldown < Interval) {
           const remainingDuration = formatDuration(Interval - cooldown)
-          return t('talkative.too-frequent', remainingDuration)
+          return `不要看话痨榜看得太频繁啦！还有 ${remainingDuration}才能再次查看！`
         }
       }
 
@@ -61,6 +60,6 @@ module.exports = ctx => {
         date: now,
       })
 
-      return t('talkative.now-title', total) + await formatRanking(session, ranking)
+      return `今日话痨榜（共 ${total} 条）：\n` + await formatRanking(session, ranking)
     })
 }

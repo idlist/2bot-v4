@@ -23,7 +23,7 @@ module.exports = defineConfig({
   // Plugins.
   plugins: {
     // Tweak behaviors.
-    './koishi.tweaks': {},
+    './koishi.tweaks': null,
 
     // Infrastructures.
     'adapter-onebot': secret.onebot,
@@ -32,11 +32,11 @@ module.exports = defineConfig({
     'assets-smms': secret.smms,
 
     // Official plugins.
-    'admin': null,
     'help': { hidden: true, shortcut: false },
     'echo': null,
     'locales': null,
     'rate-limit': null,
+    'admin': null,
     'schedule': null,
     'dialogue': { prefix: '->' },
 
@@ -45,9 +45,6 @@ module.exports = defineConfig({
     'status': null,
 
     // Local packages.
-    'aircon': {},
-    'animal-picture': {},
-    'blive': { sessdata: secret.blive.sessdata },
     'canvas': {
       fonts: [
         { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
@@ -56,26 +53,29 @@ module.exports = defineConfig({
         { path: 'fonts/SourceHanSerif-Heavy.otf', family: 'SHSerif-Heavy' },
       ],
     },
-    // 'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
     'gosen-choyen': {
       upper: { name: 'SHSans-Heavy' },
       lower: { name: 'SHSerif-Heavy' },
     },
-    'jrrp': {},
+    'blive': { sessdata: secret.blive.sessdata },
+    'animal-picture': null,
+    'jrrp': null,
+    'aircon': null,
+    // 'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
 
     // Local plugins.
-    './plugins/about': {},
-    './plugins/admin': {},
+    './plugins/about': null,
+    './plugins/admin': null,
     './plugins/ffxiv': {
       text: { name: 'SHSans' },
       number: { name: 'Din' },
     },
-    './plugins/fun': {},
+    './plugins/fun': null,
     './plugins/hexagram': { font: 'SHSans' },
-    './plugins/imgen': {},
-    './plugins/is-this-npm-package-exists': {},
-    './plugins/parrot': {},
-    './plugins/talkative': {},
+    './plugins/imgen': null,
+    './plugins/is-this-npm-package-exists': null,
+    './plugins/parrot': null,
+    './plugins/talkative': null,
 
     // Scoped plugins.
     './plugins.scoped/s1coders': { ...secret.ctx['s1coders'] },

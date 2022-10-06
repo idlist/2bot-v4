@@ -1,10 +1,7 @@
-const { t } = require('koishi')
 const schedule = require('node-schedule')
 const outdent = require('outdent')
 const { formatRanking, clamp } = require('./utils')
 
-// Fail safe
-/*
 const { createPool } = require('mariadb')
 const { mysql } = require('../../koishi.secret')
 const pool = createPool({
@@ -15,7 +12,6 @@ const pool = createPool({
   password: mysql.password,
   connectionLimit: 5,
 })
-*/
 
 /**
  * @type {import('./stats').SummarizedStats}
@@ -69,8 +65,7 @@ module.exports = ctx => {
 
       let ranking, total
 
-      // Since koishi ORM does not support GROUP BY, use direct query instead.
-      const query = async (q, args) => await ctx.database.drivers.mysql.query(outdent`${q}`, args)
+      const query = async (q, args) => await pool.query(outdent`${q}`, args)
 
       if (isOverall) {
         ranking = await query(`
@@ -144,23 +139,73 @@ module.exports = ctx => {
     jobHandler.cancel()
   })
 
-  Scopes.forEach(duration => {
-    ctx.command(`talkative.${duration} <limit>`, t(`talkative.${duration}`), {
-      authority: ['year', 'overall'].includes(duration) ? 2 : 1,
-    }).shortcut(t(`talkative.${duration}-shortcut`))
-      .userFields(['authority'])
-      .action(async ({ session }, limit = 5) => {
-        if (session.user.authority <= 1) limit = clamp(limit, 5, 1, 5)
-        else limit = clamp(limit, 5, 1, 20)
+  ctx.command('talkative.yesterday', '昨日话痨榜')
+    .shortcut('昨日话痨榜')
+    .action(async ({ session }, limit = 5) => {
+      limit = clamp(limit, 5, 1, 20)
 
-        /**
-         * @type {import('./stats').TalkativeStatsByType}
-         */
-        const { ranking, total } = Stats[session.platform][session.channelId][duration]
-        if (!ranking.length) return t('talkative.no-data')
-        const limitedRanking = ranking.slice(0, limit)
+      /** @type {import('./stats').TalkativeStatsByType} */
+      const { ranking, total } = Stats[session.platform][session.channelId].yesterday
+      if (!ranking.length) return '尚无数据，让话痨们再得瑟一会儿。'
+      const limitedRanking = ranking.slice(0, limit)
 
-        return t(`talkative.${duration}-title`, total) + await formatRanking(session, limitedRanking)
-      })
-  })
+      return `昨日话痨榜（共 ${total} 条）：\n` +
+        await formatRanking(session, limitedRanking)
+    })
+
+  ctx.command('talkative.week', '本周话痨榜')
+    .shortcut('本周话痨榜')
+    .action(async ({ session }, limit = 5) => {
+      limit = clamp(limit, 5, 1, 20)
+
+      /** @type {import('./stats').TalkativeStatsByType} */
+      const { ranking, total } = Stats[session.platform][session.channelId].week
+      if (!ranking.length) return '尚无数据，让话痨们再得瑟一会儿。'
+      const limitedRanking = ranking.slice(0, limit)
+
+      return `本周话痨榜（自昨日起 7 天，共 ${total} 条）：\n` +
+        await formatRanking(session, limitedRanking)
+    })
+
+  ctx.command('talkative.month', '本月话痨榜')
+    .shortcut('本月话痨榜')
+    .action(async ({ session }, limit = 5) => {
+      limit = clamp(limit, 5, 1, 20)
+
+      /** @type {import('./stats').TalkativeStatsByType} */
+      const { ranking, total } = Stats[session.platform][session.channelId].month
+      if (!ranking.length) return '尚无数据，让话痨们再得瑟一会儿。'
+      const limitedRanking = ranking.slice(0, limit)
+
+      return `本月话痨榜（自昨日起 30 天，共 ${total} 条）：\n` +
+        await formatRanking(session, limitedRanking)
+    })
+
+  ctx.command('talkative.year', '今年话痨榜')
+    .shortcut('今年话痨榜')
+    .action(async ({ session }, limit = 5) => {
+      limit = clamp(limit, 5, 1, 20)
+
+      /** @type {import('./stats').TalkativeStatsByType} */
+      const { ranking, total } = Stats[session.platform][session.channelId].year
+      if (!ranking.length) return '尚无数据，让话痨们再得瑟一会儿。'
+      const limitedRanking = ranking.slice(0, limit)
+
+      return `今年话痨榜（自昨日起 365 天，共 ${total} 条）：\n` +
+        await formatRanking(session, limitedRanking)
+    })
+
+  ctx.command('talkative.overall', '总计话痨榜')
+    .shortcut('总计话痨榜')
+    .action(async ({ session }, limit = 5) => {
+      limit = clamp(limit, 5, 1, 20)
+
+      /** @type {import('./stats').TalkativeStatsByType} */
+      const { ranking, total } = Stats[session.platform][session.channelId].overall
+      if (!ranking.length) return '尚无数据，让话痨们再得瑟一会儿。'
+      const limitedRanking = ranking.slice(0, limit)
+
+      return `总计话痨榜（共 ${total} 条）：\n` +
+        await formatRanking(session, limitedRanking)
+    })
 }
