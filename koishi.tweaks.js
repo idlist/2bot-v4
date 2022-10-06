@@ -54,6 +54,9 @@ module.exports = ctx => {
       case '5k':
         ctx.command('imgen/5k')
         break
+      case 'novelai':
+        ctx.command('imgen/novelai')
+        break
     }
   })
 }
