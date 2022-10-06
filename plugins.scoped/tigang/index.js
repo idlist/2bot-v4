@@ -1,5 +1,5 @@
 const { Random } = require('koishi')
-const { onebot: { bots }, ctx: { s1coders: { $guild: s1coders } } } = require('../../koishi.secret')
+const { onebot: bot, filters: { s1coders: { guild: s1coders } } } = require('../../koishi.secret')
 
 /**
  * @type {number}
@@ -46,7 +46,7 @@ module.exports = ctx => {
      */
     const alertTigang = timeout => {
       handler = setTimeout(() => {
-        ctx.bots.get(`onebot:${bots[0].selfId}`).sendMessage(s1coders[0], '2bot 提醒您注意提肛。')
+        ctx.bots.get(`onebot:${bot.selfId}`).sendMessage(s1coders[0], '2bot 提醒您注意提肛。')
         handler = null
 
         const now = Date.now()
