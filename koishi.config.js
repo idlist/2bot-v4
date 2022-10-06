@@ -1,9 +1,11 @@
 const { defineConfig } = require('koishi')
+
 const secret = require('./koishi.secret')
+const { filters } = require('./koishi.secret')
 
 module.exports = defineConfig({
   // Basic settings.
-  prefix: '.',
+  prefix: '-',
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
   port: 21919,
 
@@ -41,10 +43,9 @@ module.exports = defineConfig({
     'dialogue': { prefix: '->' },
 
     // Scoped official plugins.
-    'novelai': {
-      ...secret.ctx['novelai'],
-      token: secret.novelai.token,
-      model: 'furry',
+    'group:novelai': {
+      $filter: filters['novelai'],
+      'novelai': { token: secret.novelai.token, model: 'furry' },
     },
 
     // Web console
@@ -68,7 +69,12 @@ module.exports = defineConfig({
     'animal-picture': null,
     'jrrp': null,
     'aircon': null,
-    'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
+
+    // Local scoped packages
+    'group:checker': {
+      $filter: filters['duplicate-checker'],
+      'duplicate-checker': null,
+    },
 
     // Local plugins.
     './plugins/about': null,
@@ -84,7 +90,10 @@ module.exports = defineConfig({
     './plugins/parrot': null,
     './plugins/talkative': null,
 
-    // Scoped plugins.
-    './plugins.scoped/s1coders': { ...secret.ctx['s1coders'] },
+    // Local scoped plugins.
+    'group:s1coders': {
+      $filter: filters['s1coders'],
+      './plugins.scoped/s1coders': {},
+    },
   },
 })

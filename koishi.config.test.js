@@ -1,4 +1,5 @@
 const { defineConfig } = require('koishi')
+
 const secret = require('./koishi.secret')
 
 module.exports = defineConfig({
@@ -29,6 +30,8 @@ module.exports = defineConfig({
     'database-mysql': secret.mysql,
     'help': { hidden: true, shortcut: false },
 
-    'novelai': { token: secret.novelai.token },
+    'group:novelai': {
+      'novelai': {  token: secret.novelai.token },
+    },
   },
 })
