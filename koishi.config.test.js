@@ -29,7 +29,6 @@ module.exports = defineConfig({
     'database-mysql': secret.mysql,
     'help': { hidden: true, shortcut: false },
 
-    // 'blive': { sessdata: secret.blive.sessdata },
-    './plugins/talkative': null,
+    'novelai': { token: secret.novelai.token },
   },
 })

@@ -40,6 +40,13 @@ module.exports = defineConfig({
     'schedule': null,
     'dialogue': { prefix: '->' },
 
+    // Scoped official plugins.
+    'novelai': {
+      ...secret.ctx['novelai'],
+      token: secret.novelai.token,
+      model: 'furry',
+    },
+
     // Web console
     'console': null,
     'status': null,
@@ -61,7 +68,7 @@ module.exports = defineConfig({
     'animal-picture': null,
     'jrrp': null,
     'aircon': null,
-    // 'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
+    'duplicate-checker': { ...secret.ctx['duplicate-checker'] },
 
     // Local plugins.
     './plugins/about': null,
