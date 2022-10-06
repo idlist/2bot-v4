@@ -47,7 +47,7 @@
     "koishi": "^4.9.4",
     "koishi-plugin-assets-smms": "^1.0.0",
     "koishi-plugin-dialogue": "^4.0.1",
-    "koishi-plugin-novelai": "^1.1.0",
+    "koishi-plugin-novelai": "^1.1.1",
     "lodash": "^4.17.21",
     "luxon": "^3.0.4",
     "mariadb": "^3.0.1",
