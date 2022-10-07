@@ -20,7 +20,7 @@ const migrate = async () => {
   const modified = [...res]
 
   for await (const item of modified) {
-    const newImage = item.answer.replace(/\[CQ:image,url=(.+)\]/, '<image url="$1">')
+    const newImage = item.answer.replace(/\[CQ:image,url=(.+)\]/, '<image url="$1"/>')
 
     await query('UPDATE dialogue SET answer = ? WHERE id = ?', [newImage, item.id])
     console.log(`Migrated question ID ${item.id}.`)
