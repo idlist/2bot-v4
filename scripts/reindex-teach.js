@@ -1,24 +1,18 @@
-const { createPool } = require('mysql')
+const { createPool } = require('mariadb')
 
 const secret = require('../koishi.secret')
-const db = secret.mysql
+const mysql = secret.mysql
 
 const pool = createPool({
-  host: 'localhost',
-  port: db.port,
-  user: db.user,
-  password: db.password,
-  database: db.database,
+  host: mysql.host,
+  port: mysql.port,
+  user: mysql.user,
+  password: mysql.password,
+  database: mysql.database,
+  connectionLimit: 5,
 })
 
-const query = (sql, values = []) => new Promise((resolve, reject) => {
-  pool.query(sql, values, (error, result) => {
-    if (error) {
-      reject(error)
-    }
-    resolve(result)
-  })
-})
+const query = async (q, args) => await pool.query(q, args)
 
 const reindex = async () => {
   let qCounter = 1

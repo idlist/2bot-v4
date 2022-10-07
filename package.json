@@ -22,6 +22,7 @@
     "yaml": "koishi start koishi.config.yaml",
     "prod": "npm run build --workspaces --if-present && npm start",
     "reindex": "node scripts/reindex-teach.js",
+    "migrate": "node scripts/migrate-segment.js",
     "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },
   "dependencies": {

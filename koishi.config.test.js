@@ -30,8 +30,6 @@ module.exports = defineConfig({
     'database-mysql': secret.mysql,
     'help': { hidden: true, shortcut: false },
 
-    'group:novelai': {
-      'novelai': {  token: secret.novelai.token },
-    },
+    'jrrp': null,
   },
 })
