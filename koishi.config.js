@@ -1,7 +1,7 @@
 const { defineConfig } = require('koishi')
 
 const secret = require('./koishi.secret')
-const { filters } = require('./koishi.secret')
+const filters = secret.filters
 
 module.exports = defineConfig({
   // Basic settings.
@@ -40,23 +40,10 @@ module.exports = defineConfig({
     'rate-limit': null,
     'admin': null,
     'schedule': null,
-    'dialogue': { prefix: '?' },
+    'dialogue': { prefix: '->' },
 
     // Scoped official plugins.
-    'group:novelai': {
-      $filter: filters['novelai'],
-      'novelai': {
-        token: secret.novelai.token,
-        allowAnlas: false,
-      },
-    },
-    'group:novelai-furry': {
-      $filter: filters['novelai-furry'],
-      'novelai': {
-        token: secret.novelai.token,
-        model: 'furry',
-      },
-    },
+    './wrappers/novelai': null,
 
     // Web console
     'console': null,
