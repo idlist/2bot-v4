@@ -45,7 +45,17 @@ module.exports = defineConfig({
     // Scoped official plugins.
     'group:novelai': {
       $filter: filters['novelai'],
-      'novelai': { token: secret.novelai.token, model: 'furry' },
+      'novelai': {
+        token: secret.novelai.token,
+        allowAnlas: false,
+      },
+    },
+    'group:novelai-furry': {
+      $filter: filters['novelai-furry'],
+      'novelai': {
+        token: secret.novelai.token,
+        model: 'furry',
+      },
     },
 
     // Web console
