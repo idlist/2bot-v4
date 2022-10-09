@@ -25,7 +25,7 @@ module.exports = defineConfig({
   // Plugins.
   plugins: {
     // Tweak behaviors.
-    './koishi.tweaks': null,
+    './koishi.tweaks': {},
 
     // Infrastructures.
     'adapter-onebot': secret.onebot,
@@ -35,19 +35,25 @@ module.exports = defineConfig({
 
     // Official plugins.
     'help': { hidden: true, shortcut: false },
-    'echo': null,
-    'locales': null,
-    'rate-limit': null,
-    'admin': null,
-    'schedule': null,
+    'echo': {},
+    'locales': {},
+    'rate-limit': {},
+    'admin': {},
+    'schedule': {},
     'dialogue': { prefix: '->' },
 
     // Scoped official plugins.
-    './wrappers/novelai': null,
+    'group:novelai': {
+      $filter: filters.novelai,
+      'novelai': {
+        token: secret.novelai.token,
+        allowAnlas: false,
+      },
+    },
 
     // Web console
-    'console': null,
-    'status': null,
+    'console': {},
+    'status': {},
 
     // Local packages.
     'canvas': {
@@ -63,29 +69,29 @@ module.exports = defineConfig({
       lower: { name: 'SHSerif-Heavy' },
     },
     'blive': { sessdata: secret.blive.sessdata },
-    'animal-picture': null,
-    'jrrp': null,
-    'aircon': null,
+    'animal-picture': {},
+    'jrrp': {},
+    'aircon': {},
 
     // Local scoped packages
     'group:checker': {
       $filter: filters['duplicate-checker'],
-      'duplicate-checker': null,
+      'duplicate-checker': {},
     },
 
     // Local plugins.
-    './plugins/about': null,
-    './plugins/admin': null,
+    './plugins/about': {},
+    './plugins/admin': {},
     './plugins/ffxiv': {
       text: { name: 'SHSans' },
       number: { name: 'Din' },
     },
-    './plugins/fun': null,
+    './plugins/fun': {},
     './plugins/hexagram': { font: 'SHSans' },
-    './plugins/imgen': null,
-    './plugins/is-this-npm-package-exists': null,
-    './plugins/parrot': null,
-    './plugins/talkative': null,
+    './plugins/imgen': {},
+    './plugins/is-this-npm-package-exists': {},
+    './plugins/parrot': {},
+    './plugins/talkative': {},
 
     // Local scoped plugins.
     'group:s1coders': {

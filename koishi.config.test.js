@@ -24,12 +24,12 @@ module.exports = defineConfig({
 
   // Plugins.
   plugins: {
-    './koishi.tweaks': null,
+    './koishi.tweaks': {},
 
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
     'help': { hidden: true, shortcut: false },
 
-    './wrappers/novelai': null,
+    './wrappers/novelai': {},
   },
 })
