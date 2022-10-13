@@ -48,6 +48,8 @@
     "koishi": "^4.9.5",
     "koishi-plugin-assets-smms": "^1.0.0",
     "koishi-plugin-dialogue": "^4.0.1",
+    "koishi-plugin-dialogue-console": "^1.0.1",
+    "koishi-plugin-dialogue-context": "^1.0.1",
     "koishi-plugin-novelai": "^1.7.5",
     "lodash": "^4.17.21",
     "luxon": "^3.0.4",

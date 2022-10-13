@@ -41,6 +41,8 @@ module.exports = defineConfig({
     'admin': {},
     'schedule': {},
     'dialogue': { prefix: '->' },
+    'dialogue-context': {},
+    'dialogue-console': {},
 
     // Scoped official plugins.
     'group:novelai': {
