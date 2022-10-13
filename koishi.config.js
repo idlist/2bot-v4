@@ -40,9 +40,8 @@ module.exports = defineConfig({
     'rate-limit': {},
     'admin': {},
     'schedule': {},
-    'dialogue': { prefix: '->' },
+    'dialogue': { prefix: '-?' },
     'dialogue-context': {},
-    'dialogue-console': {},
 
     // Scoped official plugins.
     'group:novelai': {
