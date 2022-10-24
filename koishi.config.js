@@ -47,6 +47,7 @@ module.exports = defineConfig({
     'group:novelai': {
       $filter: filters.novelai,
       'novelai': {
+        type: 'token',
         token: secret.novelai.token,
         allowAnlas: false,
       },
