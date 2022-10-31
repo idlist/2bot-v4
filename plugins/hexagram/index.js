@@ -84,10 +84,15 @@ module.exports.apply = (ctx, config) => {
       const results = []
 
       try {
-        const data = await ctx.http.get('https://www.random.org/cgi-bin/randbyte', {
+        const data = await ctx.http.get('https://www.random.org/integers/', {
           params: {
-            nbytes: 3,
-            format: 'b',
+            num: 18,
+            min: 0,
+            max: 1,
+            col: 1,
+            base: 2,
+            format: 'plain',
+            rnd: 'new',
           },
         })
 
