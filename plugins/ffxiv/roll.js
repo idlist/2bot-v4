@@ -9,7 +9,7 @@ const State = {}
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   ctx.command('ff.roll', '模拟 Roll 点')
     .alias('ff.roll')
     .option('start', '-s [teamsize] 发起 Roll 点，默认人数为轻锐小队')

@@ -8,7 +8,7 @@ const State = {}
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   ctx.command('poke <target>', '戳一戳')
     .shortcut('戳戳我', { prefix: true })
     .shortcut('戳戳', { prefix: true, fuzzy: true })
@@ -22,7 +22,7 @@ module.exports = ctx => {
       }
     })
 
-  ctx.on('notice/poke', session => {
+  ctx.on('notice/poke', (session) => {
     if (
       session.channelId &&
       session.senderId != session.selfId &&

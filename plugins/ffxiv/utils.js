@@ -14,7 +14,7 @@ const range = (x) => {
  * @param {string} str
  * @returns {string}
  */
-const truncateString = str => {
+const truncateString = (str) => {
   str = str.replace(/\s+/g, ' ').trim()
 
   if (str.length >= 100) return str.substring(0, 100) + '...'

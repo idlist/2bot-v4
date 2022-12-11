@@ -10,7 +10,7 @@ module.exports = defineConfig({
   port: 21919,
 
   autoAssign: true,
-  autoAuthorize: session => {
+  autoAuthorize: (session) => {
     if (secret.admin.includes(session.uid)) return 5
     else return 1
   },

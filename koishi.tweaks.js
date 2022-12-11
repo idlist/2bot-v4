@@ -3,7 +3,7 @@ const { sleep } = require('koishi')
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   ctx.on('command-added', async (command) => {
     switch (command.name) {
       // Modify commands.

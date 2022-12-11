@@ -1,7 +1,7 @@
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   ctx.model.extend('talkative', {
     platform: 'string',
     channel: 'string',

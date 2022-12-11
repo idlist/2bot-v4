@@ -19,7 +19,7 @@ class ListAPI {
    */
   static getMarketList(name) {
     if (!name) return MarketList
-    else return MarketList.filter(item => item.name.match(name))
+    else return MarketList.filter((item) => item.name.match(name))
   }
 
   /**
@@ -28,7 +28,7 @@ class ListAPI {
    * @returns {import('./market').MarketListItem | undefined}
    */
   static showMarketList(name) {
-    return MarketList.find(item => item.name == name)
+    return MarketList.find((item) => item.name == name)
   }
 }
 

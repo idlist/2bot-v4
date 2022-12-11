@@ -2,7 +2,7 @@ const { segment } = require('koishi')
 const imagify = require('./imagify')
 const NameList = require('./name-list.json')
 const NameListMap = require('./name-list-map.json')
-const Names = NameListMap.map(rows => rows.map(i => NameList[i - 1]))
+const Names = NameListMap.map((rows) => rows.map((i) => NameList[i - 1]))
 /**
  * @type {import('./index').SymbolMeaning[]}
  */
@@ -53,9 +53,9 @@ const analyzeSymbols = (results, map) => {
   for (let i = 0; i < 3; i++) lower += map[results[i]] * Radix[i]
   for (let i = 3; i < 6; i++) upper += map[results[i]] * Radix[i - 3]
 
-  const figures = results.map(i => map[i])
+  const figures = results.map((i) => map[i])
   const orders = figures.map((side, i) => getOrder(i, side))
-  const display = figures.map(i => i ? '|' : '¦').join(' ')
+  const display = figures.map((i) => i ? '|' : '¦').join(' ')
   const code = NameListMap[upper][lower]
   const name = Names[upper][lower]
   const meaning = Meanings[code - 1].meaning
@@ -212,7 +212,7 @@ module.exports.apply = (ctx, config) => {
       const textImage = await imagify(ctx, config.font, [
         `主卦：${main.display}  ${main.fullName} (${main.code})`,
         `变卦：${change.display}  ${change.fullName} (${change.code})`,
-        (changeSymbols.length ? `变${changeSymbols.map(c => Orders[c]).join('、')}爻；` : '无变爻；'),
+        (changeSymbols.length ? `变${changeSymbols.map((c) => Orders[c]).join('、')}爻；` : '无变爻；'),
         `${HowTo[changeSymbols.length]}。`,
         ...comments,
       ])

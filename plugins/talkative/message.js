@@ -4,12 +4,12 @@ const Interval = 60 * 1000
 
 const channelUsage = {}
 
-const formatDuration = m => `${Math.floor(m / 1000)} 秒`
+const formatDuration = (m) => `${Math.floor(m / 1000)} 秒`
 
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   ctx.on('message', async (session) => {
     const now = new Date()
     now.setHours(0, 0, 0, 0)

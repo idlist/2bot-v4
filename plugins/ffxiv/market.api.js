@@ -10,7 +10,7 @@ const axios = require('axios')
 let Shortcodes
 (async () => {
   Shortcodes = yaml.load(await readFile(resolve(__dirname, 'data/market-shortcodes.yaml'), 'utf-8'))
-  Shortcodes = Shortcodes.map(item => ({ code: RegExp(item.code), full: item.full }))
+  Shortcodes = Shortcodes.map((item) => ({ code: RegExp(item.code), full: item.full }))
   Object.freeze(Shortcodes)
 })()
 
@@ -41,7 +41,7 @@ class API {
     const parsed = ['']
     const compo = [false]
     for (const shortcode of Shortcodes) {
-      if (original.filter(s => s != '').length == 0) break
+      if (original.filter((s) => s != '').length == 0) break
 
       for (let i = 0; i < original.length; i++) {
         if (!original[i]) continue
@@ -86,12 +86,12 @@ class API {
     const result = []
 
     if (options.direction == 'shorten') {
-      Shortcodes.forEach(item => {
+      Shortcodes.forEach((item) => {
         if (item.full.match(keyword)) result.push(item)
       })
     }
     if (options.direction == 'lengthen') {
-      Shortcodes.forEach(item => {
+      Shortcodes.forEach((item) => {
         if (item.code.match(keyword)) result.push(item)
       })
     }

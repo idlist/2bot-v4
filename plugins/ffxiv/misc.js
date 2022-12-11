@@ -1,7 +1,7 @@
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   ctx.command('ff.cactpot', '仙人微彩')
     .shortcut('刮刮乐', { fuzzy: true, prefix: true })
     .action(() => '仙人微彩解答器 - http://super-aardvark.github.io/yuryu')

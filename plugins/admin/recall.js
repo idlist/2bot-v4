@@ -10,8 +10,8 @@ const RecentSent = {}
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
-  ctx.on('send', session => {
+module.exports = (ctx) => {
+  ctx.on('send', (session) => {
     const cid = session.cid
 
     if(!RecentSent[cid]) RecentSent[cid] = []

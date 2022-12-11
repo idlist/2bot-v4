@@ -3,7 +3,7 @@ const axios = require('axios')
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   const logger = ctx.logger('hhsh')
 
   ctx.command('hhsh <abbr>', '好好说话')

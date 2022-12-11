@@ -18,14 +18,14 @@ const getRandomNumbers = async () => {
     },
   })
   let numbers = data.split('\n')
-  numbers = numbers.slice(0, numbers.length - 1).map(n => Number(n))
+  numbers = numbers.slice(0, numbers.length - 1).map((n) => Number(n))
   RandomTable.push(...numbers)
 }
 
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   const logger = ctx.logger('ff.advmeld')
 
   ctx.command('ff.advmeld <prob>', '模拟禁断镶嵌')

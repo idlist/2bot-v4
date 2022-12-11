@@ -5,7 +5,7 @@ module.exports.using = ['database']
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports.apply = ctx => {
+module.exports.apply = (ctx) => {
   ctx.command('talkative', '话痨统计')
     .usage('看看群里谁最话痨')
 

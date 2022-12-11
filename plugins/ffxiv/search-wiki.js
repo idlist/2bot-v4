@@ -41,7 +41,7 @@ const extractSearchResult = (payload, keyword) => {
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   const logger = ctx.logger('ff.search')
 
   ctx.command('ff.search <keyword>', '搜索 Wiki')

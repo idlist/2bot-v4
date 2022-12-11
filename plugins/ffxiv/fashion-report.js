@@ -9,7 +9,7 @@ const mockHeader = {
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports.apply = ctx => {
+module.exports.apply = (ctx) => {
   const logger = ctx.logger('ff.fashion')
 
   ctx.command('ff.fashion', '时尚品鉴', { minInterval: 60 * 1000 })

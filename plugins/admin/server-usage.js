@@ -7,7 +7,7 @@ const secret = require('../../koishi.secret')
  * @param {number} b
  * @returns {string}
  */
-const formatBytes = b => {
+const formatBytes = (b) => {
   let order = 0
   const orderUnit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
   while (b >= 1024) {
@@ -34,7 +34,7 @@ const exec = promisify(execCallback)
 /**
  * @param {import('koishi').Context} Context
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   if (secret.platform != 'linux') return
 
   const logger = ctx.logger('vnstat')

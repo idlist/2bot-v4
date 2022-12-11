@@ -8,12 +8,12 @@ const MarketListImageGenerator = require('./market-list.image')
  * @param {boolean | string} name
  * @returns
  */
-const findMarketList = name => {
+const findMarketList = (name) => {
   /**
    * @param {import('./market').MarketListItem[]} list
    * @returns {string}
    */
-  const showResult = list => list.slice(0, 10).map(item => item.name).join('\n')
+  const showResult = (list) => list.slice(0, 10).map((item) => item.name).join('\n')
 
   if (typeof name == 'boolean') {
     const list = ListAPI.getMarketList()
@@ -35,7 +35,7 @@ const findMarketList = name => {
  * @param {string} name
  * @returns {string}
  */
-const showListDetail = name => {
+const showListDetail = (name) => {
   if (!name) return '未提供清单名。'
   const list = ListAPI.showMarketList(name)
 
@@ -69,7 +69,7 @@ const getMarketListData = async (generator, rawServer, name) => {
   /**
    * @type {import('./market').MarketListItemParsed[]}
    */
-  const parsedList = itemResolve.map(item => {
+  const parsedList = itemResolve.map((item) => {
     /**
      * @type {Partial<import('./market').MarketPayloadListing>}
      */
@@ -91,7 +91,7 @@ const getMarketListData = async (generator, rawServer, name) => {
     }
   })
 
-  if (parsedList.every(item => item.status == 'error')) {
+  if (parsedList.every((item) => item.status == 'error')) {
     return '所有请求均失败，请检查输入或尝试查询单件物品。'
   }
 

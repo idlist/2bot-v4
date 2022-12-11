@@ -19,8 +19,8 @@ const findSubsTable = (keyword, direction) => {
 
   const typeText = direction ? '缩写规则' : '全称'
   const showResult = () => direction == 'shorten'
-    ? result.map(item => `${item.full} - ${item.code}`).join('\n')
-    : result.map(item => `${item.code} - ${item.full}`).join('\n')
+    ? result.map((item) => `${item.full} - ${item.code}`).join('\n')
+    : result.map((item) => `${item.code} - ${item.full}`).join('\n')
 
   if (!result.length) {
     return `没有找到包含 ${keyword} 的${typeText}。`
@@ -53,7 +53,7 @@ const getMarketData = async (generator, rawServer, item, lang) => {
    * @param {import('./market').MarketPayloadListing} item
    * @returns {import('./market').MarketListing}
    */
-  const extractItem = item => {
+  const extractItem = (item) => {
     return {
       seller: item.retainerName,
       server: item.worldName ? Server.localize(item.worldName) : server,

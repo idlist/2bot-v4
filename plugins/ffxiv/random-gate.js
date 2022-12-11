@@ -18,7 +18,7 @@ Promise.all([
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   ctx.command('ff.gate', '挖宝选门')
     .shortcut('选门', { prefix: true })
     .action(() => {

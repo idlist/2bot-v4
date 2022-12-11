@@ -17,9 +17,9 @@ class Server {
    */
   static parse(keyword) {
     keyword = keyword.toLowerCase()
-    const result = ServerData.find(server => server.keywords.includes(keyword))
+    const result = ServerData.find((server) => server.keywords.includes(keyword))
     if (result) return result.name
-    else return keyword.replace(/^\w/, char => char.toUpperCase())
+    else return keyword.replace(/^\w/, (char) => char.toUpperCase())
   }
   /**
    * Try to localize the server from market API.
@@ -35,7 +35,7 @@ class Server {
    * // Mana
    */
   static localize(response) {
-    const result = ServerData.find(server => server.server == server)
+    const result = ServerData.find((server) => server.server == server)
     if (result) return result.name
     else return response
   }

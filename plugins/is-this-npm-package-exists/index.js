@@ -9,7 +9,7 @@ module.exports.name = 'is-this-npm-package-exists'
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports.apply = ctx => {
+module.exports.apply = (ctx) => {
   const logger = ctx.logger('itnpe')
 
   ctx.command('itnpe <name(s)>', '这个 npm 包存在吗')

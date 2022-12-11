@@ -20,10 +20,10 @@ const randomTrigger = () => {
  * @param {string} message
  * @returns {string}
  */
-const replacePhrases = message => {
+const replacePhrases = (message) => {
   const flag = '%flag%'
 
-  ReplaceList.map(word => {
+  ReplaceList.map((word) => {
     const repReg = new RegExp(`${word[0]}(?!${flag})`, 'g')
     message = message.replace(repReg, `${word[1]}${flag}`)
   })
@@ -37,7 +37,7 @@ module.exports.name = 'parrot'
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports.apply = ctx => {
+module.exports.apply = (ctx) => {
   const cooldown = 60 * 10000
 
   ctx.middleware((session, next) => {

@@ -3,7 +3,7 @@ module.exports.name = 'fun'
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports.apply = ctx => {
+module.exports.apply = (ctx) => {
   ctx.command('fun', '趣味功能')
 
   ctx.plugin(require('./poke'))
@@ -14,4 +14,7 @@ module.exports.apply = ctx => {
 
   ctx.plugin(require('./silly'))
   ctx.command('fun/silly')
+
+  ctx.plugin(require('./choose'))
+  ctx.command('fun/choose')
 }

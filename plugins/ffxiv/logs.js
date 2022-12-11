@@ -22,7 +22,7 @@ Object.freeze(SERVER)
  * @param {string} str
  * @return {import('./logs').BossData}
  */
-const resolveBoss = str => {
+const resolveBoss = (str) => {
   for (const boss of Bosses) {
     if (boss.keywords.includes(str.toLowerCase())) return { ...boss }
   }
@@ -32,7 +32,7 @@ const resolveBoss = str => {
  * @param {string} str
  * @return {ResolvedJob}
  */
-const resolveJob = str => {
+const resolveJob = (str) => {
   for (const job of Jobs) {
     if (job.keywords.includes(str.toLowerCase())) {
       return {
@@ -141,7 +141,7 @@ module.exports = (ctx, config) => {
         type: type == 'adps' ? 'aDPS' : 'rDPS',
         duration: durationText,
         record: recordNumber,
-        data: seriesData.map(str => parseFloat(str).toFixed(2)),
+        data: seriesData.map((str) => parseFloat(str).toFixed(2)),
       }
 
       const canvas = await generator.generate(logsData)

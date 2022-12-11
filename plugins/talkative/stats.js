@@ -29,7 +29,7 @@ const validate = (platform, channel) => {
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   const summarizeStats = async () => {
     /**
      * @param {string} platform

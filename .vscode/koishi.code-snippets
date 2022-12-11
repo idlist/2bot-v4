@@ -8,7 +8,7 @@
       "/**",
       " * @param {import('koishi').Context} ctx",
       " */",
-      "module.exports.apply = ctx => {",
+      "module.exports.apply = (ctx) => {",
       "\t${2:/* your code here */}",
       "}"
     ]
@@ -20,7 +20,7 @@
       "/**",
       " * @param {import('koishi').Context} ctx",
       " */",
-      "module.exports = ctx => {",
+      "module.exports = (ctx) => {",
       "\t${2:/* your code here */}",
       "}"
     ]

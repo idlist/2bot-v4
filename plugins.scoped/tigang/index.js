@@ -26,7 +26,7 @@ const calcNextAlarm = (timestamp, nextDay = true) => {
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   /**
    * @type {NodeJS.Timeout}
    */
@@ -44,7 +44,7 @@ module.exports = ctx => {
      * @param {number} timeout
      * @returns {NodeJS.Timeout}
      */
-    const alertTigang = timeout => {
+    const alertTigang = (timeout) => {
       handler = setTimeout(() => {
         ctx.bots[`onebot:${bot.selfId}`].sendMessage(s1coders[0], '2bot 提醒您注意提肛。')
         handler = null

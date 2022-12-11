@@ -3,7 +3,7 @@ module.exports.name = 'about'
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports.apply = ctx => {
+module.exports.apply = (ctx) => {
   ctx.command('about', '关于 2bot')
     .action(() => {
       return (

@@ -14,7 +14,7 @@ Promise.all(range(6).map(async (i) => {
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   const logger = ctx.logger('ff.draw')
 
   ctx.command('ff.draw', '抽一张占星卡')

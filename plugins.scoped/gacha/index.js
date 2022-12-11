@@ -24,7 +24,7 @@ const gachaOnce = () => {
 /**
  * @param { import('koishi').Context } ctx
  */
-module.exports = ctx => {
+module.exports = (ctx) => {
   ctx.command('gacha', '抽卡', { maxUsage: 1, hidden: true })
     .shortcut('十连抽卡', { options: { tenfold: true } })
     .option('show', '-s 展示概率', { notUsage: true })
