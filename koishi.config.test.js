@@ -30,6 +30,6 @@ module.exports = defineConfig({
     // 'database-mysql': secret.mysql,
     'help': { hidden: true, shortcut: false },
 
-    './plugins/fun/choose.js': {},
+    'aircon': {},
   },
 })

@@ -5,10 +5,11 @@ const { sleep } = require('koishi')
  */
 module.exports = (ctx) => {
   ctx.on('command-added', async (command) => {
+    await sleep(0)
+
     switch (command.name) {
       // Modify commands.
       case 'teach':
-        await sleep(0)
         ctx.command('teach', { hidden: true })
           .usage('指令速查： https://s.idl.ist/teach-v4')
         break
