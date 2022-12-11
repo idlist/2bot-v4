@@ -29,9 +29,10 @@ module.exports = defineConfig({
 
     // Infrastructures.
     'adapter-onebot': secret.onebot,
-    'adapter-discord': secret.discord,
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
+    // In dev environment, discord adapter is not installed.
+    'adapter-discord': secret.discord,
 
     // Official plugins.
     'help': { hidden: true, shortcut: false },
@@ -42,16 +43,6 @@ module.exports = defineConfig({
     'schedule': {},
     'dialogue': { prefix: '-?' },
     'dialogue-context': {},
-
-    // Scoped official plugins.
-    'group:novelai': {
-      $filter: filters.novelai,
-      'novelai': {
-        type: 'token',
-        token: secret.novelai.token,
-        allowAnlas: false,
-      },
-    },
 
     // Web console
     'console': {},

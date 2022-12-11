@@ -17,7 +17,7 @@ const range = (x) => {
 const truncateString = str => {
   str = str.replace(/\s+/g, ' ').trim()
 
-  if (str.length >= 100) return str.substr(0, 100) + '...'
+  if (str.length >= 100) return str.substring(0, 100) + '...'
   else return str
 }
 

@@ -27,9 +27,9 @@ module.exports = defineConfig({
     './koishi.tweaks': {},
 
     'adapter-onebot': secret.onebot,
-    'database-mysql': secret.mysql,
+    // 'database-mysql': secret.mysql,
     'help': { hidden: true, shortcut: false },
 
-    './wrappers/novelai': {},
+    './packages/aircon': {},
   },
 })
