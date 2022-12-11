@@ -82,6 +82,7 @@ module.exports = defineConfig({
       number: { name: 'Din' },
     },
     './plugins/fun': {},
+    './plugins/tools': {},
     './plugins/hexagram': { font: 'SHSans' },
     './plugins/imgen': {},
     './plugins/is-this-npm-package-exists': {},
