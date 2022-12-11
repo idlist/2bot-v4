@@ -3,9 +3,12 @@ const { defineConfig } = require('koishi')
 const secret = require('./koishi.secret')
 const filters = secret.filters
 
+const dev = secret.dev
+const discordConfig = dev ? {} : { 'adapter-discord': secret.discord }
+
 module.exports = defineConfig({
   // Basic settings.
-  prefix: '-',
+  prefix: dev ? '.' : '-',
   nickname: ['2bot', '阿尔博特', '阿尔伯特'],
   port: 21919,
 
@@ -31,8 +34,7 @@ module.exports = defineConfig({
     'adapter-onebot': secret.onebot,
     'database-mysql': secret.mysql,
     'assets-smms': secret.smms,
-    // In dev environment, discord adapter is not installed.
-    'adapter-discord': secret.discord,
+    ...discordConfig,
 
     // Official plugins.
     'help': { hidden: true, shortcut: false },
@@ -41,7 +43,7 @@ module.exports = defineConfig({
     'rate-limit': {},
     'admin': {},
     'schedule': {},
-    'dialogue': { prefix: '-?' },
+    'dialogue': { prefix: dev ? '.?' : '-?' },
     'dialogue-context': {},
 
     // Web console
