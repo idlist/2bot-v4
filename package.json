@@ -57,6 +57,11 @@
     "outdent": "^0.8.0",
     "simplify-chinese": "^1.2.0"
   },
+  "overrides": {
+    "koishi-plugin-canvas": {
+      "koishi": "4.10.6-alpha.1"
+    }
+  },
   "devDependencies": {
     "eslint": "^8.29.0"
   },
