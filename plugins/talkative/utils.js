@@ -6,8 +6,12 @@
 const formatRanking = async (session, ranking) => {
   const users = await Promise.all(
     ranking.map(async (item) => {
-      const user = await session.bot.getGuildMember(session.guildId, item.user)
-      return user ? (user.nickname || user.username) : '[找不到该用户]'
+      try {
+        const user = await session.bot.getGuildMember(session.guildId, item.user)
+        return user.nickname || user.username
+      } catch {
+        return '[找不到该用户]'
+      }
     }),
   )
 
