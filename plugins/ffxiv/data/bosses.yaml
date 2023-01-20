@@ -1,36 +1,24 @@
 # Extremes
 
 - keywords:
-    - diamond
-    - 钻石神兵
-    - 钻石
-  name: 钻石神兵
-  zoneId: 37
-  id: 1057
-  teamsize: 8
-  diff: 100
-  server: { global: 7, cn: 9 }
-
-- keywords:
-    - zodirak
-    - 佐迪亚克
-    - 黑色
-    - 黑色极神
-  name: 黑色极神
-  zoneId: 42
-  id: 1058
+    - barbariccia
+    - 巴尔巴莉希亚
+    - 极风天王
+    - 极丰田王
+  name: 巴尔巴莉希亚
+  zoneId: 50
+  id: 1066
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }
 
 - keywords:
-    - hydaelyn
-    - 海德琳
-    - 白色
-    - 白色极神
-  name: 白色蛮神
-  zoneId: 42
-  id: 1059
+    - rubicante
+    - 卢比坎特
+    - 极火天王
+  name: 卢比坎特
+  zoneId: 50
+  id: 1067
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }
@@ -38,15 +26,19 @@
 # Unreals
 
 - keywords:
-    - leviathanu
-    - leviu
-    - 幻利维亚桑
-    - 幻水
-    - 利维亚桑幻巧
-    - 水幻巧
-  name: 利维亚桑幻巧战
-  zoneId: 36
-  id: 3003
+    - 幻魔神
+  name: 萨菲洛特幻巧战
+  zoneId: 46
+  id: 3005
+  teamsize: 8
+  diff: 100
+  server: { global: 1, cn: 3 }
+
+- keywords:
+    - 幻女神
+  name: 索菲亚幻巧战
+  zoneId: 46
+  id: 3006
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }
@@ -54,37 +46,37 @@
 # Normal Raids
 
 - keywords:
-    - p1
-  name: 厄瑞克透斯 (P1)
-  zoneId: 44
-  id: 78
+    - p5
+  name: 原型宝石兽（P5）
+  zoneId: 49
+  id: 83
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }
 
 - keywords:
-    - p2
-  name: 鱼尾海马怪 (P2)
-  zoneId: 44
-  id: 79
+    - p6
+  name: 赫革摩涅（P6）
+  zoneId: 49
+  id: 84
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }
 
 - keywords:
-    - p3
-  name: 菲尼克斯（P3）
-  zoneId: 44
-  id: 80
+    - p7
+  name: 阿格斯提斯（P7）
+  zoneId: 49
+  id: 85
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }
 
 - keywords:
-    - p4
-  name: 赫斯珀洛斯（P4）
-  zoneId: 44
-  id: 81
+    - p8
+  name: 赫淮斯托斯（P8）
+  zoneId: 49
+  id: 86
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }
@@ -92,56 +84,57 @@
 # Savage Raids
 
 - keywords:
-    - p1s
-    - erichthonios
-    - 厄瑞克透斯
-  name: 厄瑞克透斯 (P1S)
-  zoneId: 44
-  id: 78
+    - p5s
+    - 原型宝石兽
+    - protocarbuncle
+  name: 原型宝石兽 (P5S)
+  zoneId: 49
+  id: 83
   teamsize: 8
   diff: 101
   server: { global: 1, cn: 3 }
 
 - keywords:
-    - p2s
-    - hippocampus
-    - 鱼尾海马怪
-  name: 鱼尾海马怪 (P2S)
+    - p6s
+    - hegemone
+    - 赫革摩涅
+  name: 赫革摩涅 (P6S)
   zoneId: 44
-  id: 79
+  id: 84
   teamsize: 8
   diff: 101
   server: { global: 1, cn: 3 }
 
 - keywords:
-    - p3s
-    - phoinix
-    - 菲尼克斯
-  name: 菲尼克斯（P3S）
-  zoneId: 44
-  id: 80
+    - p7s
+    - agdistis
+    - 阿格斯提斯
+  name: 阿格斯提斯（P7S）
+  zoneId: 49
+  id: 85
   teamsize: 8
   diff: 101
   server: { global: 1, cn: 3 }
 
 - keywords:
-    - p4s
-    - p4s1
-    - hesperos
-    - 赫斯珀洛斯
-  name: 赫斯珀洛斯（P4S P1）
-  zoneId: 44
-  id: 81
+    - p8s
+    - p8s1
+    - hephaistos
+    - 赫淮斯托斯
+  name: 赫淮斯托斯（P8S P1）
+  zoneId: 49
+  id: 86
   teamsize: 8
   diff: 101
   server: { global: 1, cn: 3 }
 
 - keywords:
-    - p4s2
-    - hesperos2
-  name: 赫斯珀洛斯（P4S P2）
-  zoneId: 44
-  id: 82
+    - p8s2
+    - hephaistos2
+    - 赫淮斯托斯2
+  name: 赫淮斯托斯（P8S P2）
+  zoneId: 49
+  id: 87
   teamsize: 8
   diff: 101
   server: { global: 1, cn: 3 }
@@ -149,13 +142,11 @@
 # Ultimates
 
 - keywords:
-    - 绝亚
-    - 绝a
-    - 绝亚历山大
-    - ua
-  name: "亚历山大绝境战"
-  zoneId: 32
-  id: 1050
+    - 绝龙诗
+    - 幻想龙诗绝境战
+  name: 幻想龙诗绝境战
+  zoneId: 45
+  id: 1065
   teamsize: 8
   diff: 100
   server: { global: 1, cn: 3 }

@@ -181,7 +181,7 @@ class API {
     }
 
     try {
-      let apiUrl = 'https://universalis.app/api'
+      let apiUrl = 'https://universalis.app/api/v2'
       apiUrl = encodeURI(`${apiUrl}/${server}/${targetItem.id}`)
       const { status, data } = await axios.get(apiUrl)
 
