@@ -68,12 +68,6 @@ module.exports = defineConfig({
     'jrrp': {},
     'aircon': {},
 
-    // Local scoped packages
-    'group:checker': {
-      $filter: filters['duplicate-checker'],
-      'duplicate-checker': {},
-    },
-
     // Local plugins.
     './plugins/about': {},
     './plugins/admin': {},
@@ -89,10 +83,7 @@ module.exports = defineConfig({
     './plugins/parrot': {},
     './plugins/talkative': {},
 
-    // Local scoped plugins.
-    'group:s1coders': {
-      $filter: filters['s1coders'],
-      './plugins.scoped/s1coders': {},
-    },
+    // Scoped plugins.
+    './koishi.scopes': {},
   },
 })
