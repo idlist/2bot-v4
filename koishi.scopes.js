@@ -5,7 +5,7 @@ const secret = require('./koishi.secret')
  */
 module.exports = (ctx) => {
   ctx.intersect((session) => {
-    return !(session.platform != 'onebot' &&
+    return !(session.platform == 'onebot' &&
       secret.filters['duplicate-checker'].excludes.includes(session.guildId))
   }).plugin(require('./packages/duplicate-checker'))
 

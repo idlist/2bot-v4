@@ -1,7 +1,6 @@
 const { defineConfig } = require('koishi')
 
 const secret = require('./koishi.secret')
-const filters = secret.filters
 
 const dev = secret.dev
 const discordConfig = dev ? {} : { 'adapter-discord': secret.discord }
