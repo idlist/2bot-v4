@@ -31,6 +31,9 @@ module.exports = (ctx) => {
       case 'user':
         ctx.command('admin/user')
         break
+      case 'status':
+        ctx.command('admin/status')
+        break
       case 'usage':
         ctx.command('admin/user/usage')
         break
