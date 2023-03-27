@@ -8,4 +8,7 @@ module.exports.apply = (ctx) => {
 
   ctx.plugin(require('./base16384'))
   ctx.command('tools/b16384')
+
+  ctx.plugin(require('./probe'))
+  ctx.command('tools/probe')
 }
