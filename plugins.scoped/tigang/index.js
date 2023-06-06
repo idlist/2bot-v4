@@ -1,5 +1,5 @@
 const { Random } = require('koishi')
-const { onebot: bot, filters: { s1coders: { guild: s1coders } } } = require('../../koishi.secret')
+const { onebot: bot, filters: { s1coders: { includes: s1coders } } } = require('../../koishi.secret')
 
 /**
  * @type {number}
@@ -38,7 +38,9 @@ module.exports = (ctx) => {
     if (now.getHours() < 16) {
       nextAlarm = calcNextAlarm(now, false)
       if (nextAlarm < Date.now()) nextAlarm = calcNextAlarm(now)
-    } else nextAlarm = calcNextAlarm(now)
+    } else {
+      nextAlarm = calcNextAlarm(now)
+    }
 
     /**
      * @param {number} timeout
