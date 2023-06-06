@@ -1,6 +1,7 @@
 const { defineConfig } = require('koishi')
 
 const secret = require('./koishi.secret')
+const filters = secret.filters
 
 const dev = secret.dev
 const discordConfig = dev ? {} : { 'adapter-discord': secret.discord }
@@ -67,6 +68,13 @@ module.exports = defineConfig({
     'jrrp': {},
     'aircon': {},
 
+    'duplicate-checker': {
+      $filter: (session) => {
+        const excludes = filters['duplicate-checker'].excludes
+        return session.platform != 'onebot' || !excludes.includes(session.guildId)
+      },
+    },
+
     // Local plugins.
     './plugins/about': {},
     './plugins/admin': {},
@@ -83,6 +91,11 @@ module.exports = defineConfig({
     './plugins/talkative': {},
 
     // Scoped plugins.
-    './koishi.scopes': {},
+    './plugins.scoped/s1coders': {
+      $filter: (session) => {
+        const includes = filters['s1coders'].includes
+        return session.platform == 'onebot' && includes.includes(session.guildId)
+      },
+    },
   },
 })
