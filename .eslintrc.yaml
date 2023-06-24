@@ -12,9 +12,6 @@ globals:
 parserOptions:
   ecmaVersion: 2022
 
-ignorePatterns:
-  - packages
-
 rules:
   # Set some rules from error to warining
   no-empty: warn
