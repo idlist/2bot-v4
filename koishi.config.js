@@ -49,6 +49,8 @@ module.exports = defineConfig({
     // Web console
     'console': {},
     'status': {},
+    'auth': { admin: { enabled: false } },
+    'analytics': {},
 
     // Local packages.
     'canvas': {
