@@ -41,8 +41,6 @@ module.exports.apply = (ctx) => {
             header: { ...mockHeader },
           })
 
-          console.log(data)
-
           if (data.code == 0) {
             listData = data
             break

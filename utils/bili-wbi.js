@@ -25,24 +25,26 @@ const getMixinKey = (source) => {
   return key.substring(0, 32)
 }
 
+/**
+ * @param {any} data
+ */
+const extractWbiKey = (data) => {
+  const extract = (segment) => segment
+    .substring(segment.lastIndexOf('/') + 1)
+    .split('.')[0]
+
+  const seg1 = data.wbi_img.img_url
+  const seg2 = data.wbi_img.sub_url
+
+  return extract(seg1) + extract(seg2)
+}
+
 const getWbiKey = async () => {
   const { data } = await axios.get('https://api.bilibili.com/x/web-interface/nav', {
     responseType: 'json',
   })
 
-  const seg1 = data.data.wbi_img.img_url
-  const seg2 = data.data.wbi_img.sub_url
-
-  /**
-   * @param {string} segment
-   */
-  const extractKey = (segment) => {
-    return segment
-      .substring(segment.lastIndexOf('/') + 1)
-      .split('.')[0]
-  }
-
-  return extractKey(seg1) + extractKey(seg2)
+  return extractWbiKey(data.data)
 }
 
 /**
@@ -73,5 +75,6 @@ const encodeWbi = (params, wbiKey) => {
   return `${query}&w_rid=${wbiSign}`
 }
 
+module.exports.extractWbiKey = extractWbiKey
 module.exports.getWbiKey = getWbiKey
 module.exports.encodeWbi = encodeWbi
