@@ -32,7 +32,6 @@ module.exports.apply = (ctx) => {
         while (retry < maximumRetry) {
           if (!wbiKey) wbiKey = await getWbiKey()
           const query = encodeWbi(params, wbiKey)
-          console.log(query)
 
           /**
            * @type {import('./fashion-report').BVideoListPayload}
