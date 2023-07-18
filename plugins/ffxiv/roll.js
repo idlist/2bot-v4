@@ -47,11 +47,12 @@ module.exports = (ctx) => {
           teamsize: teamsize,
           member: [],
         }
-        starterText = (
-          h('at', { id: session.userId }) + ' 发起了 ' +
-          (specialSizeText || `${teamsize} 人`) + ' Roll 点，' +
-          '使用 ff.roll 指令参加！'
-        )
+        starterText = h('text', [
+          h('at', { id: session.userId }),
+          ' 发起了 ',
+          (specialSizeText || `${teamsize} 人`),
+          ' Roll 点，使用 ff.roll 指令参加！',
+        ])
       }
 
       let rollText
@@ -75,7 +76,7 @@ module.exports = (ctx) => {
           id: session.userId,
           result: rollResult,
         })
-        rollText = h('at', { id: session.userId }) + ' 参与了 Roll 点。'
+        rollText = h('text', [h('at', { id: session.userId }), ' 参与了 Roll 点。'])
       }
 
       if (
@@ -86,21 +87,33 @@ module.exports = (ctx) => {
         delete State[cid]
         const winner = maxBy(result, (item) => item.result)
 
-        const resultText = (
-          result.map((member) => h('p',
-            h('at', { id: member.id }) + ` Roll 到了 ${member.result} 点。\n`),
-          ) +
-          h('p', `恭喜 ${h('at', { id: winner.id })} 获得了箱子！`)
-        )
+        const resultText = [
+          ...result.map((member) => h('p', [
+            h('at', { id: member.id }),
+            ` Roll 到了 ${member.result} 点。\n`,
+          ])),
+          h('p', `恭喜 ${h('at', { id: winner.id })} 获得了箱子！`),
+        ]
 
         if (!options.end) {
-          return h('p', rollText) + h('p') + resultText
+          return [
+            h('p', rollText),
+            h('p'),
+            ...resultText,
+          ]
         }
 
-        const terminateText = h('at', { id: session.userId }) + ' 中止了 Roll 点。'
+        const terminateText = h('text', [
+          h('at', { id: session.userId }),
+          ' 中止了 Roll 点。',
+        ])
         if (result.length <= 1) return terminateText
 
-        return h('p', terminateText) + h('p') + h('p', resultText)
+        return [
+          h('p', terminateText),
+          h('p'),
+          ...resultText,
+        ]
       }
 
       if (options.start) return starterText
