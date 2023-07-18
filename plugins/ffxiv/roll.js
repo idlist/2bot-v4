@@ -47,12 +47,12 @@ module.exports = (ctx) => {
           teamsize: teamsize,
           member: [],
         }
-        starterText = h('text', [
+        starterText = [
           h('at', { id: session.userId }),
           ' 发起了 ',
           (specialSizeText || `${teamsize} 人`),
           ' Roll 点，使用 ff.roll 指令参加！',
-        ])
+        ]
       }
 
       let rollText
@@ -76,7 +76,7 @@ module.exports = (ctx) => {
           id: session.userId,
           result: rollResult,
         })
-        rollText = h('text', [h('at', { id: session.userId }), ' 参与了 Roll 点。'])
+        rollText = [h('at', { id: session.userId }), ' 参与了 Roll 点。']
       }
 
       if (
@@ -103,10 +103,10 @@ module.exports = (ctx) => {
           ]
         }
 
-        const terminateText = h('text', [
+        const terminateText = [
           h('at', { id: session.userId }),
           ' 中止了 Roll 点。',
-        ])
+        ]
         if (result.length <= 1) return terminateText
 
         return [
