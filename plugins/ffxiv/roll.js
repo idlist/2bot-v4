@@ -90,9 +90,13 @@ module.exports = (ctx) => {
         const resultText = [
           ...result.map((member) => h('p', [
             h('at', { id: member.id }),
-            ` Roll 到了 ${member.result} 点。\n`,
+            ` Roll 到了 ${member.result} 点。`,
           ])),
-          h('p', `恭喜 ${h('at', { id: winner.id })} 获得了箱子！`),
+          h('p', [
+            '恭喜',
+            h('at', { id: winner.id }),
+            '获得了箱子！',
+          ]),
         ]
 
         if (!options.end) {
