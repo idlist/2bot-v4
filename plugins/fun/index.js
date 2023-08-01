@@ -17,4 +17,7 @@ module.exports.apply = (ctx) => {
 
   ctx.plugin(require('./choose'))
   ctx.command('fun/choose')
+
+  ctx.plugin(require('./bing'))
+  ctx.command('fun/bing')
 }
