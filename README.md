@@ -1,6 +1,4 @@
-![2bot](docs/2bot.png)
-
-#  2bot-v4
+# ![2bot](docs/2bot.png) 2bot-v4
 
 使用 Koishi v4 的 2bot，并没有焕然一新。
 

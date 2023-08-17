@@ -19,6 +19,7 @@ Promise.all([
   readTextFile('data/silly.2020.txt'),
   readTextFile('data/silly.2021.txt'),
   readTextFile('data/silly.2022.txt'),
+  readTextFile('data/silly.2023.txt'),
 ])
 
 /**
