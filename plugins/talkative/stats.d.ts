@@ -1,5 +1,6 @@
 export interface UserMessageCount {
   user: string
+  name: string
   message: number
 }
 

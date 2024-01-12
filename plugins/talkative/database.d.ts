@@ -10,5 +10,6 @@ export interface TalkativeDatabase {
   channel: string
   date: Date
   user: string
+  name: string
   message: number
 }

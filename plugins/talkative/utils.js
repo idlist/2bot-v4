@@ -1,21 +1,9 @@
 /**
- * @param {import('koishi').Session} session
  * @param {import('./stats').UserMessageCount[]} ranking
  * @returns {Promise<string>}
  */
-const formatRanking = async (session, ranking) => {
-  const users = await Promise.all(
-    ranking.map(async (item) => {
-      try {
-        const user = await session.bot.getGuildMember(session.guildId, item.user)
-        return user.nickname || user.username
-      } catch {
-        return '[找不到该用户]'
-      }
-    }),
-  )
-
-  return ranking.map((item, i) => `${i + 1} - ${users[i]}: ${item.message} 条`).join('\n')
+const formatRanking = (ranking) => {
+  return ranking.map((item, i) => `${i + 1} - ${item.name}: ${item.message} 条`).join('\n')
 }
 
 /**

@@ -19,6 +19,7 @@ module.exports = (ctx) => {
       channel: session.channelId,
       date: now,
       user: session.userId,
+      name: session.username,
       message: { $add: [{ $: 'message' }, 1] },
     }])
   })
@@ -60,6 +61,6 @@ module.exports = (ctx) => {
         date: now,
       })
 
-      return `今日话痨榜（共 ${total} 条）：\n` + await formatRanking(session, ranking)
+      return `今日话痨榜（共 ${total} 条）：\n` + formatRanking(session, ranking)
     })
 }

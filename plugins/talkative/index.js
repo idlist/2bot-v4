@@ -1,4 +1,4 @@
-module.exports.name = 'who-talkative'
+module.exports.name = 'talkative'
 
 module.exports.using = ['database']
 
