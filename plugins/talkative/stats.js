@@ -150,7 +150,7 @@ module.exports = (ctx) => {
       const limitedRanking = ranking.slice(0, limit)
 
       return `昨日话痨榜（共 ${total} 条）：\n` +
-        formatRanking(session, limitedRanking)
+        formatRanking(limitedRanking)
     })
 
   ctx.command('talkative.week', '本周话痨榜')
@@ -164,7 +164,7 @@ module.exports = (ctx) => {
       const limitedRanking = ranking.slice(0, limit)
 
       return `本周话痨榜（自昨日起 7 天，共 ${total} 条）：\n` +
-        formatRanking(session, limitedRanking)
+        formatRanking(limitedRanking)
     })
 
   ctx.command('talkative.month', '本月话痨榜')
@@ -178,7 +178,7 @@ module.exports = (ctx) => {
       const limitedRanking = ranking.slice(0, limit)
 
       return `本月话痨榜（自昨日起 30 天，共 ${total} 条）：\n` +
-        formatRanking(session, limitedRanking)
+        formatRanking(limitedRanking)
     })
 
   ctx.command('talkative.year', '今年话痨榜')
@@ -192,7 +192,7 @@ module.exports = (ctx) => {
       const limitedRanking = ranking.slice(0, limit)
 
       return `今年话痨榜（自昨日起 365 天，共 ${total} 条）：\n` +
-        formatRanking(session, limitedRanking)
+        formatRanking(limitedRanking)
     })
 
   ctx.command('talkative.overall', '总计话痨榜')
@@ -206,6 +206,6 @@ module.exports = (ctx) => {
       const limitedRanking = ranking.slice(0, limit)
 
       return `总计话痨榜（共 ${total} 条）：\n` +
-        formatRanking(session, limitedRanking)
+        formatRanking(limitedRanking)
     })
 }
