@@ -1,3 +1,4 @@
+const { $ } = require('koishi')
 const { formatRanking, clamp } = require('./utils')
 
 const Interval = 60 * 1000
