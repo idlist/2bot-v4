@@ -69,7 +69,7 @@ module.exports = (ctx) => {
 
       if (isOverall) {
         ranking = await query(`
-          SELECT user, SUM(message) as message
+          SELECT user, SUM(message) as message, name
           FROM talkative
           WHERE platform = ? AND channel = ?
           GROUP BY user
@@ -84,7 +84,7 @@ module.exports = (ctx) => {
         })
       } else if (isPeriod) {
         ranking = await query(`
-          SELECT user, SUM(message) as message
+          SELECT user, SUM(message) as message, name
           FROM talkative
           WHERE platform = ? AND channel = ? AND date <= ? AND date >= ?
           GROUP BY user
@@ -100,7 +100,7 @@ module.exports = (ctx) => {
         })
       } else {
         ranking = await query(`
-          SELECT user, message
+          SELECT user, message, name
           FROM talkative
           WHERE platform = ? AND channel = ? AND date = ?
           ORDER BY message DESC
