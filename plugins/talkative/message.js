@@ -53,8 +53,8 @@ module.exports = (ctx) => {
         limit: limit,
       })
 
-      const total = await ctx.database.eval('talkative', {
-        $sum: 'message',
+      const total = await ctx.database.eval('talkative', (row) => {
+        return $.sum(row.message)
       }, {
         platform: session.platform,
         channel: session.channelId,

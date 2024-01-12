@@ -1,6 +1,7 @@
 const schedule = require('node-schedule')
 const outdent = require('outdent')
 const { formatRanking, clamp } = require('./utils')
+const { $ } = require('koishi')
 
 const { createPool } = require('mariadb')
 const { mysql } = require('../../koishi.secret')
@@ -76,8 +77,8 @@ module.exports = (ctx) => {
           ORDER BY message DESC
           LIMIT 20`, [platform, channel])
 
-        total = await ctx.database.eval('talkative', {
-          $sum: 'message',
+        total = await ctx.database.eval('talkative', (row) => {
+          return $.sum(row.message)
         }, {
           platform: platform,
           channel: channel,
@@ -91,8 +92,8 @@ module.exports = (ctx) => {
           ORDER BY message DESC
           LIMIT 20`, [platform, channel, yesterday, timeWindow])
 
-        total = await ctx.database.eval('talkative', {
-          $sum: 'message',
+        total = await ctx.database.eval('talkative', (row) => {
+          return $.sum(row.message)
         }, {
           platform: platform,
           channel: channel,
@@ -106,8 +107,8 @@ module.exports = (ctx) => {
           ORDER BY message DESC
           LIMIT 20`, [platform, channel, yesterday])
 
-        total = await ctx.database.eval('talkative', {
-          $sum: 'message',
+        total = await ctx.database.eval('talkative', (row) => {
+          return $.sum(row.message)
         }, {
           platform: platform,
           channel: channel,

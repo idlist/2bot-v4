@@ -3,7 +3,7 @@
  * @returns {Promise<string>}
  */
 const formatRanking = (ranking) => {
-  return ranking.map((item, i) => `${i + 1} - ${item.name}: ${item.message} 条`).join('\n')
+  return ranking.map((item, i) => `${i + 1} - ${item.name ?? '[未获取到名字]'}: ${item.message} 条`).join('\n')
 }
 
 /**
