@@ -8,7 +8,7 @@ module.exports.using = ['canvas']
 /**
  * @param {import('koishi').Context} ctx
  */
-module.exports = (ctx) => {
+module.exports.apply = (ctx) => {
   Promise.all([
     (async () => {
       const baseImage = await ctx.canvas.loadImage(resolve(__dirname, 'assets/low-high-eq.jpg'))
