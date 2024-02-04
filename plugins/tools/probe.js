@@ -46,9 +46,9 @@ module.exports = (ctx) => {
       const results = []
 
       await Promise.all(flatten.map(async (fragment, i) => {
-        if (fragment.type != 'image') return
+        if (fragment.type != 'img') return
 
-        const result = await probe(fragment.attrs.url)
+        const result = await probe(fragment.attrs.src)
         results.push([i, result])
       }))
 
