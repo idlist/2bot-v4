@@ -69,7 +69,7 @@ const analyzeSymbols = (results, map) => {
 
 module.exports.name = 'hexagram'
 
-module.exports.using = ['canvas']
+module.exports.inject = ['canvas']
 
 /**
  * @param {import('koishi').Context} ctx

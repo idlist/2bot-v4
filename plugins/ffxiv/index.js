@@ -1,6 +1,6 @@
 module.exports.name = 'ffxiv'
 
-module.exports.using = ['canvas']
+module.exports.inject = ['canvas']
 
 /**
  * @param {import('koishi').Context} ctx

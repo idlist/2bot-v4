@@ -1,6 +1,6 @@
 module.exports.name = 'talkative'
 
-module.exports.using = ['database']
+module.exports.inject = ['database']
 
 /**
  * @param {import('koishi').Context} ctx

@@ -3,7 +3,7 @@ const { segment } = require('koishi')
 
 const canvasResources = new Map()
 
-module.exports.using = ['canvas']
+module.exports.inject = ['canvas']
 
 /**
  * @param {import('koishi').Context} ctx
