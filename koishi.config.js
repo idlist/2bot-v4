@@ -73,8 +73,8 @@ module.exports = defineConfig({
       'aircon': {},
       'duplicate-checker': {
         $filter: (session) => {
-          const excludes = filters['duplicate-checker'].excludes
-          return session.platform != 'onebot' || !excludes.includes(session.guildId)
+          const includes = filters['duplicate-checker'].includes
+          return session.platform != 'onebot' || !includes.includes(session.guildId)
         },
       },
     },
