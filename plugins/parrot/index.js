@@ -1,8 +1,6 @@
 const ReplaceList = require('./replace-list')
 
-/**
- * @type {import('./index').ParrotDataType}
- */
+/** @type {import('./index').ParrotDataType} */
 const ParrotData = {}
 
 /**
@@ -41,6 +39,10 @@ module.exports.apply = (ctx) => {
   const cooldown = 60 * 10000
 
   ctx.middleware((session, next) => {
+    if (session.content.startsWith('[') && session.content.endsWith(']')) {
+      return next()
+    }
+
     const cid = session.cid
     const channel = ParrotData[cid]
 
@@ -49,7 +51,7 @@ module.exports.apply = (ctx) => {
         channel.count++
 
         if (
-          channel.count == channel.trigger  &&
+          channel.count == channel.trigger &&
           channel.lastTriggered + cooldown <= Date.now()
         ) {
           let message = session.content
