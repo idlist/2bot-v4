@@ -1,13 +1,13 @@
-require('koishi-plugin-canvas')
+require('@idlist/koishi-plugin-canvas')
 
 /**
- * @param {import('koishi').Context} ctxK
+ * @param {import('koishi').Context} koishi
  * @param {string} font
  * @param {string[]} text
  * @returns {Promise<import('koishi-plugin-canvas').Canvas>}
  */
-module.exports = async (ctxK, font, text) => {
-  const canvas = ctxK.canvas.createCanvas()
+module.exports = async (koishi, font, text) => {
+  const canvas = koishi.canvas.createCanvas()
   const ctx = canvas.getContext('2d')
 
   const textWidths = []

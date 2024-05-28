@@ -34,6 +34,7 @@
     "@koishijs/plugin-database-mysql": "^6.3.0",
     "@koishijs/plugin-echo": "^2.2.5",
     "@koishijs/plugin-help": "^2.4.3",
+    "@koishijs/plugin-hmr": "^1.2.9",
     "@koishijs/plugin-http": "^0.5.1",
     "@koishijs/plugin-locales": "^2.5.3",
     "@koishijs/plugin-market": "^2.11.2",

@@ -1,10 +1,7 @@
 const { defineConfig } = require('koishi')
 
 const secret = require('./koishi.secret')
-const filters = secret.filters
-
-const dev = secret.dev
-const discordConfig = dev ? {} : { 'adapter-discord': secret.discord }
+const { dev, adapters, mysql, smms, filters } = secret
 
 module.exports = defineConfig({
   // Basic settings.
@@ -34,10 +31,9 @@ module.exports = defineConfig({
     'group:infrastructures': {
       'server': { port: 21919 },
       'http': {},
-      'adapter-onebot': secret.onebot,
-      ...discordConfig,
-      'database-mysql': secret.mysql,
-      'assets-smms': secret.smms,
+      ...adapters,
+      'database-mysql': mysql,
+      'assets-smms': smms,
     },
 
     'group:official': {
@@ -59,7 +55,7 @@ module.exports = defineConfig({
     },
 
     'group:packages': {
-      'canvas': {
+      '@idlist/canvas': {
         fonts: [
           { path: 'fonts/SourceHanSans-Regular.otf', family: 'SHSans' },
           { path: 'fonts/Din1451Alt.ttf', family: 'Din' },
