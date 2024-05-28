@@ -74,7 +74,7 @@ module.exports = defineConfig({
       'duplicate-checker': {
         $filter: (session) => {
           const includes = filters['duplicate-checker'].includes
-          return session.platform != 'onebot' || !includes.includes(session.guildId)
+          return session.platform == 'onebot' && includes.includes(session.guildId)
         },
         calloutText: false,
       },
