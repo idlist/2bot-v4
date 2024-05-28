@@ -1,7 +1,7 @@
 const { defineConfig } = require('koishi')
 
 const secret = require('./koishi.secret')
-const { dev, adapters, mysql, smms, filters } = secret
+const { dev, adapters, mysql, smms, filters, blive } = secret
 
 module.exports = defineConfig({
   // Basic settings.
@@ -67,7 +67,7 @@ module.exports = defineConfig({
         upper: { name: 'SHSans-Heavy' },
         lower: { name: 'SHSerif-Heavy' },
       },
-      'blive': {},
+      'blive': blive,
       'animal-picture': {},
       'jrrp': {},
       'aircon': {},
@@ -76,6 +76,7 @@ module.exports = defineConfig({
           const includes = filters['duplicate-checker'].includes
           return session.platform != 'onebot' || !includes.includes(session.guildId)
         },
+        calloutText: false,
       },
     },
 
