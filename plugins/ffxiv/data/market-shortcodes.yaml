@@ -1,4 +1,8 @@
 # 地图
+- code: ^G17$
+  full: 陈旧的狞豹革地图
+- code: ^G16$
+  full: 陈旧的银狼革地图
 - code: ^G15$
   full: 陈旧的蛇牛革地图
 - code: ^G14$
@@ -46,6 +50,10 @@
 - code: ^GP
   full: 器识魔晶石
 
+- code: 12型%
+  full: 拾贰型
+- code: 11型$
+  full: 拾壹型
 - code: 10型$
   full: 拾型
 - code: 9型$

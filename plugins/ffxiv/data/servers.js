@@ -125,6 +125,21 @@ module.exports = [
     server: 'YinLeiHu',
   },
   {
+    keywords: ['太阳海岸'],
+    name: '太阳海岸',
+    server: 'TaiYangHaiAn',
+  },
+  {
+    keywords: ['伊修加德'],
+    name: '伊修加德',
+    server: 'YiXiuJiaDe',
+  },
+  {
+    keywords: ['红茶川'],
+    name: '红茶川',
+    server: 'HongChaChuan',
+  },
+  {
     keywords: ['陆行鸟', '鸟', '鸟区'],
     name: '陆行鸟',
     server: 'LuXingNiao',

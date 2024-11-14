@@ -15,7 +15,7 @@ module.exports.apply = (ctx, config) => {
   ctx.plugin(require('./simulate-melding'))
   ctx.plugin(require('./search-wiki'))
   ctx.plugin(require('./search-item'))
-  ctx.plugin(require('./logs'), config)
+  // ctx.plugin(require('./logs'), config)
   ctx.plugin(require('./market'), config)
   ctx.plugin(require('./market-list'), config)
   ctx.plugin(require('./roll'))

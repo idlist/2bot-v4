@@ -67,7 +67,10 @@ module.exports = defineConfig({
         upper: { name: 'SHSans-Heavy' },
         lower: { name: 'SHSerif-Heavy' },
       },
-      'blive': blive,
+      'blive': {
+        ...blive,
+        pollInterval: 300000,
+      },
       'animal-picture': {},
       'jrrp': {},
       'aircon': {},

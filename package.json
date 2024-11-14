@@ -17,15 +17,11 @@
   "main": "index.js",
   "scripts": {
     "pull": "git pull && git submodule update --init",
-
     "start": "koishi start koishi.config.js",
     "start:prod": "npm run build --workspaces --if-present && npm start koishi.config.js",
     "build": "npm run build --workspaces --if-present",
     "yaml": "koishi start koishi.config.yaml",
-
     "reindex-dialogue": "node scripts/reindex-teach-simple.js",
-    "migrate": "node scripts/migrate-segment.js",
-
     "count": "cd .. && cloc 2bot-v4 --exclude-dir=node_modules,test --include-ext=js,ts"
   },
   "dependencies": {
